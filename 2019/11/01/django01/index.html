@@ -274,7 +274,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">3.4k</span>Reading time: <span class="post-count reading-time">21 min</span></span>
+                        <span>Word count: <span class="post-count word-count">3.3k</span>Reading time: <span class="post-count reading-time">20 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -475,30 +475,80 @@ height:50vh;
 </ul>
 </blockquote>
 </li>
-<li><pre><code>val = &quot;01092330203&quot;
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">val = &quot;01092330203&quot;</span><br><span class="line"></span><br><span class="line">if val.startswith(&quot;010&quot;) and len(11) == 11 and val[:3] in (&quot;010&quot;, &quot;011&quot;, &quot;016&quot;):</span><br><span class="line">    print(&quot;ok&quot;)</span><br><span class="line"></span><br><span class="line">import re</span><br><span class="line">if re.match(&apos;^01[1-9]\d&#123;6,7&#125;$&apos;, val):</span><br><span class="line">    print(&quot;matched&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;invalid&quot;)</span><br><span class="line"></span><br><span class="line">같은 것 수행</span><br></pre></td></tr></table></figure>
 
-if val.startswith(&quot;010&quot;) and len(11) == 11 and val[:3] in (&quot;010&quot;, &quot;011&quot;, &quot;016&quot;):
-    print(&quot;ok&quot;)
+<ul>
+<li><blockquote>
+<ul>
+<li><p>숫자 1글자 : “[0123456789]” 또는 “[0-9]” 또는 “\d”</p>
+</li>
+<li><blockquote>
+<p>알파벳 소문자 1글자 : “[abcdefghijklmnopqrstuvwxyz]” 혹은 “[a-z]”</p>
+<p> 알파벳 대문자 1글자 : [ABCDEFGHIJKLMNOPQRSTUVWXYZ]” 혹은 “[A-Z]” </p>
+<p>알파벳 대/소문자 1글자 : “[a-zA-Z]”</p>
+<p> 16진수 1글자 : “[0-9a-fA-F]”</p>
+<p> 문자열의 시작을 지정 : “^”</p>
+<p> 문자열의 끝을 지정 : “$”</p>
+<p> 한글 1글자 : “[ᄀ-힣]” </p>
+</blockquote>
+</li>
+</ul>
+<p><strong>한글자를 표현할때 그중한글자의 정보를 []에 담는다</strong> ex) “01[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]”</p>
+<ul>
+<li><p><strong>반복횟수 지정</strong> </p>
+<blockquote>
+<p> “\d?” : 숫자 0회 또는 1회<br> “\d*” : 숫자 0회 이상<br> “\d+” : 숫자 1회 이상<br> “\d{m}” : 숫자 m글자<br> “\d{m,n}” : 숫자 m글자 이상, n글자 이하 </p>
+<ul>
+<li><p>주의:정규표현식은띄워쓰기하나에도민감합니다.</p>
+</li>
+<li><p>\가 들어갈경우 맨앞에 r쓰고 “^<del>~</del>$”쓰기 (이걸해줘야 \ \ d 로 인식함)</p>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="URLConf"><a href="#URLConf" class="headerlink" title="URLConf"></a>URLConf</h2><ul>
+<li><p>프로잭트/setting.py 에 최상위 URLConf모듈을 지정 (Root_urlconf 항목에 기본으로 프로젝트의 urls.py가 지정되있다)</p>
+<p>Root_url에서 서브로 url.py와 연결</p>
+</li>
+<li><p>특정URL과뷰매핑List </p>
+</li>
+<li><p>Django 서버로 Http 요청이 들어올 때마다, URLConf 매핑 List 를 처 </p>
+<p>음부터 끝까지 순차적으로 훝으며 검색합니다. </p>
+</li>
+<li><p>매칭되는 URL Rule 을 찾지못했을 경우, 404 Page Not Found 응답 </p>
+<p>을 발생시킵니다.</p>
+</li>
+</ul>
+<h2 id="URLConf-정규표현식-매핑-연습"><a href="#URLConf-정규표현식-매핑-연습" class="headerlink" title="URLConf 정규표현식 매핑 연습"></a>URLConf <strong>정규표현식 매핑 연습</strong></h2><ul>
+<li>(?P ) : 이 영역의 문자열에 정규표현식을 적용해서 !!!</li>
+<li>\d+ : \d+ 패턴에 부합된다면 </li>
+<li><x> : x 라는 변수명으로 인자를 넘기겠다.<br> • <strong>뷰의인자로넘겨받은값들은모두문자열타입입니다.</strong> </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Example #4 하나의 뷰에 3개의 URL연결</span><br><span class="line">url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/(?P&lt;z&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/$&apos;, views.mysum)</span><br><span class="line"># views.py</span><br><span class="line">def mysum(request, x, y=0, z=0):</span><br><span class="line">return HttpResponse(int(x) + int(y) + int(z))Example #4 하나의 뷰에 3개의 URL연결</span><br><span class="line">url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/(?P&lt;z&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/$&apos;, views.mysum)</span><br><span class="line"># views.py</span><br><span class="line">def mysum(request, x, y=0, z=0):</span><br><span class="line">return HttpResponse(int(x) + int(y) + int(z))</span><br></pre></td></tr></table></figure>
 
-import re
-if re.match(&apos;^01[1-9]\d{6,7}$&apos;, val):
-    print(&quot;matched&quot;)
-else:
-    print(&quot;invalid&quot;)
-
-같은 것 수행
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- &gt; - 숫자 1글자 : &quot;[0123456789]&quot; 또는 &quot;[0-9]&quot; 또는 &quot;\d&quot;</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; - &gt; 알파벳 소문자 1글자 : &quot;[abcdefghijklmnopqrstuvwxyz]&quot; 혹은 &quot;[a-z]&quot;</span><br><span class="line">  &gt;   &gt;</span><br><span class="line">  &gt;   &gt;  알파벳 대문자 1글자 : [ABCDEFGHIJKLMNOPQRSTUVWXYZ]&quot; 혹은 &quot;[A-Z]&quot; </span><br><span class="line">  &gt;   &gt;</span><br><span class="line">  &gt;   &gt; 알파벳 대/소문자 1글자 : &quot;[a-zA-Z]&quot;</span><br><span class="line">  &gt;   &gt;</span><br><span class="line">  &gt;   &gt;  16진수 1글자 : &quot;[0-9a-fA-F]&quot;</span><br><span class="line">  &gt;   &gt;</span><br><span class="line">  &gt;   &gt;  문자열의 시작을 지정 : &quot;^&quot;</span><br><span class="line">  &gt;   &gt;</span><br><span class="line">  &gt;   &gt;  문자열의 끝을 지정 : &quot;$&quot;</span><br><span class="line">  &gt;   &gt;</span><br><span class="line">  &gt;   &gt;  한글 1글자 : &quot;[ᄀ-힣]&quot; </span><br><span class="line">  &gt;</span><br><span class="line">  &gt; __한글자를 표현할때 그중한글자의 정보를 []에 담는다__ ex) &quot;01[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]&quot;</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; - **반복횟수 지정** </span><br><span class="line">  &gt;</span><br><span class="line">  &gt;   &gt;  &quot;\d?&quot; : 숫자 0회 또는 1회</span><br><span class="line">  &gt;   &gt;  &quot;\d*&quot; : 숫자 0회 이상</span><br><span class="line">  &gt;   &gt;  &quot;\d+&quot; : 숫자 1회 이상</span><br><span class="line">  &gt;   &gt;  &quot;\d&#123;m&#125;&quot; : 숫자 m글자</span><br><span class="line">  &gt;   &gt;  &quot;\d&#123;m,n&#125;&quot; : 숫자 m글자 이상, n글자 이하 </span><br><span class="line">  &gt;   &gt;</span><br><span class="line">  &gt;   &gt; - 주의:정규표현식은띄워쓰기하나에도민감합니다.</span><br><span class="line">  &gt;   &gt;</span><br><span class="line">  &gt;   &gt; - \가 들어갈경우 맨앞에 r쓰고 &quot;^~~~~~~~$&quot;쓰기 (이걸해줘야 \ \ d 로 인식함)</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## URLConf</span><br><span class="line"></span><br><span class="line">- 프로잭트/setting.py 에 최상위 URLConf모듈을 지정 (Root_urlconf 항목에 기본으로 프로젝트의 urls.py가 지정되있다)</span><br><span class="line"></span><br><span class="line">  Root_url에서 서브로 url.py와 연결</span><br><span class="line"></span><br><span class="line">- 특정URL과뷰매핑List </span><br><span class="line"></span><br><span class="line">- Django 서버로 Http 요청이 들어올 때마다, URLConf 매핑 List 를 처 </span><br><span class="line"></span><br><span class="line">  음부터 끝까지 순차적으로 훝으며 검색합니다. </span><br><span class="line"></span><br><span class="line">- 매칭되는 URL Rule 을 찾지못했을 경우, 404 Page Not Found 응답 </span><br><span class="line"></span><br><span class="line">  을 발생시킵니다.</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">## URLConf **정규표현식 매핑 연습**  </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">- (?P ) : 이 영역의 문자열에 정규표현식을 적용해서 !!!</span><br><span class="line">- \d+ : \d+ 패턴에 부합된다면 </span><br><span class="line">- &lt;x&gt; : x 라는 변수명으로 인자를 넘기겠다.</span><br><span class="line">   • __뷰의인자로넘겨받은값들은모두문자열타입입니다.__</span><br></pre></td></tr></table></figure>
-Example #4 하나의 뷰에 3개의 URL연결
-url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/(?P&lt;z&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/$&apos;, views.mysum)
-# views.py
-def mysum(request, x, y=0, z=0):
-return HttpResponse(int(x) + int(y) + int(z))Example #4 하나의 뷰에 3개의 URL연결
-url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/(?P&lt;z&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/$&apos;, views.mysum)
-# views.py
-def mysum(request, x, y=0, z=0):
-return HttpResponse(int(x) + int(y) + int(z))
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> result = sum(map(int, numbers.split(&quot;/&quot;))) *#map은 리스트의 요소를 지정된 함수로 처리해주는 함수입니다</span><br><span class="line"></span><br><span class="line">만약 넣은 것에 //100/234//45이라면 빈문자열이 생기므로 int&quot;&quot;은 에러가뜸 </span><br><span class="line"></span><br><span class="line">빈문자열을 없애줘야하므로  sum(map(lambda s: int(s or 0), numbers.split(&quot;/&quot;))) 해야함 #or표현은 s가 거짓일떄 0으로 치환됨</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># View</span><br><span class="line"></span><br><span class="line">- URLConf에 매핑된 Callable Object</span><br><span class="line">   • 첫번째인자로HttpRequest인스턴스를받습니다. • 필히HttpResponse인스턴스를리턴해야합니다. </span><br><span class="line"></span><br><span class="line">- 크게 Function Based View와 Class Based View로 구분 </span><br><span class="line"></span><br><span class="line">- 요청에 대한 리턴값으로는 무조건 HttpResponse 인자값이여야함로 html을 직접써서 하던가, 템플릿을 활용한다</span><br><span class="line"></span><br><span class="line">- &gt;  from django.shortcuts import render</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; render사용하여 render(request, &apos;myapp/post_list.html&apos;, &#123;&apos;name&apos;: name&#125;)  (템플릿!)</span><br><span class="line"></span><br><span class="line">- 파일다운로드 </span><br><span class="line"></span><br><span class="line">-</span><br></pre></td></tr></table></figure>
-def excel_download(request): &apos;FBV: 엑셀 다운로드 응답하기&apos; 
+<p> result = sum(map(int, numbers.split(“/“))) *#map은 리스트의 요소를 지정된 함수로 처리해주는 함수입니다</p>
+<p>만약 넣은 것에 //100/234//45이라면 빈문자열이 생기므로 int””은 에러가뜸 </p>
+<p>빈문자열을 없애줘야하므로  sum(map(lambda s: int(s or 0), numbers.split(“/“))) 해야함 #or표현은 s가 거짓일떄 0으로 치환됨</p>
+<h1 id="View"><a href="#View" class="headerlink" title="View"></a>View</h1><ul>
+<li><p>URLConf에 매핑된 Callable Object<br> • 첫번째인자로HttpRequest인스턴스를받습니다. • 필히HttpResponse인스턴스를리턴해야합니다. </p>
+</li>
+<li><p>크게 Function Based View와 Class Based View로 구분 </p>
+</li>
+<li><p>요청에 대한 리턴값으로는 무조건 HttpResponse 인자값이여야함로 html을 직접써서 하던가, 템플릿을 활용한다</p>
+</li>
+<li><blockquote>
+<p> from django.shortcuts import render</p>
+<p>render사용하여 render(request, ‘myapp/post_list.html’, {‘name’: name})  (템플릿!)</p>
+</blockquote>
+</li>
+<li><p>파일다운로드 </p>
+</li>
+<li><pre><code>def excel_download(request): &apos;FBV: 엑셀 다운로드 응답하기&apos; 
 
 filepath = &apos;/other/path/excel.xls&apos; filename = os.path.basename(filepath) 
 
@@ -778,7 +828,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고"><span class="toc-number">1.</span> <span class="toc-text">장고</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#웹서비스-기본구조"><span class="toc-number">1.1.</span> <span class="toc-text">웹서비스 기본구조</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#웹-애플리케이션-기본-구조"><span class="toc-number">1.2.</span> <span class="toc-text">웹 애플리케이션 기본 구조</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고-따라가기"><span class="toc-number">1.3.</span> <span class="toc-text">장고 따라가기</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-App-URLConf-Template"><span class="toc-number">2.</span> <span class="toc-text">Django App, URLConf, Template</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#URLConf-and-Regular-Expression"><span class="toc-number">3.</span> <span class="toc-text">URLConf and Regular Expression</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#정규표현식-Regular-Expression"><span class="toc-number">3.1.</span> <span class="toc-text">정규표현식(Regular Expression)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#지금부터-모든-장고환경에-접근-가능"><span class="toc-number">4.</span> <span class="toc-text">지금부터 모든 장고환경에 접근 가능</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#모델-Meta-ordering-을-무시하고-직접-정렬조건-지정하는법"><span class="toc-number">5.</span> <span class="toc-text">모델 Meta.ordering 을 무시하고, 직접 정렬조건 지정하는법</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고"><span class="toc-number">1.</span> <span class="toc-text">장고</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#웹서비스-기본구조"><span class="toc-number">1.1.</span> <span class="toc-text">웹서비스 기본구조</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#웹-애플리케이션-기본-구조"><span class="toc-number">1.2.</span> <span class="toc-text">웹 애플리케이션 기본 구조</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고-따라가기"><span class="toc-number">1.3.</span> <span class="toc-text">장고 따라가기</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-App-URLConf-Template"><span class="toc-number">2.</span> <span class="toc-text">Django App, URLConf, Template</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#URLConf-and-Regular-Expression"><span class="toc-number">3.</span> <span class="toc-text">URLConf and Regular Expression</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#정규표현식-Regular-Expression"><span class="toc-number">3.1.</span> <span class="toc-text">정규표현식(Regular Expression)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URLConf"><span class="toc-number">3.2.</span> <span class="toc-text">URLConf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URLConf-정규표현식-매핑-연습"><span class="toc-number">3.3.</span> <span class="toc-text">URLConf 정규표현식 매핑 연습</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#View"><span class="toc-number">4.</span> <span class="toc-text">View</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#지금부터-모든-장고환경에-접근-가능"><span class="toc-number">5.</span> <span class="toc-text">지금부터 모든 장고환경에 접근 가능</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#모델-Meta-ordering-을-무시하고-직접-정렬조건-지정하는법"><span class="toc-number">6.</span> <span class="toc-text">모델 Meta.ordering 을 무시하고, 직접 정렬조건 지정하는법</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
