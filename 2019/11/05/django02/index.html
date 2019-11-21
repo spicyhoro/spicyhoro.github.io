@@ -266,15 +266,15 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "django">django</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags = "basic">basic</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "django">django</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">2.5k</span>Reading time: <span class="post-count reading-time">15 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2.6k</span>Reading time: <span class="post-count reading-time">16 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -612,53 +612,97 @@ height:50vh;
 </li>
 </ul>
 <p>  <strong>따라서 습관적으로 blog_post_list.html 을 만들기 or 템플릿디렉토리안 해당 앱이름으로 디렉토리 만들고 그안에 템플릿 쓰면됨.</strong></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">예시</span><br><span class="line">- blog/templats/blog/post_list.html : blog/post_list.html 경로로 찾습니다.</span><br><span class="line">- shop/templats/shop/post_list.html : shop/post_list.html 경로로 찾습니다.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">예시</span><br><span class="line">- blog/templats/blog/post_list.html : blog/post_list.html 경로로 찾습니다.</span><br><span class="line">- shop/templats/shop/post_list.html : shop/post_list.html 경로로 찾습니다.</span><br></pre></td></tr></table></figure>
 
 
 
 
 
-  <figure class="highlight plain"><figcaption><span>"blog/post_list.html") 로 호출시킴```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">__장고 앱은 재사용할려고 만듬 즉 거의 모든 파일은 앱 디렉토리 안에 넣어놓자__</span><br><span class="line"></span><br><span class="line">전반적으로 쓸 템플릿은 프로젝트 레벨에 쓸 템플릿을 넣는것은 프로젝트 디렉토리에 템플릿에 넣자 그리고 꼭 settings.py 에 템플릿에 dir에 경로 추가해줘야함 (자동추가x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## render_to_string 샘플(템플릿으로 html, 이메일, JS 등등가능)</span><br><span class="line"></span><br><span class="line">accounts/signup_welcome.txt</span><br></pre></td></tr></table></figure>
-<p>  안녕하세요. 님. 님께서는 에 가입하셨습니다.<br>  감사드립니다. - AskDjango<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">만들기</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># URL Reverse</span><br><span class="line"></span><br><span class="line"> urls.py 변경만으로 &quot;각 뷰에 대한 URL&quot;이 변경되는, 유연한 URL시스템</span><br></pre></td></tr></table></figure><br>  urlpatterns = [<br>       url(r’^blog/$’, blog_views.post_list, name=’post_list’),<br>       url(r’^blog/(?P<id>\d+)/$’, blog_views.post_detail, name=’post_detail’),<br>  ]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">을 아래와 같이 바꾼다</span><br></pre></td></tr></table></figure>
-<p>  urlpatterns = [<br>   url(r’^weblog/$’, blog_views.post_list, name=’post_list’),<br>   url(r’^weblog/(?P<id>\d+)/$’, blog_views.post_detail, name=’post_detail’),<br>  ]</p>
-<h1 id="이제-“-weblog-“-“-weblog-1-“-주소로-서비스하게-됩니다"><a href="#이제-“-weblog-“-“-weblog-1-“-주소로-서비스하게-됩니다" class="headerlink" title="이제 “/weblog/“, “/weblog/1/“ 주소로 서비스하게 됩니다."></a>이제 “/weblog/“, “/weblog/1/“ 주소로 서비스하게 됩니다.</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  이것이 URL Reverse의 힘!!</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  ## URL Reverse 의 혜택(템플릿&gt;url찾음)</span><br><span class="line"></span><br><span class="line">  • 개발자가 일일이 URL을 계산하지 않아도 됩니다. 만세 ~~~</span><br><span class="line"></span><br><span class="line">  ​    (뷰는 안바뀌고 url주소만바뀜)</span><br><span class="line"></span><br><span class="line">  • URL이 변경되더라도, URL Reverse가 변경된 URL을 추적 </span><br><span class="line"></span><br><span class="line">  • 누락될 일이 없어요. </span><br><span class="line"></span><br><span class="line">  - 예시</span><br><span class="line"></span><br><span class="line">  - &gt; 내가 list를 만들고 싶음</span><br><span class="line">    &gt;</span><br><span class="line">    &gt;  blog앱 Post목록을 볼려면 post_list뷰를 호출해야되니깐, URLConf 뒤 적뒤적거리며 URL계산계산 @_@;;; /blog/ 주소로 접근하면 되겠네.</span><br><span class="line">    &gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-<pre><code>&gt; &lt;!-- blog/templates/blog/layout.html --&gt;
-&gt; &lt;a href=&quot;/blog/&quot;&gt;블로그 글 목록&lt;/a&gt;
-&gt; &lt;!-- blog/templates/blog/post_form.html --&gt;
-&gt; &lt;a href=&quot;/blog/&quot;&gt;블로그 글 목록&lt;/a&gt;
-&gt; &lt;!-- blog/templates/blog/comment_form.html --&gt;
-&gt; &lt;a href=&quot;/blog/&quot;&gt;블로그 글 목록&lt;/a&gt;</code></pre><blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">문제점은 blog앱을 다른 프로젝트에 쓸려고 옮겼는데, r&apos;^blog/&apos; 에서 r&apos;^weblog/&apos;로 다시 다 변경해야함</span><br><span class="line"> ##  뷰 url계산은 장고! 시키자</span><br><span class="line"> URL이 변경될 때마다, 이 URL을 참조하고 있는 코드를 일일이 찾아서 변 경하는 것은 너무 번거롭고, 수정건을 누락시킬 여지도 많다</span><br><span class="line"> 각각의 url패턴이란? url(~~)형식을 말함 </span><br><span class="line"> 이때 urls.py 에서 url(~~ ,~~, name=&apos;post_detail&apos;) 라고 url이름을 달아주면 </span><br></pre></td></tr></table></figure>
-  
-  <a href="/blog/detail/{{post.id}}/">
-       {{post.title}}
-       </a> 
-       #이렇게 써야하는것을 줄일수있다
-       
-  <a href="{% url "post_detail" post.id %}">  중요! id라는 인자도넘김
-       {{post.title}}
-       </a> 
-       #으로 줄일수있고 거기다 url을 수동으로 바꿔줄필요가없다.
-       #즉 url패턴을 바로 대려와서 필요한 인자 넘기고 실행하는 링크가된듯
-       #네임이 중요
-       
+<p><code>render(request, &quot;blog/post_list.html&quot;) 로 호출시킴</code></p>
+<p>  <strong>장고 앱은 재사용할려고 만듬 즉 거의 모든 파일은 앱 디렉토리 안에 넣어놓자</strong></p>
+<p>  전반적으로 쓸 템플릿은 프로젝트 레벨에 쓸 템플릿을 넣는것은 프로젝트 디렉토리에 템플릿에 넣자 그리고 꼭 settings.py 에 템플릿에 dir에 경로 추가해줘야함 (자동추가x)</p>
+<h2 id="render-to-string-샘플-템플릿으로-html-이메일-JS-등등가능"><a href="#render-to-string-샘플-템플릿으로-html-이메일-JS-등등가능" class="headerlink" title="render_to_string 샘플(템플릿으로 html, 이메일, JS 등등가능)"></a>render_to_string 샘플(템플릿으로 html, 이메일, JS 등등가능)</h2><p>  accounts/signup_welcome.txt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">안녕하세요. &#123;&#123; name &#125;&#125;님. &#123;&#123; name &#125;&#125;님께서는 &#123;&#123; when &#125;&#125;에 가입하셨습니다.</span><br><span class="line">감사드립니다. - AskDjango</span><br></pre></td></tr></table></figure>
+
+<p>  만들기</p>
+<h1 id="URL-Reverse"><a href="#URL-Reverse" class="headerlink" title="URL Reverse"></a>URL Reverse</h1><p>   urls.py 변경만으로 “각 뷰에 대한 URL”이 변경되는, 유연한 URL시스템</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">     url(r&apos;^blog/$&apos;, blog_views.post_list, name=&apos;post_list&apos;),</span><br><span class="line">     url(r&apos;^blog/(?P&lt;id&gt;\d+)/$&apos;, blog_views.post_detail, name=&apos;post_detail&apos;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>  을 아래와 같이 바꾼다</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line"> url(r&apos;^weblog/$&apos;, blog_views.post_list, name=&apos;post_list&apos;),</span><br><span class="line"> url(r&apos;^weblog/(?P&lt;id&gt;\d+)/$&apos;, blog_views.post_detail, name=&apos;post_detail&apos;),</span><br><span class="line">]</span><br><span class="line"># 이제 &quot;/weblog/&quot;, &quot;/weblog/1/&quot; 주소로 서비스하게 됩니다.</span><br></pre></td></tr></table></figure>
+
+<p>  이것이 URL Reverse의 힘!!</p>
+<h2 id="URL-Reverse-의-혜택-템플릿-gt-url찾음"><a href="#URL-Reverse-의-혜택-템플릿-gt-url찾음" class="headerlink" title="URL Reverse 의 혜택(템플릿&gt;url찾음)"></a>URL Reverse 의 혜택(템플릿&gt;url찾음)</h2><p>  • 개발자가 일일이 URL을 계산하지 않아도 됩니다. 만세 <del>~</del></p>
+<p>  ​    (뷰는 안바뀌고 url주소만바뀜)</p>
+<p>  • URL이 변경되더라도, URL Reverse가 변경된 URL을 추적 </p>
+<p>  • 누락될 일이 없어요. </p>
+<ul>
+<li><p>예시</p>
+</li>
+<li><blockquote>
+<p>내가 list를 만들고 싶음</p>
+<p> blog앱 Post목록을 볼려면 post_list뷰를 호출해야되니깐, URLConf 뒤 적뒤적거리며 URL계산계산 @_@;;; /blog/ 주소로 접근하면 되겠네.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- blog/templates/blog/layout.html --&gt;</span><br><span class="line">&lt;a href=&quot;/blog/&quot;&gt;블로그 글 목록&lt;/a&gt;</span><br><span class="line">&lt;!-- blog/templates/blog/post_form.html --&gt;</span><br><span class="line">&lt;a href=&quot;/blog/&quot;&gt;블로그 글 목록&lt;/a&gt;</span><br><span class="line">&lt;!-- blog/templates/blog/comment_form.html --&gt;</span><br><span class="line">&lt;a href=&quot;/blog/&quot;&gt;블로그 글 목록&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p>문제점은 blog앱을 다른 프로젝트에 쓸려고 옮겼는데, r’^blog/‘ 에서 r’^weblog/‘로 다시 다 변경해야함</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  ## URL Reverse를 수행하는 4가지 함수</span><br><span class="line"></span><br><span class="line">  • reverse 함수 : 매칭 URL이 없으면 NoReverseMatch 예외 발생 (str리턴)</span><br><span class="line"></span><br><span class="line">  &gt;reverse(&apos;blog:post_detail&apos;, kwargs=&#123;&apos;id&apos;: 10&#125;)</span><br><span class="line">  &gt;</span><br><span class="line">  &gt;reverse(&quot;blog:post_detail&quot;, args=[10])</span><br><span class="line"></span><br><span class="line">  • resolve_url 함수 : 매칭 URL이 없으면 &quot;인자 문자열&quot;을 그대로 리턴  (str리턴)</span><br><span class="line"></span><br><span class="line">  &gt; 내부적으로 reverse 함수를 사용 </span><br><span class="line">  &gt;</span><br><span class="line">  &gt; resolve_url(&apos;blog:post_detail&apos;, 10)</span><br><span class="line"></span><br><span class="line">  • redirect 함수 : 매칭 URL이 없으면 &quot;인자 문자열&quot;을 URL로 판단 (HttpR리턴)</span><br><span class="line"></span><br><span class="line">  &gt; 내부적으로 resolve_url 함수를 사용 </span><br><span class="line"></span><br><span class="line">  • url template tag : 내부적으로 reverse 함수가 사용 (str)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  ### 예시(프로젝트 안에 이름동일하면 네임스페이스 지정!)</span><br><span class="line"></span><br><span class="line">  - 네임스페이스는 </span><br><span class="line"></span><br><span class="line">    path()쓰자 그리고 네임 스페이스는 이제 그해당 앱에 url에 </span><br><span class="line"></span><br><span class="line">    app_name = &quot;blog&quot; 추가하면 그게 네임 스페이스가됨</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    이렇게 include안에 지정하면 이제 하위에 url패턴 이름이 겹쳐도 사용가능</span><br><span class="line"></span><br><span class="line">템플릿에서 사용시&#123;% raw %&#125; &#123;%url &quot;blog:post_detail&quot; post.id %&#125; &#123;% endraw %&#125; post.id는 넘겨줄인자</span><br><span class="line"></span><br><span class="line">  - tip: 인자 넘겨줄때 포지션args or 키워드args존재.</span><br><span class="line"></span><br><span class="line">    reverse(&quot;blog:post_detail&quot;, args=[10])</span><br><span class="line"></span><br><span class="line">    reverse(&apos;blog:post_detail&apos;, kwargs=&#123;&apos;id&apos;: 10&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## URL Reverse, 뷰 이름을 지정하는 2가지 방법 (2) 와 의 조합</span><br><span class="line"></span><br><span class="line">- &lt;include() namespace&gt;</span><br><span class="line">- &lt;url() name&gt;</span><br><span class="line"></span><br><span class="line">## 모델 클래스내 get_absolute_url 멤버함수</span><br><span class="line"></span><br><span class="line">__강추기능__</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">해당 post인스턴스의 디테일을 볼수있는 url을 아는방법이 예시임</span><br><span class="line"></span><br><span class="line">models.py 파일에 post모델 클래스에</span><br><span class="line"></span><br><span class="line">def get_absolute_url(self):</span><br><span class="line"></span><br><span class="line">​    return reverse(&apos;blog:post_detail&apos;, args=[*self*.id])</span><br><span class="line"></span><br><span class="line">추가하기</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">이제 얻는 방법은 4가지</span><br></pre></td></tr></table></figure>
-<p>from blog.models import Post<br>post = Post.objects.first()<br>print(reverse(‘blog:post_detail’, args=[post.id]))<br>print(resolve_url(“blog:post_detail”, post.id))<br>print(post.get_absolute_url())</p>
-<p>print(resolve_url(post))<br>#resolve_url()은 포스트인자안에 get_absolute_url정의되어있다면 바로반환함</p>
-<pre><code>
+<h2 id="뷰-url계산은-장고-시키자"><a href="#뷰-url계산은-장고-시키자" class="headerlink" title="뷰 url계산은 장고! 시키자"></a>뷰 url계산은 장고! 시키자</h2><p>URL이 변경될 때마다, 이 URL을 참조하고 있는 코드를 일일이 찾아서 변 경하는 것은 너무 번거롭고, 수정건을 누락시킬 여지도 많다</p>
+<p>각각의 url패턴이란? url(~~)형식을 말함 </p>
+<p>이때 urls.py 에서 url(<del>~ ,</del>, name=’post_detail’) 라고 url이름을 달아주면</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">&lt;a href=&quot;/blog/detail/&#123;&#123;post.id&#125;&#125;/&quot;&gt;</span><br><span class="line">     &#123;&#123;post.title&#125;&#125;</span><br><span class="line">     &lt;/a&gt; </span><br><span class="line">     #이렇게 써야하는것을 줄일수있다</span><br><span class="line">     </span><br><span class="line">&lt;a href=&quot;&#123;% url &quot;post_detail&quot; post.id %&#125;&quot;&gt;  중요! id라는 인자도넘김</span><br><span class="line">     &#123;&#123;post.title&#125;&#125;</span><br><span class="line">     &lt;/a&gt; </span><br><span class="line">     #으로 줄일수있고 거기다 url을 수동으로 바꿔줄필요가없다.</span><br><span class="line">     #즉 url패턴을 바로 대려와서 필요한 인자 넘기고 실행하는 링크가된듯</span><br><span class="line">     #네임이 중요</span><br><span class="line">     &#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
 
 
-즉 어떠한 데이터 모델에 디데일뷰를 만들게되면 습관적으로 넣어놓는것이 편하다
+
+<h2 id="URL-Reverse를-수행하는-4가지-함수"><a href="#URL-Reverse를-수행하는-4가지-함수" class="headerlink" title="URL Reverse를 수행하는 4가지 함수"></a>URL Reverse를 수행하는 4가지 함수</h2><p>  • reverse 함수 : 매칭 URL이 없으면 NoReverseMatch 예외 발생 (str리턴)</p>
+<blockquote>
+<p>reverse(‘blog:post_detail’, kwargs={‘id’: 10})</p>
+<p>reverse(“blog:post_detail”, args=[10])</p>
+</blockquote>
+<p>  • resolve_url 함수 : 매칭 URL이 없으면 “인자 문자열”을 그대로 리턴  (str리턴)</p>
+<blockquote>
+<p>내부적으로 reverse 함수를 사용 </p>
+<p>resolve_url(‘blog:post_detail’, 10)</p>
+</blockquote>
+<p>  • redirect 함수 : 매칭 URL이 없으면 “인자 문자열”을 URL로 판단 (HttpR리턴)</p>
+<blockquote>
+<p>내부적으로 resolve_url 함수를 사용 </p>
+</blockquote>
+<p>  • url template tag : 내부적으로 reverse 함수가 사용 (str)</p>
+<h3 id="예시-프로젝트-안에-이름동일하면-네임스페이스-지정"><a href="#예시-프로젝트-안에-이름동일하면-네임스페이스-지정" class="headerlink" title="예시(프로젝트 안에 이름동일하면 네임스페이스 지정!)"></a>예시(프로젝트 안에 이름동일하면 네임스페이스 지정!)</h3><ul>
+<li><p>네임스페이스는 </p>
+<p>path()쓰자 그리고 네임 스페이스는 이제 그해당 앱에 url에 </p>
+<p>app_name = “blog” 추가하면 그게 네임 스페이스가됨</p>
+<p>이렇게 include안에 지정하면 이제 하위에 url패턴 이름이 겹쳐도 사용가능</p>
+</li>
+</ul>
+<p>템플릿에서 사용시 {%url "blog:post_detail" post.id %}  post.id는 넘겨줄인자</p>
+<ul>
+<li><p>tip: 인자 넘겨줄때 포지션args or 키워드args존재.</p>
+<p>reverse(“blog:post_detail”, args=[10])</p>
+<p>reverse(‘blog:post_detail’, kwargs={‘id’: 10})</p>
+</li>
+</ul>
+<h2 id="URL-Reverse-뷰-이름을-지정하는-2가지-방법-2-와-의-조합"><a href="#URL-Reverse-뷰-이름을-지정하는-2가지-방법-2-와-의-조합" class="headerlink" title="URL Reverse, 뷰 이름을 지정하는 2가지 방법 (2) 와 의 조합"></a>URL Reverse, 뷰 이름을 지정하는 2가지 방법 (2) 와 의 조합</h2><ul>
+<li>&lt;include() namespace&gt;</li>
+<li>&lt;url() name&gt;</li>
+</ul>
+<h2 id="모델-클래스내-get-absolute-url-멤버함수"><a href="#모델-클래스내-get-absolute-url-멤버함수" class="headerlink" title="모델 클래스내 get_absolute_url 멤버함수"></a>모델 클래스내 get_absolute_url 멤버함수</h2><p><strong>강추기능</strong></p>
+<p>해당 post인스턴스의 디테일을 볼수있는 url을 아는방법이 예시임</p>
+<p>models.py 파일에 post모델 클래스에</p>
+<p>def get_absolute_url(self):</p>
+<p>​    return reverse(‘blog:post_detail’, args=[<em>self</em>.id])</p>
+<p>추가하기</p>
+<p>이제 얻는 방법은 4가지 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from blog.models import Post</span><br><span class="line">post = Post.objects.first()</span><br><span class="line">print(reverse(&apos;blog:post_detail&apos;, args=[post.id]))</span><br><span class="line">print(resolve_url(&quot;blog:post_detail&quot;, post.id))</span><br><span class="line">print(post.get_absolute_url())</span><br><span class="line"></span><br><span class="line">print(resolve_url(post)) </span><br><span class="line">#resolve_url()은 포스트인자안에 get_absolute_url정의되어있다면 바로반환함</span><br></pre></td></tr></table></figure>
 
 
 
-## 그 외 활용
+<p>즉 어떠한 데이터 모델에 디데일뷰를 만들게되면 습관적으로 넣어놓는것이 편하다</p>
+<h2 id="그-외-활용"><a href="#그-외-활용" class="headerlink" title="그 외 활용"></a>그 외 활용</h2><p>• CreateView, UpdateView 에 success_url을 제공하지 않을 경우, 해당 model instance 의 get_absolute_url 주소로 이동이 가능한지 체크하고, 이동이 가능할 경우 이동 • 생성/수정하고나서 Detail화면으로 이동하는 것은 자연스러운 시나 리오 </p>
+<p>특정 모델에 대한 Detail뷰를 작성할 경우, Detail뷰에 대한 URLConf설 정을 하자마자, 필히 get_absolute_url설정을 해주세요. 코드가 보다 간 결해집니다</p>
 
-• CreateView, UpdateView 에 success_url을 제공하지 않을 경우, 해당 model instance 의 get_absolute_url 주소로 이동이 가능한지 체크하고, 이동이 가능할 경우 이동 • 생성/수정하고나서 Detail화면으로 이동하는 것은 자연스러운 시나 리오 
-
-특정 모델에 대한 Detail뷰를 작성할 경우, Detail뷰에 대한 URLConf설 정을 하자마자, 필히 get_absolute_url설정을 해주세요. 코드가 보다 간 결해집니다</code></pre>
     </article>
     <!-- license  -->
     
@@ -795,7 +839,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-Status-Code"><span class="toc-number">1.</span> <span class="toc-text">HTTP Status Code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#지정-Record가-없는-것은-서버오류가-아닙니다-500"><span class="toc-number">1.1.</span> <span class="toc-text">지정 Record가 없는 것은 서버오류가 아닙니다 (!= 500)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Model-Relationship-Fields-관계형-데이터베이스"><span class="toc-number">2.</span> <span class="toc-text">Model Relationship Fields  (관계형 데이터베이스)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#데이터베이스-정규화"><span class="toc-number">2.1.</span> <span class="toc-text">데이터베이스 정규화</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-N-포스팅과-댓글"><span class="toc-number">2.2.</span> <span class="toc-text">1:N - 포스팅과 댓글</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#M-N-Relation없이-포스팅과-태그"><span class="toc-number">2.3.</span> <span class="toc-text">M:N - Relation없이 포스팅과 태그</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-User와-Profile"><span class="toc-number">2.4.</span> <span class="toc-text">1:1 - User와 Profile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ForeignKey와-Onetoone차이"><span class="toc-number">2.5.</span> <span class="toc-text">ForeignKey와 Onetoone차이</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#알아야할것"><span class="toc-number">2.6.</span> <span class="toc-text">알아야할것</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#참고-auth-User-모델과-관계를-맺을-때"><span class="toc-number">2.7.</span> <span class="toc-text">참고 : auth.User 모델과 관계를 맺을 때</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ForeignKey-on-delete-옵션"><span class="toc-number">2.8.</span> <span class="toc-text">ForeignKey.on_delete 옵션</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ForeignKey에서-related-name-지정의-필요성"><span class="toc-number">2.9.</span> <span class="toc-text">ForeignKey에서 related_name 지정의 필요성</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#related-name-이름-중복이-발생"><span class="toc-number">3.</span> <span class="toc-text">related_name 이름 중복이 발생</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#save되지-않은-모델-인스턴스와-Relation은-불가"><span class="toc-number">3.1.</span> <span class="toc-text">save되지 않은 모델 인스턴스와 Relation은 불가</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#갯수-카운트하는-2가지-방법"><span class="toc-number">3.2.</span> <span class="toc-text">갯수 카운트하는 2가지 방법</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-Template-Inheritance"><span class="toc-number">4.</span> <span class="toc-text">Django Template Inheritance</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-Template-Loader-꼭알자"><span class="toc-number">5.</span> <span class="toc-text">Django Template Loader 꼭알자</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#app-directories-Loader"><span class="toc-number">5.1.</span> <span class="toc-text">app_directories.Loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#filesystem-Loader"><span class="toc-number">5.2.</span> <span class="toc-text">filesystem.Loader</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#이제-“-weblog-“-“-weblog-1-“-주소로-서비스하게-됩니다"><span class="toc-number">6.</span> <span class="toc-text">이제 “/weblog/“, “/weblog/1/“ 주소로 서비스하게 됩니다.</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-Status-Code"><span class="toc-number">1.</span> <span class="toc-text">HTTP Status Code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#지정-Record가-없는-것은-서버오류가-아닙니다-500"><span class="toc-number">1.1.</span> <span class="toc-text">지정 Record가 없는 것은 서버오류가 아닙니다 (!= 500)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Model-Relationship-Fields-관계형-데이터베이스"><span class="toc-number">2.</span> <span class="toc-text">Model Relationship Fields  (관계형 데이터베이스)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#데이터베이스-정규화"><span class="toc-number">2.1.</span> <span class="toc-text">데이터베이스 정규화</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-N-포스팅과-댓글"><span class="toc-number">2.2.</span> <span class="toc-text">1:N - 포스팅과 댓글</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#M-N-Relation없이-포스팅과-태그"><span class="toc-number">2.3.</span> <span class="toc-text">M:N - Relation없이 포스팅과 태그</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-User와-Profile"><span class="toc-number">2.4.</span> <span class="toc-text">1:1 - User와 Profile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ForeignKey와-Onetoone차이"><span class="toc-number">2.5.</span> <span class="toc-text">ForeignKey와 Onetoone차이</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#알아야할것"><span class="toc-number">2.6.</span> <span class="toc-text">알아야할것</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#참고-auth-User-모델과-관계를-맺을-때"><span class="toc-number">2.7.</span> <span class="toc-text">참고 : auth.User 모델과 관계를 맺을 때</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ForeignKey-on-delete-옵션"><span class="toc-number">2.8.</span> <span class="toc-text">ForeignKey.on_delete 옵션</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ForeignKey에서-related-name-지정의-필요성"><span class="toc-number">2.9.</span> <span class="toc-text">ForeignKey에서 related_name 지정의 필요성</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#related-name-이름-중복이-발생"><span class="toc-number">3.</span> <span class="toc-text">related_name 이름 중복이 발생</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#save되지-않은-모델-인스턴스와-Relation은-불가"><span class="toc-number">3.1.</span> <span class="toc-text">save되지 않은 모델 인스턴스와 Relation은 불가</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#갯수-카운트하는-2가지-방법"><span class="toc-number">3.2.</span> <span class="toc-text">갯수 카운트하는 2가지 방법</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-Template-Inheritance"><span class="toc-number">4.</span> <span class="toc-text">Django Template Inheritance</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-Template-Loader-꼭알자"><span class="toc-number">5.</span> <span class="toc-text">Django Template Loader 꼭알자</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#app-directories-Loader"><span class="toc-number">5.1.</span> <span class="toc-text">app_directories.Loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#filesystem-Loader"><span class="toc-number">5.2.</span> <span class="toc-text">filesystem.Loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#render-to-string-샘플-템플릿으로-html-이메일-JS-등등가능"><span class="toc-number">5.3.</span> <span class="toc-text">render_to_string 샘플(템플릿으로 html, 이메일, JS 등등가능)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#URL-Reverse"><span class="toc-number">6.</span> <span class="toc-text">URL Reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Reverse-의-혜택-템플릿-gt-url찾음"><span class="toc-number">6.1.</span> <span class="toc-text">URL Reverse 의 혜택(템플릿&gt;url찾음)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#뷰-url계산은-장고-시키자"><span class="toc-number">6.2.</span> <span class="toc-text">뷰 url계산은 장고! 시키자</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Reverse를-수행하는-4가지-함수"><span class="toc-number">6.3.</span> <span class="toc-text">URL Reverse를 수행하는 4가지 함수</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#예시-프로젝트-안에-이름동일하면-네임스페이스-지정"><span class="toc-number">6.3.1.</span> <span class="toc-text">예시(프로젝트 안에 이름동일하면 네임스페이스 지정!)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Reverse-뷰-이름을-지정하는-2가지-방법-2-와-의-조합"><span class="toc-number">6.4.</span> <span class="toc-text">URL Reverse, 뷰 이름을 지정하는 2가지 방법 (2) 와 의 조합</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#모델-클래스내-get-absolute-url-멤버함수"><span class="toc-number">6.5.</span> <span class="toc-text">모델 클래스내 get_absolute_url 멤버함수</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#그-외-활용"><span class="toc-number">6.6.</span> <span class="toc-text">그 외 활용</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -808,6 +852,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
@@ -997,13 +1043,13 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
+    
         <span class="sidebar-tag-name" data-tags="django"><span class="iconfont-archer">&#xe606;</span>django</span>
     
         <span class="sidebar-tag-name" data-tags="장고"><span class="iconfont-archer">&#xe606;</span>장고</span>
     
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
-        <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
     
         <span class="sidebar-tag-name" data-tags="GDG"><span class="iconfont-archer">&#xe606;</span>GDG</span>
     
@@ -1015,11 +1061,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
     
+        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
+    
         <span class="sidebar-tag-name" data-tags="terminal"><span class="iconfont-archer">&#xe606;</span>terminal</span>
     
         <span class="sidebar-tag-name" data-tags="마크다운"><span class="iconfont-archer">&#xe606;</span>마크다운</span>
-    
-        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1060,11 +1106,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="git"><span class="iconfont-archer">&#xe60a;</span>git</span>
     
+        <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
+    
         <span class="sidebar-category-name" data-categories="terminal"><span class="iconfont-archer">&#xe60a;</span>terminal</span>
     
         <span class="sidebar-category-name" data-categories="마크다운"><span class="iconfont-archer">&#xe60a;</span>마크다운</span>
-    
-        <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
