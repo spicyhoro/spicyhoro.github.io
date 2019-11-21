@@ -266,9 +266,9 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "django">django</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags = "basic">basic</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "django">django</a>
     
 </div>
                 
@@ -529,9 +529,8 @@ height:50vh;
 <li>\d+ : \d+ 패턴에 부합된다면 </li>
 <li><x> : x 라는 변수명으로 인자를 넘기겠다.<br> • <strong>뷰의인자로넘겨받은값들은모두문자열타입입니다.</strong> </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Example #4 하나의 뷰에 3개의 URL연결</span><br><span class="line">url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/(?P&lt;z&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/$&apos;, views.mysum)</span><br><span class="line"># views.py</span><br><span class="line">def mysum(request, x, y=0, z=0):</span><br><span class="line">return HttpResponse(int(x) + int(y) + int(z))Example #4 하나의 뷰에 3개의 URL연결</span><br><span class="line">url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/(?P&lt;z&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/$&apos;, views.mysum)</span><br><span class="line"># views.py</span><br><span class="line">def mysum(request, x, y=0, z=0):</span><br><span class="line">return HttpResponse(int(x) + int(y) + int(z))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Example #4 하나의 뷰에 3개의 URL연결</span><br><span class="line">url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/(?P&lt;z&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/$&apos;, views.mysum)</span><br><span class="line"># views.py</span><br><span class="line">def mysum(request, x, y=0, z=0):</span><br><span class="line">return HttpResponse(int(x) + int(y) + int(z))Example #4 하나의 뷰에 3개의 URL연결</span><br><span class="line">url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/(?P&lt;z&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/(?P&lt;y&gt;\d+)/$&apos;, views.mysum) url(r&apos;^sum/(?P&lt;x&gt;\d+)/$&apos;, views.mysum)</span><br><span class="line"># views.py</span><br><span class="line">def mysum(request, x, y=0, z=0):</span><br><span class="line">return HttpResponse(int(x) + int(y) + int(z))</span><br><span class="line"></span><br><span class="line">result = sum(map(int, numbers.split(&quot;/&quot;))) *#map은 리스트의 요소를 지정된 함수로 처리해주는 함수입니다</span><br></pre></td></tr></table></figure>
 
-<p> result = sum(map(int, numbers.split(“/“))) *#map은 리스트의 요소를 지정된 함수로 처리해주는 함수입니다</p>
 <p>만약 넣은 것에 //100/234//45이라면 빈문자열이 생기므로 int””은 에러가뜸 </p>
 <p>빈문자열을 없애줘야하므로  sum(map(lambda s: int(s or 0), numbers.split(“/“))) 해야함 #or표현은 s가 거짓일떄 0으로 치환됨</p>
 <h1 id="View"><a href="#View" class="headerlink" title="View"></a>View</h1><ul>
@@ -548,150 +547,339 @@ height:50vh;
 </li>
 <li><p>파일다운로드 </p>
 </li>
-<li><pre><code>def excel_download(request): &apos;FBV: 엑셀 다운로드 응답하기&apos; 
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def excel_download(request): &apos;FBV: 엑셀 다운로드 응답하기&apos; </span><br><span class="line">  </span><br><span class="line">  filepath = &apos;/other/path/excel.xls&apos; filename = os.path.basename(filepath) </span><br><span class="line">  </span><br><span class="line">  with open(filepath, &apos;rb&apos;) as f:</span><br><span class="line">   response = HttpResponse(f, content_type=&apos;application/vnd.ms-excel&apos;) # 필요한 응답헤더 세팅 </span><br><span class="line">  </span><br><span class="line">  response[&apos;Content-Disposition&apos;] = &apos;attachment; filename=&quot;&#123;&#125;&quot;&apos;.format(filename) return response</span><br></pre></td></tr></table></figure>
 
-filepath = &apos;/other/path/excel.xls&apos; filename = os.path.basename(filepath) 
 
-with open(filepath, &apos;rb&apos;) as f:
- response = HttpResponse(f, content_type=&apos;application/vnd.ms-excel&apos;) # 필요한 응답헤더 세팅 
 
-response[&apos;Content-Disposition&apos;] = &apos;attachment; filename=&quot;{}&quot;&apos;.format(filename) return response 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 함수기반view 응답만드는4가지</span><br><span class="line"></span><br><span class="line">- HttpResponse</span><br><span class="line">- render(템플릿)</span><br><span class="line">- json</span><br><span class="line">- 파일 다운로드 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 클래스기반 view</span><br><span class="line"></span><br><span class="line">- ​    함수기반 뷰를 생성해주는 클래스</span><br></pre></td></tr></table></figure>
-class SampleTemplateView(object):
-@classmethod];/
-   def get(self, request):
-       wejpfojwopejfw
-       ewfpojwepfojwe
-       wejfopwejopfew
-
-예시@@@@@실행
-</code></pre></li>
+</li>
 </ul>
-<p>fbv_view = SampleTemplateView.as_view()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Model and Model Fields</span><br><span class="line"></span><br><span class="line">## SQL (Structured Query Language) (꼭별도공부)</span><br><span class="line"></span><br><span class="line">• Query : 정보 수집에 대한 요청에 쓰이는 컴퓨터 언어 (위키백과) </span><br><span class="line"></span><br><span class="line">• SQL : 관계형 데이터베이스 관리 시스템(RDBMS) (Relational Database Management System) 의 데이터를 관리하기 위해 설계된 특수 목적 으로 프로그래밍 언어 (위키백과) </span><br><span class="line"></span><br><span class="line">• RDBMS 종류 : PostgreSQL, MySQL, MariaDB 등</span><br><span class="line"></span><br><span class="line">• 장고 모델은 RDBMS만을 지원 </span><br><span class="line"></span><br><span class="line">• 장고 모델을 통해 SQL을 생성/실행 (이런것을ORM이라고함)</span><br><span class="line"></span><br><span class="line">- Django 내장 ORM</span><br><span class="line">- SQL을 직접작성하지않아도 장고 모델을 통해 데이터베이스로의 접근(조회추가수정삭제)</span><br><span class="line">- __SQL을 몰라도 된다느 것은 아님. 최소한 내가 짠 코드가 어떤 SQL을 만들어내는지검증해야함__ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##  DjangoORM 개념</span><br><span class="line"></span><br><span class="line">- 엑셀처럼 하나 시트를 테이블이라함 = 이 DB테이블과의 매핑이 Model</span><br><span class="line">- Model Instance= DB 테이블의 1 Row (엑셀에 행!!!!!!!)</span><br><span class="line">- 엑셀의 여러 시트들 !!= DB</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Django Model 커스텀 모델 정의 (특정앱/models.py)</span><br><span class="line"></span><br><span class="line">- 데이터베이스 테이블 구조/타입을 먼저 설계를 한 다음에 모델 정의 모델 클래스명은 단수형(Posts가 아니라, Post)</span><br><span class="line"></span><br><span class="line">-</span><br></pre></td></tr></table></figure>
-<p>  from django.db import models<br>       class Post(models.Model):<br>            title = models.CharField(max_length=100)<br>            content = models.TextField()<br>            created_at = models.DateTimeField(auto_now_add=True)<br>            updated_at = models.DateTimeField(auto_now=True)</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-  **- DataBase의 구성요소**</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  ![img](https://tva1.sinaimg.cn/large/006y8mN6gy1g88bng7r29j30id03cweo.jpg)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">   파란색 박스 : 행 or 로우(raw) or 레코드(record)</span><br><span class="line"></span><br><span class="line">   빨간색 박스 : 열 or 컬럼(column) or 필드(field)</span><br><span class="line"></span><br><span class="line">- AutoField, BooleanField, CharField, DateTimeField, FileField, ImageField, TextField, ForeignKey, ManyToManyField, OneToOneField 많이 쓰는 필드임 </span><br><span class="line"></span><br><span class="line">- 데이터베이스 데이터타입과  파이썬 데이터타입을 매핑</span><br><span class="line"></span><br><span class="line">  &gt;  AutoField (int), BinaryField (bytes), BooleanField (bool), NullBooleanField (None, bool), CharField/TextField/ EmailField/GenericIPAddressField/SlugField/URLField (str) </span><br><span class="line"></span><br><span class="line">-  같은 파이썬 데이터타입에 매핑되더라도, &quot;데이터 형식&quot; 에 따라 여러 Model Field Types 로 나뉨</span><br><span class="line"></span><br><span class="line">- 자주 쓰는 필드 옵션(모든 데이터필드가능)(연습필요,, 진짜 유용함)</span><br><span class="line"></span><br><span class="line">- &gt; • null (DB 옵션) : DB 필드에 NULL 허용 여부 (디폴트 : False)</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; • unique (DB 옵션) : 유일성 여부</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; • blank : 입력값 유효성 (validation) 검사 시에 empty 값 허용 여부 (디폴트 : False) </span><br><span class="line">  &gt;</span><br><span class="line">  &gt; • default : 디폴트 값 지정. 값이 지정되지 않았을 때 사용. • 인자없는 함수 지정 가능. 함수 지정 시에는 매 리턴값이 필요할 때마 다 함수를 호출하여 리턴값을 사용</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; • choices (form widget 용) : select box 소스로 사용 </span><br><span class="line">  &gt;</span><br><span class="line">  &gt; • validators : 입력값 유효성 검사를 수행할 함수를 다수 지정</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; &gt; - 각 필드마다 고유한 validators 들이 이미 등록되어있기도 함</span><br><span class="line">  &gt; &gt;</span><br><span class="line">  &gt; &gt; - ex) 이메일만 받기, 최대길이 제한, 최소길이 제한, 최대값 제한, 최소 값 제한, etc. </span><br><span class="line">  &gt;</span><br><span class="line">  &gt; • verbose_name : 필드 레이블. 지정되지 않으면 필드명이 쓰여짐.</span><br><span class="line">  &gt;</span><br><span class="line">  &gt; • help_text (form widget 용) : 필드 입력 도움말 </span><br><span class="line">  &gt;</span><br><span class="line">  &gt; (~/nomade/django/askdjango/blog/models.py)</span><br><span class="line"></span><br><span class="line">- 데이터 정의 후에는 makemigrations, migrate 통해 DB에 반영하고 해당 앱에 admin에서</span><br></pre></td></tr></table></figure>
-<p>  from .models import Post</p>
-<p>  admin.site.register(Post)<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (지금까지과정이 모델정의  정의후에 이대로 DB생성후 admin에 모델에 모델에Post라는 클래스로 등록시킴)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Migration</span><br><span class="line"></span><br><span class="line">## 관련 명령</span><br><span class="line"></span><br><span class="line">쉘&gt; python manage.py makemigrations   &lt;app-name&gt;마이그레이션 파일 생성 #앱이름 꼭적기.. 이것만 하니까.</span><br><span class="line"></span><br><span class="line">쉘&gt; python manage.py migrate &lt;app-name&gt;  #마이그레이션 적용  (이미적용한 마이그레이션은 지우지마라 헬게이트)</span><br><span class="line"></span><br><span class="line">쉘&gt; python manage.py showmigrations  &lt;app-name&gt;#마이그레이션 적용 현황 </span><br><span class="line"></span><br><span class="line">쉘&gt; python manage.py sqlmigrate &lt;app-name&gt; &lt;migration-name or 유일한 일부의 미그레이션 파일 이름&gt;  #지정 마이그레이션의 SQL내역 ex) 0002</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 마이그레이션 파일 생성 및 적용</span><br><span class="line"></span><br><span class="line">- makemigrations로 마이그레이션 파일(작업 지시서)(__적용전에 무조건까서확인해야함!__ )(SQL용어로도 확인하면좋음)</span><br><span class="line">- migrate로 데이터베이스에 마이그레이션 파일을 반영함</span><br><span class="line">- 참고로 현재 sqlite3를 쓰고있는데 DB형태 변경은 프로젝트 dir에 setting.py 에 DATABASES 확인 변경</span><br><span class="line">- 눈으로 DB보고싶으면 DBLiteBrowser설치</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Migration 정방향(forward) 역방향(reverse)</span><br><span class="line"></span><br><span class="line">- 마이그레이션 적용된것이 blog/0007인상태에서 역방향가고싶으면  (내 현재위치기준으로 정, 역 정해짐)</span><br><span class="line"></span><br><span class="line">-</span><br></pre></td></tr></table></figure><br>  python3 manage.py migrate blog 0006 #zero라고하면 모든 마이그레이션 적용모두 취소<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## id필드는 왜 기본임?</span><br><span class="line"></span><br><span class="line"> • 모든 데이터베이스 테이블에는 각 Row 의 식별기준인 &quot;기본키 (Primary Key)&quot; 가 필요</span><br><span class="line"></span><br><span class="line"> • Django 에서는 기본키로서 id 필드(AutoField)가 디폴트 지정</span><br><span class="line"></span><br><span class="line"> • 기본키는 줄여서 pk 로도 접근 가능 (primary key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 기존 모델 클래스에 필수필드를 추가하여 makemigrations 수행</span><br><span class="line"></span><br><span class="line">필수필드는 인자가있어야만 DB에저장할수잇는것 </span><br><span class="line"></span><br><span class="line">(blank, null가 기본적으로 False이므로 따로True지정안하는이상 필수필드됨임)</span><br><span class="line"></span><br><span class="line">필수필드를 추가하므로, 기존 Row들에 필드를 추가할때, 반드시 채워넣어야하므로 어떤 값으로 채워넣을 지 묻습니다</span><br><span class="line"></span><br><span class="line">&gt; 선택1) 지금 값을 입력!!! 새로생기는 필드의기존빈것들전체동일적용됨 (반드시 필드타입확인후 같은 타입 입력 (int str,,,등)</span><br><span class="line">&gt;</span><br><span class="line">&gt; 선택2) 모델 클래스를 수정하여 디폴트 값을 제공</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Django Shell</span><br><span class="line"></span><br><span class="line">장고 모듈등을 사용할려면 필히 장고 환경에 접근해야하므로 (일반 파이썬셀은 접근불가함)(장고프로젝트에 setting.py에존재)</span><br></pre></td></tr></table></figure><br>python3 manage.py shell #장고환경 접근가능!<br>pip3 install “ipython[notebook]” #쥬피터랑 아이파이선 둘다 설치됨</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Jupyter Notebook 으로 장고쉘 띄우기</span><br></pre></td></tr></table></figure>
-<p>pip3 install django-extensions 설치후에 프로젝트 settings.py내 INSTALLED_APPS에 django_extensions추가해야함 !!! 이것은 앱형태이므로!!!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">실행하려면</span><br></pre></td></tr></table></figure>
-<p>python manage.py shell_plus #쉘에서 필요한것 자동으로 import해줌<br>python manage.py shell_plus–notebook  #쉘에서필요한것 자동으로 import해줌</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">__쥬피터 노트북이 유리한이유는 log남길수있고 이미지등도 확인할수있고 즉각적이라 더욱 좋다__</span><br></pre></td></tr></table></figure>
-<p>import os<br>os.environ.setdefault(‘DJANGO_SETTINGS_MODULE’, ‘myproj.settings’) # FIXME: 경로 확인<br>import django<br>django.setup()</p>
-<h1 id="지금부터-모든-장고환경에-접근-가능"><a href="#지금부터-모든-장고환경에-접근-가능" class="headerlink" title="지금부터 모든 장고환경에 접근 가능"></a>지금부터 모든 장고환경에 접근 가능</h1><p>from blog.models import Post<br>하면 일반 셀에서도 가능</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Django Admin</span><br><span class="line"></span><br><span class="line">staff/superuser만 접근가능 (Users에서 권한 부여가능)</span><br><span class="line"></span><br><span class="line">모델 클래스만 등록하면, 조회/추가/삭제 가능 (#ModelCls 는 모델에 클래스 이름을 적으면됨)</span><br></pre></td></tr></table></figure>
-<p>admin에 DB등록하는 법!<br>1.</p>
-<p>관리하고 싶은 앱에 admin.py에 가서<br> from .models import ModelCls  #클래스이름</p>
-<p>admin.site.register(ModelCls)  #클래스이름<br>#이미등록되어있다면 unregister(Post)다음에 재등록해야함<br>하면 admin에서 접근가능함</p>
-<p>2.해당 앱에 admin에서<br>class PostAdmin(admin.ModelAdmin):<br>      list_display = [‘id’, ‘title’, ‘content’]<br>admin.site.register(Post, PostAdmin) # 참고: 같은 모델 중복 등록은 불가 #이렇게하면 admin에 필드로추가됨</p>
-<ol start="2">
-<li>장식자 형태로 지원<br>@admin.register(Post) #이부분이 바로위에 코드 대신해서 씀. 같은 역할<br>class PostAdmin(admin.ModelAdmin):<pre><code>list_display = [&apos;id&apos;, &apos;title&apos;, &apos;content&apos;]</code></pre></li>
+<h2 id="함수기반view-응답만드는4가지"><a href="#함수기반view-응답만드는4가지" class="headerlink" title="함수기반view 응답만드는4가지"></a>함수기반view 응답만드는4가지</h2><ul>
+<li>HttpResponse</li>
+<li>render(템플릿)</li>
+<li>json</li>
+<li>파일 다운로드 </li>
+</ul>
+<h2 id="클래스기반-view"><a href="#클래스기반-view" class="headerlink" title="클래스기반 view"></a>클래스기반 view</h2><ul>
+<li>​    함수기반 뷰를 생성해주는 클래스</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class SampleTemplateView(object):</span><br><span class="line"> @classmethod];/</span><br><span class="line">     def get(self, request):</span><br><span class="line">         wejpfojwopejfw</span><br><span class="line">         ewfpojwepfojwe</span><br><span class="line">         wejfopwejopfew</span><br><span class="line"> </span><br><span class="line"> 예시@@@@@실행</span><br><span class="line"> </span><br><span class="line">fbv_view = SampleTemplateView.as_view()</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Model-and-Model-Fields"><a href="#Model-and-Model-Fields" class="headerlink" title="Model and Model Fields"></a>Model and Model Fields</h1><h2 id="SQL-Structured-Query-Language-꼭별도공부"><a href="#SQL-Structured-Query-Language-꼭별도공부" class="headerlink" title="SQL (Structured Query Language) (꼭별도공부)"></a>SQL (Structured Query Language) (꼭별도공부)</h2><p>• Query : 정보 수집에 대한 요청에 쓰이는 컴퓨터 언어 (위키백과) </p>
+<p>• SQL : 관계형 데이터베이스 관리 시스템(RDBMS) (Relational Database Management System) 의 데이터를 관리하기 위해 설계된 특수 목적 으로 프로그래밍 언어 (위키백과) </p>
+<p>• RDBMS 종류 : PostgreSQL, MySQL, MariaDB 등</p>
+<p>• 장고 모델은 RDBMS만을 지원 </p>
+<p>• 장고 모델을 통해 SQL을 생성/실행 (이런것을ORM이라고함)</p>
+<ul>
+<li>Django 내장 ORM</li>
+<li>SQL을 직접작성하지않아도 장고 모델을 통해 데이터베이스로의 접근(조회추가수정삭제)</li>
+<li><strong>SQL을 몰라도 된다느 것은 아님. 최소한 내가 짠 코드가 어떤 SQL을 만들어내는지검증해야함</strong> </li>
+</ul>
+<h2 id="DjangoORM-개념"><a href="#DjangoORM-개념" class="headerlink" title="DjangoORM 개념"></a>DjangoORM 개념</h2><ul>
+<li>엑셀처럼 하나 시트를 테이블이라함 = 이 DB테이블과의 매핑이 Model</li>
+<li>Model Instance= DB 테이블의 1 Row (엑셀에 행!!!!!!!)</li>
+<li>엑셀의 여러 시트들 !!= DB</li>
+</ul>
+<h2 id="Django-Model-커스텀-모델-정의-특정앱-models-py"><a href="#Django-Model-커스텀-모델-정의-특정앱-models-py" class="headerlink" title="Django Model 커스텀 모델 정의 (특정앱/models.py)"></a>Django Model 커스텀 모델 정의 (특정앱/models.py)</h2><ul>
+<li><p>데이터베이스 테이블 구조/타입을 먼저 설계를 한 다음에 모델 정의 모델 클래스명은 단수형(Posts가 아니라, Post)</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from django.db import models</span><br><span class="line">     class Post(models.Model):</span><br><span class="line">          title = models.CharField(max_length=100)</span><br><span class="line">          content = models.TextField()</span><br><span class="line">          created_at = models.DateTimeField(auto_now_add=True)</span><br><span class="line">          updated_at = models.DateTimeField(auto_now=True)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>- DataBase의 구성요소</strong></p>
+</li>
+</ul>
+<p>  <img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g88bng7r29j30id03cweo.jpg" alt="img"></p>
+<p>   파란색 박스 : 행 or 로우(raw) or 레코드(record)</p>
+<p>   빨간색 박스 : 열 or 컬럼(column) or 필드(field)</p>
+<ul>
+<li><p>AutoField, BooleanField, CharField, DateTimeField, FileField, ImageField, TextField, ForeignKey, ManyToManyField, OneToOneField 많이 쓰는 필드임 </p>
+</li>
+<li><p>데이터베이스 데이터타입과  파이썬 데이터타입을 매핑</p>
+<blockquote>
+<p> AutoField (int), BinaryField (bytes), BooleanField (bool), NullBooleanField (None, bool), CharField/TextField/ EmailField/GenericIPAddressField/SlugField/URLField (str) </p>
+</blockquote>
+</li>
+<li><p>같은 파이썬 데이터타입에 매핑되더라도, “데이터 형식” 에 따라 여러 Model Field Types 로 나뉨</p>
+</li>
+<li><p>자주 쓰는 필드 옵션(모든 데이터필드가능)(연습필요,, 진짜 유용함)</p>
+</li>
+<li><blockquote>
+<p>• null (DB 옵션) : DB 필드에 NULL 허용 여부 (디폴트 : False)</p>
+<p>• unique (DB 옵션) : 유일성 여부</p>
+<p>• blank : 입력값 유효성 (validation) 검사 시에 empty 값 허용 여부 (디폴트 : False) </p>
+<p>• default : 디폴트 값 지정. 값이 지정되지 않았을 때 사용. • 인자없는 함수 지정 가능. 함수 지정 시에는 매 리턴값이 필요할 때마 다 함수를 호출하여 리턴값을 사용</p>
+<p>• choices (form widget 용) : select box 소스로 사용 </p>
+<p>• validators : 입력값 유효성 검사를 수행할 함수를 다수 지정</p>
+<blockquote>
+<ul>
+<li><p>각 필드마다 고유한 validators 들이 이미 등록되어있기도 함</p>
+</li>
+<li><p>ex) 이메일만 받기, 최대길이 제한, 최소길이 제한, 최대값 제한, 최소 값 제한, etc. </p>
+</li>
+</ul>
+</blockquote>
+<p>• verbose_name : 필드 레이블. 지정되지 않으면 필드명이 쓰여짐.</p>
+<p>• help_text (form widget 용) : 필드 입력 도움말 </p>
+<p>(~/nomade/django/askdjango/blog/models.py)</p>
+</blockquote>
+</li>
+<li><p>데이터 정의 후에는 makemigrations, migrate 통해 DB에 반영하고 해당 앱에 admin에서</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from .models import Post</span><br><span class="line"></span><br><span class="line">admin.site.register(Post)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>(지금까지과정이 모델정의  정의후에 이대로 DB생성후 admin에 모델에 모델에Post라는 클래스로 등록시킴)</li>
+</ul>
+<h1 id="Migration"><a href="#Migration" class="headerlink" title="Migration"></a>Migration</h1><h2 id="관련-명령"><a href="#관련-명령" class="headerlink" title="관련 명령"></a>관련 명령</h2><p>쉘&gt; python manage.py makemigrations   <app-name>마이그레이션 파일 생성 #앱이름 꼭적기.. 이것만 하니까.</p>
+<p>쉘&gt; python manage.py migrate <app-name>  #마이그레이션 적용  (이미적용한 마이그레이션은 지우지마라 헬게이트)</p>
+<p>쉘&gt; python manage.py showmigrations  <app-name>#마이그레이션 적용 현황 </p>
+<p>쉘&gt; python manage.py sqlmigrate <app-name> &lt;migration-name or 유일한 일부의 미그레이션 파일 이름&gt;  #지정 마이그레이션의 SQL내역 ex) 0002</p>
+<h2 id="마이그레이션-파일-생성-및-적용"><a href="#마이그레이션-파일-생성-및-적용" class="headerlink" title="마이그레이션 파일 생성 및 적용"></a>마이그레이션 파일 생성 및 적용</h2><ul>
+<li>makemigrations로 마이그레이션 파일(작업 지시서)(<strong>적용전에 무조건까서확인해야함!</strong> )(SQL용어로도 확인하면좋음)</li>
+<li>migrate로 데이터베이스에 마이그레이션 파일을 반영함</li>
+<li>참고로 현재 sqlite3를 쓰고있는데 DB형태 변경은 프로젝트 dir에 setting.py 에 DATABASES 확인 변경</li>
+<li>눈으로 DB보고싶으면 DBLiteBrowser설치</li>
+</ul>
+<h2 id="Migration-정방향-forward-역방향-reverse"><a href="#Migration-정방향-forward-역방향-reverse" class="headerlink" title="Migration 정방향(forward) 역방향(reverse)"></a>Migration 정방향(forward) 역방향(reverse)</h2><ul>
+<li><p>마이그레이션 적용된것이 blog/0007인상태에서 역방향가고싶으면  (내 현재위치기준으로 정, 역 정해짐)</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py migrate blog 0006 #zero라고하면 모든 마이그레이션 적용모두 취소</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="id필드는-왜-기본임"><a href="#id필드는-왜-기본임" class="headerlink" title="id필드는 왜 기본임?"></a>id필드는 왜 기본임?</h2><p> • 모든 데이터베이스 테이블에는 각 Row 의 식별기준인 “기본키 (Primary Key)” 가 필요</p>
+<p> • Django 에서는 기본키로서 id 필드(AutoField)가 디폴트 지정</p>
+<p> • 기본키는 줄여서 pk 로도 접근 가능 (primary key)</p>
+<h2 id="기존-모델-클래스에-필수필드를-추가하여-makemigrations-수행"><a href="#기존-모델-클래스에-필수필드를-추가하여-makemigrations-수행" class="headerlink" title="기존 모델 클래스에 필수필드를 추가하여 makemigrations 수행"></a>기존 모델 클래스에 필수필드를 추가하여 makemigrations 수행</h2><p>필수필드는 인자가있어야만 DB에저장할수잇는것 </p>
+<p>(blank, null가 기본적으로 False이므로 따로True지정안하는이상 필수필드됨임)</p>
+<p>필수필드를 추가하므로, 기존 Row들에 필드를 추가할때, 반드시 채워넣어야하므로 어떤 값으로 채워넣을 지 묻습니다</p>
+<blockquote>
+<p>선택1) 지금 값을 입력!!! 새로생기는 필드의기존빈것들전체동일적용됨 (반드시 필드타입확인후 같은 타입 입력 (int str,,,등)</p>
+<p>선택2) 모델 클래스를 수정하여 디폴트 값을 제공</p>
+</blockquote>
+<h1 id="Django-Shell"><a href="#Django-Shell" class="headerlink" title="Django Shell"></a>Django Shell</h1><p>장고 모듈등을 사용할려면 필히 장고 환경에 접근해야하므로 (일반 파이썬셀은 접근불가함)(장고프로젝트에 setting.py에존재)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py shell #장고환경 접근가능!</span><br><span class="line">pip3 install &quot;ipython[notebook]&quot; #쥬피터랑 아이파이선 둘다 설치됨</span><br></pre></td></tr></table></figure>
+
+<h2 id="Jupyter-Notebook-으로-장고쉘-띄우기"><a href="#Jupyter-Notebook-으로-장고쉘-띄우기" class="headerlink" title="Jupyter Notebook 으로 장고쉘 띄우기"></a>Jupyter Notebook 으로 장고쉘 띄우기</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install django-extensions 설치후에 프로젝트 settings.py내 INSTALLED_APPS에 django_extensions추가해야함 !!! 이것은 앱형태이므로!!!</span><br></pre></td></tr></table></figure>
+
+<p>실행하려면</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python manage.py shell_plus #쉘에서 필요한것 자동으로 import해줌</span><br><span class="line">python manage.py shell_plus--notebook  #쉘에서필요한것 자동으로 import해줌</span><br></pre></td></tr></table></figure>
+
+<p><strong>쥬피터 노트북이 유리한이유는 log남길수있고 이미지등도 확인할수있고 즉각적이라 더욱 좋다</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">os.environ.setdefault(&apos;DJANGO_SETTINGS_MODULE&apos;, &apos;myproj.settings&apos;) # FIXME: 경로 확인</span><br><span class="line">import django</span><br><span class="line">django.setup()</span><br><span class="line"># 지금부터 모든 장고환경에 접근 가능</span><br><span class="line">from blog.models import Post</span><br><span class="line">하면 일반 셀에서도 가능</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="Django-Admin"><a href="#Django-Admin" class="headerlink" title="Django Admin"></a>Django Admin</h1><p>staff/superuser만 접근가능 (Users에서 권한 부여가능)</p>
+<p>모델 클래스만 등록하면, 조회/추가/삭제 가능 (#ModelCls 는 모델에 클래스 이름을 적으면됨)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">admin에 DB등록하는 법!</span><br><span class="line">1.</span><br><span class="line"></span><br><span class="line">관리하고 싶은 앱에 admin.py에 가서 </span><br><span class="line"> from .models import ModelCls  #클래스이름</span><br><span class="line"></span><br><span class="line">admin.site.register(ModelCls)  #클래스이름    </span><br><span class="line">#이미등록되어있다면 unregister(Post)다음에 재등록해야함</span><br><span class="line">하면 admin에서 접근가능함</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2.해당 앱에 admin에서</span><br><span class="line">class PostAdmin(admin.ModelAdmin):</span><br><span class="line">      list_display = [&apos;id&apos;, &apos;title&apos;, &apos;content&apos;]</span><br><span class="line">admin.site.register(Post, PostAdmin) # 참고: 같은 모델 중복 등록은 불가 #이렇게하면 admin에 필드로추가됨</span><br><span class="line"></span><br><span class="line">2. 장식자 형태로 지원</span><br><span class="line">@admin.register(Post) #이부분이 바로위에 코드 대신해서 씀. 같은 역할</span><br><span class="line">class PostAdmin(admin.ModelAdmin):</span><br><span class="line">       list_display = [&apos;id&apos;, &apos;title&apos;, &apos;content&apos;]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ModelAdmin-Options-admin-ModelAdmin"><a href="#ModelAdmin-Options-admin-ModelAdmin" class="headerlink" title="ModelAdmin Options (admin.ModelAdmin)"></a>ModelAdmin Options (admin.ModelAdmin)</h2><p>• list_display  : Admin 목록에 보여질 필드 목록. </p>
+<p>• list_display_links  : 목록 내에서 링크로 지정할 필드 목록. #이를 지정하지 않으면, 첫번째 필드에만 링크가 적용</p>
+<p>• list_editable  : 목록 상에서 수정할 필드 목록 </p>
+<p>• list_per_page  (디폴트 : 100) : 페이지 별로 보여질 최대 갯수</p>
+<p>• list_filter: 필터 옵션을 제공할 필드 목록</p>
+<p>• actions : 목록에서 수행할 action 목록 </p>
+<p>위에가 쉽게 쓰임.</p>
+<p>• fields: add/change 폼에 노출할 필드 목록</p>
+<p>• fieldsets: add/change 폼에 노출할 필드 목록 (fieldset) </p>
+<p>• formfield_overrides : 특정 Form Field 에 대한 속성 재정의 </p>
+<p>• form : 디폴트로 모델 클래스에 대한 Form Class 지정</p>
+<h3 id="list-display-옵션"><a href="#list-display-옵션" class="headerlink" title="list_display 옵션"></a>list_display 옵션</h3><ul>
+<li>모델 인스턴스 필드명/속성명/함수명 뿐만 아니라, ModelAdmin 내 맴버 함수도 지정가능</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@admin.register(Post)</span><br><span class="line">class PostAdmin(admin.ModelAdmin):</span><br><span class="line"> list_display = [&apos;id&apos;, &apos;title&apos;, &apos;content&apos;]</span><br><span class="line"> def content_size(self, post):</span><br><span class="line"> return &apos;&#123;&#125;글자&apos;.format(len(post))</span><br><span class="line"> content_size.short_description = &apos;내용 글자수&apos;</span><br><span class="line"> #강조하고싶다면 mark_safe을 import해서 해보기  #이렇게 따로 지정해줘야하는이유는 &lt;tag&gt;&lt;/tag&gt;가 유저가 사용하면 html에서 변형되어 태그 그대로 나오지 않도록 방지하므로 태그이스케이프기능이 켜져있다.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Admin-Actions"><a href="#Admin-Actions" class="headerlink" title="Admin Actions"></a>Admin Actions</h3><p>대개 선택된 Model Instance 들에 대해 Bulk Update 용도 구현 #한번에 여러개 인스턴스 업데이트</p>
+<ol>
+<li>ModelAdmin 클래스내 멤버함수로 action 함수를 구현<ul>
+<li>멤버함수.short_description 을 통해, action 설명 추가 </li>
+</ul>
+</li>
+<li>ModelAdmin actions 내에 등록 #모든액션 첫번째인자는 request 두번째 queryset</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##  ModelAdmin Options (admin.ModelAdmin)</span><br><span class="line"></span><br><span class="line">• list_display  : Admin 목록에 보여질 필드 목록. </span><br><span class="line"></span><br><span class="line">• list_display_links  : 목록 내에서 링크로 지정할 필드 목록. #이를 지정하지 않으면, 첫번째 필드에만 링크가 적용</span><br><span class="line"></span><br><span class="line">• list_editable  : 목록 상에서 수정할 필드 목록 </span><br><span class="line"></span><br><span class="line">• list_per_page  (디폴트 : 100) : 페이지 별로 보여질 최대 갯수</span><br><span class="line"></span><br><span class="line">• list_filter: 필터 옵션을 제공할 필드 목록</span><br><span class="line"></span><br><span class="line">• actions : 목록에서 수행할 action 목록 </span><br><span class="line"></span><br><span class="line">위에가 쉽게 쓰임.</span><br><span class="line"></span><br><span class="line">• fields: add/change 폼에 노출할 필드 목록</span><br><span class="line"></span><br><span class="line">• fieldsets: add/change 폼에 노출할 필드 목록 (fieldset) </span><br><span class="line"></span><br><span class="line">• formfield_overrides : 특정 Form Field 에 대한 속성 재정의 </span><br><span class="line"></span><br><span class="line">• form : 디폴트로 모델 클래스에 대한 Form Class 지정</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### list_display 옵션</span><br><span class="line"></span><br><span class="line">- 모델 인스턴스 필드명/속성명/함수명 뿐만 아니라, ModelAdmin 내 맴버 함수도 지정가능</span><br></pre></td></tr></table></figure>
-<p>  @admin.register(Post)<br>  class PostAdmin(admin.ModelAdmin):<br>   list_display = [‘id’, ‘title’, ‘content’]<br>   def content_size(self, post):<br>   return ‘{}글자’.format(len(post))<br>   content_size.short_description = ‘내용 글자수’<br>   #강조하고싶다면 mark_safe을 import해서 해보기  #이렇게 따로 지정해줘야하는이유는 <tag></tag>가 유저가 사용하면 html에서 변형되어 태그 그대로 나오지 않도록 방지하므로 태그이스케이프기능이 켜져있다.<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Admin Actions</span><br><span class="line"></span><br><span class="line">대개 선택된 Model Instance 들에 대해 Bulk Update 용도 구현 #한번에 여러개 인스턴스 업데이트</span><br><span class="line"></span><br><span class="line">1. ModelAdmin 클래스내 멤버함수로 action 함수를 구현</span><br><span class="line">   - 멤버함수.short_description 을 통해, action 설명 추가 </span><br><span class="line">2. ModelAdmin actions 내에 등록 #모든액션 첫번째인자는 request 두번째 queryset</span><br><span class="line"></span><br><span class="line">아래는 이페이지 완성될때 model.py에 모델클래스</span><br></pre></td></tr></table></figure><br>from django.db import models<br>import re<br>from django.forms import ValidationError</p>
-<p>def lnglat_validator(value):<br>     if not re.match(r’^([+-]?\d+.?\d<em>).([+-]?\d+.?\d</em>)$’, value):<br>          raise ValidationError(‘Invalid LngLat Type’)</p>
-<p>class Post(models.Model):<br>    STATUS_CHOICES = (<br>        (‘d’, “Draft”),<br>        (‘p’, ‘Published’),<br>        (‘w’, ‘Withdrawn’),<br>    )<br>    title = models.CharField(max_length=100, verbose_name=”제목”,<br>    help_text=”포스팅 제목을 입력해주세요”,<br>    choices = (<br>        (‘제목1’, ‘제목1 레이블’), #(‘저장될 값’, ‘UI에 보여질 레이블’)<br>        (‘제목2’, ‘제목ㅈ 레이블’),<br>        (‘제목4’, ‘제목ㄷ 레이블’),<br>    )) #길이 제한이 있는 문자열<br>    tags = models.CharField(max_length=100, blank=True)<br>          #blank 디폴트는 false임 즉, 기본은 필수요소임<br>    Inglat = models.CharField(max_length=50, blank=True,<br>    validators=[lnglat_validator],<br>    help_text=”경도/위도 포맷으로 입력”)<br>    content = models.TextField(verbose_name=”내용”) #길이 제한이 없는 문자열 #DB는 문자열길이차이에서 구별필요하므로 속도차이<br>    status = models.CharField(max_length=1, choices=STATUS_CHOICES)<br>    created_at = models.DateTimeField(auto_now_add=True) #날짜시간 필드<br>    updated_at = models.DateTimeField(auto_now=True)</p>
-<pre><code>def __str__(self):
-    return self.title
-
-class Meta:
-    ordering = [&apos;-id&apos;] #이 필드에 대해서 내림차순 정렬</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># CRUD</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Model Manager</span><br><span class="line"></span><br><span class="line">- 데이터베이스 질의 인터페이스를 제공</span><br><span class="line"></span><br><span class="line">- 디폴트 Manager로서 ModelCls.objects가 제공 ex) post.objects.all()</span><br><span class="line"></span><br><span class="line">-</span><br></pre></td></tr></table></figure>
-<p>  ModelCls.objects.all() # 특정 모델의 전체 데이터 조회<br>  ModelCls.objects.all().order_by(‘-id’)[:10] # 특정 모델의 최근 10개 데이터 조회<br>  ModelCls.objects.create(title=”New Title”) # 특정 모델의 새 Row 저장<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## QuerySet (알아서 SQL언어로 변경해줌)</span><br><span class="line"></span><br><span class="line">- SQL을 생성해주는 인터페이스!</span><br><span class="line">- Model Manager 를 통해, 해당 Model 에 대한 QuerySet 을 획득</span><br><span class="line">-  Post.objects.all() 는 &quot;SELECT * FROM post;&quot; 와 같은 SQL 을 생성하여, 데이터베이스로의 질의를 수행</span><br><span class="line">-  Post.objects.create(...) 는 &quot;INSERT INTO ...;&quot; 와 같은 SQL을 생성하여, 데이터베이스로의 질의를 수행</span><br><span class="line">- __Chaining 지원__ : QuerySet 수행 리턴값이 다시 QuerySet</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 데이터베이스에 데이터 조회 요청 (retrieve)</span><br><span class="line"></span><br><span class="line">- QuerySet을 통한 AND 조회 조건 추가 (아래 예시들은 모두 AND조건으로추가됨) (ModelCls는 내가쓴 모델클래스이름)</span><br><span class="line"></span><br><span class="line">-</span><br></pre></td></tr></table></figure><br>  queryset = ModelCls.objects.all() #아래예시는 모두 이어지는것 #filter대신 exclude쓰면 and조건으로제외<br>  queryset = queryset.filter(조건필드1=조건값1, 조건필드2=조건값2)<br>  #Chaining지원이므로 쿼리셋리턴값 퀴리셋임<br>  queryset = queryset.filter(조건필드3=조건값3) #계속 퀴리셋으로 추가됨<br>  queryset = queryset.filter(조건필드4=조건값4, 조건필드5=조건값5)<br>  #여기까지하면 즉 queryset이 모두1,2,3,4,5 조건필드1,2,3,4,5에 각자 맞는 조건값을 가진것이 and조건을 찾는 SQL명령어생성됨, 실행은 아직안됨<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-  or조건으로 할려면 </span><br><span class="line"></span><br><span class="line">-</span><br></pre></td></tr></table></figure><br>  from django.db.models import Q<br>  Post.objects.filter(Q(title__icontains=’1’)|Q(title__endswith=”3”)) #|가 or를 뜻하지<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- queryset은 명령을 대기중이며 실제로 DB접근하는건 다른 명령이 수행될때임 즉위에코드는 계속 명령작성추가하는거임</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- render에서 *render에 3번쨰 인자로 딕셔너리 형태로 다양한 인자들을 넘겨줄수있다,*</span><br></pre></td></tr></table></figure><br>blog/view.py<br>def post_list(request):<br>    qs = Post.objects.all()</p>
-<pre><code>q = request.GET.get(&apos;q&apos;, &apos;&apos;) #검색이라는 요청에 새로고침되면서 request에서 나오는 q인자  있다면 q가져오고 없다면 &apos;&apos;으로가져와 객체 q로함 
-if q: #q가 True이면 
-    qs = qs.filter(title__icontains=q)
-
-return render(request, &apos;blog/post_list.html&apos;, {&apos;post_list&apos;:qs, &apos;q&apos;:q}) 
-#render에 3번쨰 인자로 딕셔너리 형태로 다양한 인자들을 넘겨줄수있다
-# 템플릿에서 q라는 이름의 인자를 넘겨주는걸만들었으므로 </code></pre><p>템플릿.blog.post_list.html은</p>
-<form action="" method="get">
-       <input type="text" name="q" value="" />
-       <input type="submit" value= "검색" />
+<p>아래는 이페이지 완성될때 model.py에 모델클래스</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">from django.db import models</span><br><span class="line">import re</span><br><span class="line">from django.forms import ValidationError</span><br><span class="line"></span><br><span class="line">def lnglat_validator(value):</span><br><span class="line">     if not re.match(r&apos;^([+-]?\d+\.?\d*).([+-]?\d+\.?\d*)$&apos;, value):</span><br><span class="line">          raise ValidationError(&apos;Invalid LngLat Type&apos;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Post(models.Model):</span><br><span class="line">    STATUS_CHOICES = (</span><br><span class="line">        (&apos;d&apos;, &quot;Draft&quot;),</span><br><span class="line">        (&apos;p&apos;, &apos;Published&apos;),</span><br><span class="line">        (&apos;w&apos;, &apos;Withdrawn&apos;),</span><br><span class="line">    )</span><br><span class="line">    title = models.CharField(max_length=100, verbose_name=&quot;제목&quot;,</span><br><span class="line">    help_text=&quot;포스팅 제목을 입력해주세요&quot;,</span><br><span class="line">    choices = (</span><br><span class="line">        (&apos;제목1&apos;, &apos;제목1 레이블&apos;), #(&apos;저장될 값&apos;, &apos;UI에 보여질 레이블&apos;)</span><br><span class="line">        (&apos;제목2&apos;, &apos;제목ㅈ 레이블&apos;),</span><br><span class="line">        (&apos;제목4&apos;, &apos;제목ㄷ 레이블&apos;),</span><br><span class="line">    )) #길이 제한이 있는 문자열</span><br><span class="line">    tags = models.CharField(max_length=100, blank=True)</span><br><span class="line">          #blank 디폴트는 false임 즉, 기본은 필수요소임</span><br><span class="line">    Inglat = models.CharField(max_length=50, blank=True,</span><br><span class="line">    validators=[lnglat_validator],</span><br><span class="line">    help_text=&quot;경도/위도 포맷으로 입력&quot;)</span><br><span class="line">    content = models.TextField(verbose_name=&quot;내용&quot;) #길이 제한이 없는 문자열 #DB는 문자열길이차이에서 구별필요하므로 속도차이</span><br><span class="line">    status = models.CharField(max_length=1, choices=STATUS_CHOICES)</span><br><span class="line">    created_at = models.DateTimeField(auto_now_add=True) #날짜시간 필드</span><br><span class="line">    updated_at = models.DateTimeField(auto_now=True)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def __str__(self):</span><br><span class="line">        return self.title</span><br><span class="line"></span><br><span class="line">    class Meta:</span><br><span class="line">        ordering = [&apos;-id&apos;] #이 필드에 대해서 내림차순 정렬</span><br></pre></td></tr></table></figure>
 
 
-</form>
-되어있어서 submit일어나면 새로고침되면서 주소에마지막에 /q=  가 생기면서 input받았던걸 q인자로 views.py다시시작
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 데이터베이스에 특정 필드로 정렬 조건 추가</span><br><span class="line"></span><br><span class="line">- queryset내 기본정렬은 모델내 Meta.ordering설정을 따릅니다.</span><br></pre></td></tr></table></figure>
-  - class Post(models.Model):  (필드 정의 생략)
 
-<pre><code>class Meta: ordering = [&apos;id&apos;]       (클래스안에클래스)</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">- 필드명만 지정시 오름차순 정렬 요청, &quot;-필드명&quot; 지정시 내람차순 정렬 요청 정렬 미지정시에는 데이터베이스 측에서 임의정렬</span><br></pre></td></tr></table></figure>
-<h1 id="모델-Meta-ordering-을-무시하고-직접-정렬조건-지정하는법"><a href="#모델-Meta-ordering-을-무시하고-직접-정렬조건-지정하는법" class="headerlink" title="모델 Meta.ordering 을 무시하고, 직접 정렬조건 지정하는법"></a>모델 Meta.ordering 을 무시하고, 직접 정렬조건 지정하는법</h1><p>  queryset = queryset.order_by(‘field1’) # 지정 필드 오름차순 요청<br>  queryset = queryset.order_by(‘-field1’) # 지정 필드 내림차순 요청 queryset = queryset.order_by(‘field2’, ‘field3’) # 1차기준, 2차기준<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  # 슬라이싱을 통한 범위 조건 추가</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  queryset = queryset[:10]     # 현재 queryset에서 처음10개만 가져오는 조건을 추가한 queryset queryset = queryset[10:20]      # 현재 queryset에서 처음10번째부터 20번째까지를 가져오는 조건을 추가한 queryset </span><br><span class="line"></span><br><span class="line">  -  리스트 슬라이싱과 거의 유사하나, 역순 슬라이싱은 지원하지 않음 </span><br><span class="line"></span><br><span class="line">    &gt; queryset = queryset[-10:]  (AssertionError 예외 발생 AssertionError: Negative indexing is not supported.)</span><br><span class="line"></span><br><span class="line">  -  이때는 먼저 특정 필드 기준으로 내림차순 정렬을 먼저 수행한 뒤, 슬라이싱 </span><br><span class="line"></span><br><span class="line">    &gt; queryset = queryset.order_by(&apos;-id&apos;)[:10]</span><br><span class="line"></span><br><span class="line">  # 지정 조건으로 DB로부터 데이터를 Fetch(가져오기)</span><br><span class="line"></span><br><span class="line">  - __지정 조건의 데이터 Row를 순회__</span><br><span class="line"></span><br><span class="line">    &gt;  for model_instance in queryset:</span><br><span class="line">    &gt;</span><br><span class="line">    &gt; ​            print(model_instance)</span><br><span class="line"></span><br><span class="line">  - 지정 조건 내에서 특정 인덱스 데이터 Row를 Fetch </span><br><span class="line"></span><br><span class="line">    &gt;  model_instance = queryset[0] # 갯수 밖의 인덱스를 요청할 경우 IndexError 예외 발생 model_instance = queryset[1]</span><br><span class="line"></span><br><span class="line">  -  __특정 조건의 데이터 Row 1개 Fetch (1개!! 2개이상말고 1개!! 0개말고 1개!!)__</span><br><span class="line"></span><br><span class="line">    &gt; model_instance = queryset.get(id=1) </span><br><span class="line">    &gt;</span><br><span class="line">    &gt; model_instance = queryset.get(title=&apos;my title&apos;)</span><br><span class="line"></span><br><span class="line">  - queryset.get은 예상되는 데이터가 1개일떄만 에러안뜨고 정상 처리</span><br><span class="line"></span><br><span class="line">  - qureyset.first() 혹은 queryset.last() </span><br><span class="line"></span><br><span class="line">    &gt; 지정 조건 내에서 첫번째/마지막 데이터 Row를 Fetch, 지정 조건에 맞는 데이터 Row가 없더라도, DoesNotExist 예외가 발 생하지 않고, None을 반환</span><br><span class="line"></span><br><span class="line">  # 데이터베이스에 데이터 추가 요청 (create)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">(필수 필드1를 모두 지정을 하고, 데이터 추가가 이뤄져야합니다. • 그렇지 않으면, IntegrityError 예외 발생)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 방법 #1) 각 Model Instance 의 save 함수를 통해 저장</span><br></pre></td></tr></table></figure></p>
+
+
+
+
+<h1 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h1><h2 id="Model-Manager"><a href="#Model-Manager" class="headerlink" title="Model Manager"></a>Model Manager</h2><ul>
+<li><p>데이터베이스 질의 인터페이스를 제공</p>
+</li>
+<li><p>디폴트 Manager로서 ModelCls.objects가 제공 ex) post.objects.all()</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ModelCls.objects.all() # 특정 모델의 전체 데이터 조회</span><br><span class="line">ModelCls.objects.all().order_by(&apos;-id&apos;)[:10] # 특정 모델의 최근 10개 데이터 조회</span><br><span class="line">ModelCls.objects.create(title=&quot;New Title&quot;) # 특정 모델의 새 Row 저장</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+<h2 id="QuerySet-알아서-SQL언어로-변경해줌"><a href="#QuerySet-알아서-SQL언어로-변경해줌" class="headerlink" title="QuerySet (알아서 SQL언어로 변경해줌)"></a>QuerySet (알아서 SQL언어로 변경해줌)</h2><ul>
+<li>SQL을 생성해주는 인터페이스!</li>
+<li>Model Manager 를 통해, 해당 Model 에 대한 QuerySet 을 획득</li>
+<li>Post.objects.all() 는 “SELECT * FROM post;” 와 같은 SQL 을 생성하여, 데이터베이스로의 질의를 수행</li>
+<li>Post.objects.create(…) 는 “INSERT INTO …;” 와 같은 SQL을 생성하여, 데이터베이스로의 질의를 수행</li>
+<li><strong>Chaining 지원</strong> : QuerySet 수행 리턴값이 다시 QuerySet</li>
+</ul>
+<h2 id="데이터베이스에-데이터-조회-요청-retrieve"><a href="#데이터베이스에-데이터-조회-요청-retrieve" class="headerlink" title="데이터베이스에 데이터 조회 요청 (retrieve)"></a>데이터베이스에 데이터 조회 요청 (retrieve)</h2><ul>
+<li><p>QuerySet을 통한 AND 조회 조건 추가 (아래 예시들은 모두 AND조건으로추가됨) (ModelCls는 내가쓴 모델클래스이름)</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">queryset = ModelCls.objects.all() #아래예시는 모두 이어지는것 #filter대신 exclude쓰면 and조건으로제외</span><br><span class="line">queryset = queryset.filter(조건필드1=조건값1, 조건필드2=조건값2) </span><br><span class="line">#Chaining지원이므로 쿼리셋리턴값 퀴리셋임</span><br><span class="line">queryset = queryset.filter(조건필드3=조건값3) #계속 퀴리셋으로 추가됨</span><br><span class="line">queryset = queryset.filter(조건필드4=조건값4, 조건필드5=조건값5) </span><br><span class="line">#여기까지하면 즉 queryset이 모두1,2,3,4,5 조건필드1,2,3,4,5에 각자 맞는 조건값을 가진것이 and조건을 찾는 SQL명령어생성됨, 실행은 아직안됨</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>or조건으로 할려면 </p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from django.db.models import Q</span><br><span class="line">Post.objects.filter(Q(title__icontains=&apos;1&apos;)|Q(title__endswith=&quot;3&quot;)) #|가 or를 뜻하지</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>queryset은 명령을 대기중이며 실제로 DB접근하는건 다른 명령이 수행될때임 즉위에코드는 계속 명령작성추가하는거임</p>
+</li>
+</ul>
+<ul>
+<li>render에서 <em>render에 3번쨰 인자로 딕셔너리 형태로 다양한 인자들을 넘겨줄수있다,</em></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">blog/view.py</span><br><span class="line">def post_list(request):</span><br><span class="line">    qs = Post.objects.all()</span><br><span class="line"></span><br><span class="line">    q = request.GET.get(&apos;q&apos;, &apos;&apos;) #검색이라는 요청에 새로고침되면서 request에서 나오는 q인자  있다면 q가져오고 없다면 &apos;&apos;으로가져와 객체 q로함 </span><br><span class="line">    if q: #q가 True이면 </span><br><span class="line">        qs = qs.filter(title__icontains=q)</span><br><span class="line"></span><br><span class="line">    return render(request, &apos;blog/post_list.html&apos;, &#123;&apos;post_list&apos;:qs, &apos;q&apos;:q&#125;) </span><br><span class="line">    #render에 3번쨰 인자로 딕셔너리 형태로 다양한 인자들을 넘겨줄수있다</span><br><span class="line">    # 템플릿에서 q라는 이름의 인자를 넘겨주는걸만들었으므로 </span><br><span class="line">    </span><br><span class="line">템플릿.blog.post_list.html은</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;form action=&quot;&quot; method=&quot;get&quot;&gt;</span><br><span class="line">       &lt;input type=&quot;text&quot; name=&quot;q&quot; value=&quot;&#123;&#123;q&#125;&#125;&quot; /&gt;</span><br><span class="line">       &lt;input type=&quot;submit&quot; value= &quot;검색&quot; /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/form&gt;</span><br><span class="line">되어있어서 submit일어나면 새로고침되면서 주소에마지막에 /q=  가 생기면서 input받았던걸 q인자로 views.py다시시작</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="데이터베이스에-특정-필드로-정렬-조건-추가"><a href="#데이터베이스에-특정-필드로-정렬-조건-추가" class="headerlink" title="데이터베이스에 특정 필드로 정렬 조건 추가"></a>데이터베이스에 특정 필드로 정렬 조건 추가</h1><ul>
+<li>queryset내 기본정렬은 모델내 Meta.ordering설정을 따릅니다. </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- class Post(models.Model):  (필드 정의 생략)</span><br><span class="line"></span><br><span class="line">         class Meta: ordering = [&apos;id&apos;]       (클래스안에클래스)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ul>
+<li>필드명만 지정시 오름차순 정렬 요청, “-필드명” 지정시 내람차순 정렬 요청 정렬 미지정시에는 데이터베이스 측에서 임의정렬 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 모델 Meta.ordering 을 무시하고, 직접 정렬조건 지정하는법</span><br><span class="line">queryset = queryset.order_by(&apos;field1&apos;) # 지정 필드 오름차순 요청 </span><br><span class="line">queryset = queryset.order_by(&apos;-field1&apos;) # 지정 필드 내림차순 요청 queryset = queryset.order_by(&apos;field2&apos;, &apos;field3&apos;) # 1차기준, 2차기준</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="슬라이싱을-통한-범위-조건-추가"><a href="#슬라이싱을-통한-범위-조건-추가" class="headerlink" title="슬라이싱을 통한 범위 조건 추가"></a>슬라이싱을 통한 범위 조건 추가</h1><p>  queryset = queryset[:10]     # 현재 queryset에서 처음10개만 가져오는 조건을 추가한 queryset queryset = queryset[10:20]      # 현재 queryset에서 처음10번째부터 20번째까지를 가져오는 조건을 추가한 queryset </p>
+<ul>
+<li><p>리스트 슬라이싱과 거의 유사하나, 역순 슬라이싱은 지원하지 않음 </p>
 <blockquote>
+<p>queryset = queryset[-10:]  (AssertionError 예외 발생 AssertionError: Negative indexing is not supported.)</p>
+</blockquote>
+</li>
+<li><p>이때는 먼저 특정 필드 기준으로 내림차순 정렬을 먼저 수행한 뒤, 슬라이싱 </p>
 <blockquote>
+<p>queryset = queryset.order_by(‘-id’)[:10]</p>
+</blockquote>
+<h1 id="지정-조건으로-DB로부터-데이터를-Fetch-가져오기"><a href="#지정-조건으로-DB로부터-데이터를-Fetch-가져오기" class="headerlink" title="지정 조건으로 DB로부터 데이터를 Fetch(가져오기)"></a>지정 조건으로 DB로부터 데이터를 Fetch(가져오기)</h1></li>
+<li><p><strong>지정 조건의 데이터 Row를 순회</strong></p>
 <blockquote>
-<p>model_instance = ModelCls(field1=value1, field2=value2) # New Model Instance<br>print(model_instance.id) # 데이터베이스 저장 전이므로, None값을 가진다.<br>  None<br>model_instance.save() # 데이터베이스에 저장을 시도하고, DB로부터 id할당받음<br>print(model_instance.id) # 자동증가된 값이 지정<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">- 방법 #2) 각 Model Manager 의 create 함수를 통해 저장</span><br></pre></td></tr></table></figure><br>인스턴스 = ModelCls.objects.create(필드명1=값1, 필드명2=값2) # DB에 저장을 시도<br>print(인스턴스.id) # DB로부터 id할당받음<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 데이터베이스에 데이터 갱신 요청</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 방법 1) 각 Model 인스턴스 속성을 변경하고, save 함수를 통해 저장 • 각 Model 인스턴스 별로 SQL 이 수행 • 다수 Row 에 대해서 수행 시에는 성능저하가 발생할 수 있음</span><br></pre></td></tr></table></figure><br>post = Post.objects.get(id=1)<br>post.tags = ‘Python, Django’<br>post.save()<br>queryset = Post.objects.all()<br>for post in queryset:<br>post.tags = ‘Python, Django’<br>post.save() # 각 Model Instance 별로 DB에 update 요청<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">- 방법 2) QuerySet 의 update 함수에 업데이트할 속성값을 지정하여 일괄 수정 하나의 SQL 로서 동작하므로, 동작이 빠르다.</span><br></pre></td></tr></table></figure><br>queryset = Post.objects.all()<br>queryset.update(tags=”Python, Django”) # 일괄 update 요청</p>
+<p> for model_instance in queryset:</p>
+<p>​            print(model_instance)</p>
+</blockquote>
+</li>
+<li><p>지정 조건 내에서 특정 인덱스 데이터 Row를 Fetch </p>
+<blockquote>
+<p> model_instance = queryset[0] # 갯수 밖의 인덱스를 요청할 경우 IndexError 예외 발생 model_instance = queryset[1]</p>
+</blockquote>
+</li>
+<li><p><strong>특정 조건의 데이터 Row 1개 Fetch (1개!! 2개이상말고 1개!! 0개말고 1개!!)</strong></p>
+<blockquote>
+<p>model_instance = queryset.get(id=1) </p>
+<p>model_instance = queryset.get(title=’my title’)</p>
+</blockquote>
+</li>
+<li><p>queryset.get은 예상되는 데이터가 1개일떄만 에러안뜨고 정상 처리</p>
+</li>
+<li><p>qureyset.first() 혹은 queryset.last() </p>
+<blockquote>
+<p>지정 조건 내에서 첫번째/마지막 데이터 Row를 Fetch, 지정 조건에 맞는 데이터 Row가 없더라도, DoesNotExist 예외가 발 생하지 않고, None을 반환</p>
+</blockquote>
+<h1 id="데이터베이스에-데이터-추가-요청-create"><a href="#데이터베이스에-데이터-추가-요청-create" class="headerlink" title="데이터베이스에 데이터 추가 요청 (create)"></a>데이터베이스에 데이터 추가 요청 (create)</h1></li>
+</ul>
+<p>(필수 필드1를 모두 지정을 하고, 데이터 추가가 이뤄져야합니다. • 그렇지 않으면, IntegrityError 예외 발생)</p>
+<ul>
+<li>방법 #1) 각 Model Instance 의 save 함수를 통해 저장</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; model_instance = ModelCls(field1=value1, field2=value2) # New Model Instance</span><br><span class="line">&gt;&gt;&gt; print(model_instance.id) # 데이터베이스 저장 전이므로, None값을 가진다.</span><br><span class="line">None</span><br><span class="line">&gt;&gt;&gt; model_instance.save() # 데이터베이스에 저장을 시도하고, DB로부터 id할당받음</span><br><span class="line">&gt;&gt;&gt; print(model_instance.id) # 자동증가된 값이 지정</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>방법 #2) 각 Model Manager 의 create 함수를 통해 저장</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 인스턴스 = ModelCls.objects.create(필드명1=값1, 필드명2=값2) # DB에 저장을 시도</span><br><span class="line">&gt;&gt;&gt; print(인스턴스.id) # DB로부터 id할당받음</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="데이터베이스에-데이터-갱신-요청"><a href="#데이터베이스에-데이터-갱신-요청" class="headerlink" title="데이터베이스에 데이터 갱신 요청"></a>데이터베이스에 데이터 갱신 요청</h1><ul>
+<li>방법 1) 각 Model 인스턴스 속성을 변경하고, save 함수를 통해 저장 • 각 Model 인스턴스 별로 SQL 이 수행 • 다수 Row 에 대해서 수행 시에는 성능저하가 발생할 수 있음</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; post = Post.objects.get(id=1)</span><br><span class="line">&gt;&gt;&gt; post.tags = &apos;Python, Django&apos;</span><br><span class="line">&gt;&gt;&gt; post.save()</span><br><span class="line">&gt;&gt;&gt; queryset = Post.objects.all()</span><br><span class="line">&gt;&gt;&gt; for post in queryset:</span><br><span class="line">&gt;&gt;&gt; post.tags = &apos;Python, Django&apos;</span><br><span class="line">&gt;&gt;&gt; post.save() # 각 Model Instance 별로 DB에 update 요청</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>방법 2) QuerySet 의 update 함수에 업데이트할 속성값을 지정하여 일괄 수정 하나의 SQL 로서 동작하므로, 동작이 빠르다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; queryset = Post.objects.all()</span><br><span class="line">&gt;&gt;&gt; queryset.update(tags=&quot;Python, Django&quot;) # 일괄 update 요청</span><br><span class="line"></span><br><span class="line">• Tip : 데이터베이스에는 UPDATE SQL이 전달</span><br><span class="line">UPDATE blog_post SET tags=&apos;Python, Django&apos;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="데이터베이스에-데이터-삭제-요청"><a href="#데이터베이스에-데이터-삭제-요청" class="headerlink" title="데이터베이스에 데이터 삭제 요청"></a>데이터베이스에 데이터 삭제 요청</h1><ul>
+<li>방법 1) 각 Model 인스턴스의 delete 함수를 호출하여, 데이터베이스 측의 관련 데이터를 삭제</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">• 각 Model 인스턴스 별로 SQL 이 수행</span><br><span class="line">• 다수 Row 에 대해서 수행 시에는 성능저하가 발생할 수 있음</span><br><span class="line">&gt;&gt;&gt; post = Post.objects.get(id=1)</span><br><span class="line">&gt;&gt;&gt; post.delete()</span><br><span class="line">&gt;&gt;&gt; queryset = Post.objects.all()</span><br><span class="line">&gt;&gt;&gt; for post in queryset:</span><br><span class="line">&gt;&gt;&gt; post.delete() # 각 Model Instance 별로 DB에 delete 요청</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>방법 2) QuerySet 의 delete 함수를 호출하여, 데이터베이스 측의 관 련 데이터를 삭제</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">하나의 SQL 로서 동작하므로, 동작이 빠르다.</span><br><span class="line">&gt;&gt;&gt; queryset = Post.objects.all()</span><br><span class="line">&gt;&gt;&gt; queryset.delete() # 일괄 delete 요청</span><br><span class="line">• Tip : 데이터베이스에는 DELETE SQL이 전달</span><br><span class="line">DELETE FROM blog_post;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="웹서비스-각-요청-반응속도에서의-병목"><a href="#웹서비스-각-요청-반응속도에서의-병목" class="headerlink" title="웹서비스, 각 요청 반응속도에서의 병목"></a>웹서비스, 각 요청 반응속도에서의 병목</h1><blockquote>
+<p>데이터베이스 : 아주 중요</p>
+<p> • DB로 전달/실행되는 SQL갯수를 줄이고 </p>
+<p>• 각 SQL의 성능/처리속도 최적화가 필요</p>
+<p> • 로직의 복잡도 : 중요 • 프로그래밍 언어의 종류 : 대개는 미미</p>
+</blockquote>
+<p>tip</p>
+<blockquote>
+<p>django-debug-toolbar</p>
+<p> • 현재 request/response 에 대한 다양한 디버깅 정보를 보여줍니다.</p>
+<p> • SQLPanel을 통해 각 요청 처리 시에 발생한 SQL 내역 확인 가능      • 웹서비스 성능과 직결 = 응답속도</p>
+<blockquote>
+<p># 프로젝트/settings.py</p>
+<p>INSTALLED_APPS = […, “debug_toolbar”]</p>
+<p> MIDDLEWARE = [“debug_toolbar.middleware.DebugToolbarMiddleware”, …]</p>
+<p> INTERNAL_IPS = [“127.0.0.1”] </p>
+<p>#프로젝트/urls.py</p>
+<p> from django.conf import settings</p>
+<p> from django.conf.urls import include, url</p>
+<p>if settings.DEBUG: </p>
+<p>​         import debug_toolbar </p>
+<p>​           urlpatterns += [ url(r’^<strong>debug</strong>/‘, include(debug_toolbar.urls)), ]</p>
+<blockquote>
+<p>/<body>/</body>  꼭 바디테그가 필요함( 바디테그에 대입해서 툴바가 나오므로)</p>
 </blockquote>
 </blockquote>
 </blockquote>
-<p>  • Tip : 데이터베이스에는 UPDATE SQL이 전달<br>  UPDATE blog_post SET tags=’Python, Django’;<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 데이터베이스에 데이터 삭제 요청</span><br><span class="line"></span><br><span class="line">- 방법 1) 각 Model 인스턴스의 delete 함수를 호출하여, 데이터베이스 측의 관련 데이터를 삭제</span><br></pre></td></tr></table></figure><br>• 각 Model 인스턴스 별로 SQL 이 수행<br>• 다수 Row 에 대해서 수행 시에는 성능저하가 발생할 수 있음</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>post = Post.objects.get(id=1)<br>post.delete()<br>queryset = Post.objects.all()<br>for post in queryset:<br>post.delete() # 각 Model Instance 별로 DB에 delete 요청</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 방법 2) QuerySet 의 delete 함수를 호출하여, 데이터베이스 측의 관 련 데이터를 삭제</span><br></pre></td></tr></table></figure>
-<p>하나의 SQL 로서 동작하므로, 동작이 빠르다.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>queryset = Post.objects.all()<br>queryset.delete() # 일괄 delete 요청<br>• Tip : 데이터베이스에는 DELETE SQL이 전달<br>DELETE FROM blog_post;</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<pre><code>
 
-
-# 웹서비스, 각 요청 반응속도에서의 병목
-
-&gt; 데이터베이스 : 아주 중요
-&gt;
-&gt;  • DB로 전달/실행되는 SQL갯수를 줄이고 
-&gt;
-&gt; • 각 SQL의 성능/처리속도 최적화가 필요
-&gt;
-&gt;  • 로직의 복잡도 : 중요 • 프로그래밍 언어의 종류 : 대개는 미미
-
-tip
-
-&gt; django-debug-toolbar
-&gt;
-&gt;  • 현재 request/response 에 대한 다양한 디버깅 정보를 보여줍니다.
-&gt;
-&gt;  • SQLPanel을 통해 각 요청 처리 시에 발생한 SQL 내역 확인 가능      • 웹서비스 성능과 직결 = 응답속도
-&gt;
-&gt; &gt; \# 프로젝트/settings.py
-&gt; &gt;
-&gt; &gt; INSTALLED_APPS = [..., &quot;debug_toolbar&quot;]
-&gt; &gt;
-&gt; &gt;  MIDDLEWARE = [&quot;debug_toolbar.middleware.DebugToolbarMiddleware&quot;, ...]
-&gt; &gt;
-&gt; &gt;  INTERNAL_IPS = [&quot;127.0.0.1&quot;] 
-&gt; &gt;
-&gt; &gt; \#프로젝트/urls.py
-&gt; &gt;
-&gt; &gt;  from django.conf import settings
-&gt; &gt;
-&gt; &gt;  from django.conf.urls import include, url
-&gt; &gt;
-&gt; &gt; if settings.DEBUG: 
-&gt; &gt;
-&gt; &gt; ​         import debug_toolbar 
-&gt; &gt;
-&gt; &gt; ​           urlpatterns += [ url(r&apos;^__debug__/&apos;, include(debug_toolbar.urls)), ]
-&gt; &gt;
-&gt; &gt; &gt; /&lt;body&gt;/&lt;/body&gt;  꼭 바디테그가 필요함( 바디테그에 대입해서 툴바가 나오므로)
-
-
-
-
-
-
-
-
-</code></pre>
     </article>
     <!-- license  -->
     
@@ -828,7 +1016,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고"><span class="toc-number">1.</span> <span class="toc-text">장고</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#웹서비스-기본구조"><span class="toc-number">1.1.</span> <span class="toc-text">웹서비스 기본구조</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#웹-애플리케이션-기본-구조"><span class="toc-number">1.2.</span> <span class="toc-text">웹 애플리케이션 기본 구조</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고-따라가기"><span class="toc-number">1.3.</span> <span class="toc-text">장고 따라가기</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-App-URLConf-Template"><span class="toc-number">2.</span> <span class="toc-text">Django App, URLConf, Template</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#URLConf-and-Regular-Expression"><span class="toc-number">3.</span> <span class="toc-text">URLConf and Regular Expression</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#정규표현식-Regular-Expression"><span class="toc-number">3.1.</span> <span class="toc-text">정규표현식(Regular Expression)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URLConf"><span class="toc-number">3.2.</span> <span class="toc-text">URLConf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URLConf-정규표현식-매핑-연습"><span class="toc-number">3.3.</span> <span class="toc-text">URLConf 정규표현식 매핑 연습</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#View"><span class="toc-number">4.</span> <span class="toc-text">View</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#지금부터-모든-장고환경에-접근-가능"><span class="toc-number">5.</span> <span class="toc-text">지금부터 모든 장고환경에 접근 가능</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#모델-Meta-ordering-을-무시하고-직접-정렬조건-지정하는법"><span class="toc-number">6.</span> <span class="toc-text">모델 Meta.ordering 을 무시하고, 직접 정렬조건 지정하는법</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고"><span class="toc-number">1.</span> <span class="toc-text">장고</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#웹서비스-기본구조"><span class="toc-number">1.1.</span> <span class="toc-text">웹서비스 기본구조</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#웹-애플리케이션-기본-구조"><span class="toc-number">1.2.</span> <span class="toc-text">웹 애플리케이션 기본 구조</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고-따라가기"><span class="toc-number">1.3.</span> <span class="toc-text">장고 따라가기</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-App-URLConf-Template"><span class="toc-number">2.</span> <span class="toc-text">Django App, URLConf, Template</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#URLConf-and-Regular-Expression"><span class="toc-number">3.</span> <span class="toc-text">URLConf and Regular Expression</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#정규표현식-Regular-Expression"><span class="toc-number">3.1.</span> <span class="toc-text">정규표현식(Regular Expression)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URLConf"><span class="toc-number">3.2.</span> <span class="toc-text">URLConf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URLConf-정규표현식-매핑-연습"><span class="toc-number">3.3.</span> <span class="toc-text">URLConf 정규표현식 매핑 연습</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#View"><span class="toc-number">4.</span> <span class="toc-text">View</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#함수기반view-응답만드는4가지"><span class="toc-number">4.1.</span> <span class="toc-text">함수기반view 응답만드는4가지</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#클래스기반-view"><span class="toc-number">4.2.</span> <span class="toc-text">클래스기반 view</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Model-and-Model-Fields"><span class="toc-number">5.</span> <span class="toc-text">Model and Model Fields</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Structured-Query-Language-꼭별도공부"><span class="toc-number">5.1.</span> <span class="toc-text">SQL (Structured Query Language) (꼭별도공부)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DjangoORM-개념"><span class="toc-number">5.2.</span> <span class="toc-text">DjangoORM 개념</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Django-Model-커스텀-모델-정의-특정앱-models-py"><span class="toc-number">5.3.</span> <span class="toc-text">Django Model 커스텀 모델 정의 (특정앱/models.py)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Migration"><span class="toc-number">6.</span> <span class="toc-text">Migration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#관련-명령"><span class="toc-number">6.1.</span> <span class="toc-text">관련 명령</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#마이그레이션-파일-생성-및-적용"><span class="toc-number">6.2.</span> <span class="toc-text">마이그레이션 파일 생성 및 적용</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Migration-정방향-forward-역방향-reverse"><span class="toc-number">6.3.</span> <span class="toc-text">Migration 정방향(forward) 역방향(reverse)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#id필드는-왜-기본임"><span class="toc-number">6.4.</span> <span class="toc-text">id필드는 왜 기본임?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#기존-모델-클래스에-필수필드를-추가하여-makemigrations-수행"><span class="toc-number">6.5.</span> <span class="toc-text">기존 모델 클래스에 필수필드를 추가하여 makemigrations 수행</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-Shell"><span class="toc-number">7.</span> <span class="toc-text">Django Shell</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Jupyter-Notebook-으로-장고쉘-띄우기"><span class="toc-number">7.1.</span> <span class="toc-text">Jupyter Notebook 으로 장고쉘 띄우기</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-Admin"><span class="toc-number">8.</span> <span class="toc-text">Django Admin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ModelAdmin-Options-admin-ModelAdmin"><span class="toc-number">8.1.</span> <span class="toc-text">ModelAdmin Options (admin.ModelAdmin)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#list-display-옵션"><span class="toc-number">8.1.1.</span> <span class="toc-text">list_display 옵션</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Admin-Actions"><span class="toc-number">8.1.2.</span> <span class="toc-text">Admin Actions</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CRUD"><span class="toc-number">9.</span> <span class="toc-text">CRUD</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Model-Manager"><span class="toc-number">9.1.</span> <span class="toc-text">Model Manager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QuerySet-알아서-SQL언어로-변경해줌"><span class="toc-number">9.2.</span> <span class="toc-text">QuerySet (알아서 SQL언어로 변경해줌)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#데이터베이스에-데이터-조회-요청-retrieve"><span class="toc-number">9.3.</span> <span class="toc-text">데이터베이스에 데이터 조회 요청 (retrieve)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#데이터베이스에-특정-필드로-정렬-조건-추가"><span class="toc-number">10.</span> <span class="toc-text">데이터베이스에 특정 필드로 정렬 조건 추가</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#슬라이싱을-통한-범위-조건-추가"><span class="toc-number">11.</span> <span class="toc-text">슬라이싱을 통한 범위 조건 추가</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#지정-조건으로-DB로부터-데이터를-Fetch-가져오기"><span class="toc-number">12.</span> <span class="toc-text">지정 조건으로 DB로부터 데이터를 Fetch(가져오기)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#데이터베이스에-데이터-추가-요청-create"><span class="toc-number">13.</span> <span class="toc-text">데이터베이스에 데이터 추가 요청 (create)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#데이터베이스에-데이터-갱신-요청"><span class="toc-number">14.</span> <span class="toc-text">데이터베이스에 데이터 갱신 요청</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#데이터베이스에-데이터-삭제-요청"><span class="toc-number">15.</span> <span class="toc-text">데이터베이스에 데이터 삭제 요청</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#웹서비스-각-요청-반응속도에서의-병목"><span class="toc-number">16.</span> <span class="toc-text">웹서비스, 각 요청 반응속도에서의 병목</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -841,6 +1029,10 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
     
     
     
@@ -1026,13 +1218,13 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
+    
         <span class="sidebar-tag-name" data-tags="django"><span class="iconfont-archer">&#xe606;</span>django</span>
     
         <span class="sidebar-tag-name" data-tags="장고"><span class="iconfont-archer">&#xe606;</span>장고</span>
     
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
-        <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
     
         <span class="sidebar-tag-name" data-tags="GDG"><span class="iconfont-archer">&#xe606;</span>GDG</span>
     
