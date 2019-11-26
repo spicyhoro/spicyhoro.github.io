@@ -274,7 +274,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">782</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.7k</span>Reading time: <span class="post-count reading-time">10 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -496,14 +496,96 @@ height:50vh;
 
 
 
-
-
-
-
-
-
 </li>
 </ul>
+<h1 id="User-Authentication-Implementation"><a href="#User-Authentication-Implementation" class="headerlink" title="User Authentication Implementation"></a>User Authentication Implementation</h1><ul>
+<li><p>회원가입/로그인/로그아웃/프로필</p>
+</li>
+<li><p>코드 구현에 앞서, accounts 앱을 생성</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp accounts</span><br><span class="line"></span><br><span class="line">settings.INSTALLED_APPS 에 &quot;accounts&quot; 추가</span><br><span class="line"></span><br><span class="line"># accounts/urls.py</span><br><span class="line">from django.conf.urls import url</span><br><span class="line">urlpatterns = []</span><br><span class="line"></span><br><span class="line"># askdjango/urls.py</span><br><span class="line">from django.conf.urls import include, url</span><br><span class="line"></span><br><span class="line">urlpatterns += [</span><br><span class="line">     # django.contrib.auth 앱 내에서는 namespace를 쓰지 않는 것으로</span><br><span class="line">     # 이미 구현이 되어있기 때문에, 이를 따라 본 accounts앱에서는</span><br><span class="line">     # namespace를 절대 적용하지 않습니다.</span><br><span class="line">     url(r&apos;^accounts/&apos;, include(&apos;accounts.urls&apos;)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="d-contrib-auth-forms-내-Form-Class"><a href="#d-contrib-auth-forms-내-Form-Class" class="headerlink" title="d.contrib.auth.forms 내 Form Class"></a>d.contrib.auth.forms 내 Form Class</h2><ul>
+<li>UserCreationForm #ref : 회원 가입 <ul>
+<li>쓰고 있는 뷰가 없음. </li>
+</ul>
+</li>
+<li>AuthenticationForm #ref : 로그인<ul>
+<li>d.c.auth.views.login 뷰의 디폴트 Form Class </li>
+</ul>
+</li>
+<li>PasswordResetForm #ref : 암호변경 리셋 요청<ul>
+<li>d.c.auth.views.password_reset 뷰의 디폴트 Form Class</li>
+</ul>
+</li>
+<li>PasswordChangeForm #ref : 암호변경<ul>
+<li>d.c.auth.views.password_change 뷰의 디폴트 Form Class </li>
+</ul>
+</li>
+<li>SetPasswordForm #ref : 암호 설정 <ul>
+<li>d.c.auth.views.password_reset_confirm 뷰의 디폴트 Form Class</li>
+</ul>
+</li>
+</ul>
+<h3 id="회원가입-구현-UserCreationForm-활용"><a href="#회원가입-구현-UserCreationForm-활용" class="headerlink" title="회원가입 구현 /UserCreationForm 활용"></a>회원가입 구현 /UserCreationForm 활용</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># accounts/urls.py</span><br><span class="line">urlpatterns += [</span><br><span class="line"> url(r&apos;^signup/$&apos;, views.signup, name=&apos;signup&apos;),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># accounts/views.py</span><br><span class="line">from django.contrib.auth.forms import UserCreationForm</span><br><span class="line"></span><br><span class="line">def signup(request):</span><br><span class="line">   if request.method == &apos;POST&apos;:</span><br><span class="line">       form = UserCreationForm(request.POST)</span><br><span class="line">       if form.is_valid():</span><br><span class="line">           form.save()</span><br><span class="line">           return redirect(settings.LOGIN_URL) # 회원가입에 성공하면, LOGIN 페이지로 이동 #default : &quot;/accounts/login/&quot;</span><br><span class="line">   else:</span><br><span class="line">   form = UserCreationForm()</span><br><span class="line">   return render(request, &apos;accoutns/signup_form.html&apos;, &#123; # 템플릿은 일반적인 form template</span><br><span class="line">   &apos;form&apos;: form,</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="로그인-로그아웃-구현"><a href="#로그인-로그아웃-구현" class="headerlink" title="로그인/로그아웃 구현"></a>로그인/로그아웃 구현</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># accounts/urls.py</span><br><span class="line">from django.conf import settings</span><br><span class="line">from django.contrib.auth import views as auth_views</span><br><span class="line"></span><br><span class="line">urlpatterns += [</span><br><span class="line">   url(r&apos;^login/$&apos;, auth_views.login, name=&apos;login&apos;,</span><br><span class="line">   kwargs=&#123;&apos;template_name&apos;: &apos;accounts/login_form.html&apos;&#125;),</span><br><span class="line">   url(r&apos;^logout/$&apos;, auth_views.logout, name=&apos;logout&apos;,</span><br><span class="line">   kwargs=&#123;&apos;next_page&apos;: settings.LOGIN_URL&#125;),</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>위에형식은 views.py에 뷰정의안하고 기본 장고 view에서 뷰함수 가져다씀</p>
+</li>
+<li><p>템플릿은 일반적인 form template</p>
+</li>
+<li><p>함수를 불러올때 안에 인자들을 kwargs인데 이것을 바꿔줄려면 위에 형식처럼 바꿔줄수있다.</p>
+<p>(즉, def login(request, template name=’registration/login.html’,..)되어있지만</p>
+<p>이 인자를 바꿔줄려면 kwargs={‘template_name’: ‘accounts/login_form.html’}같이 path 인자에 써주면 바꿀수있다. </p>
+</li>
+<li><p>로그인 성공하면 next인자가 주어지지않으면 settings.LOGIN_REDIRECT_URL로 이동하며,</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8000/accounts/login/?next=/blog/1</span><br><span class="line">이런주소에서 next인자가 주어진상태에서 로그인성공하면 바로 next인자로 이동</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;  </span><br><span class="line">  #프로젝트/templates/layout.html</span><br><span class="line">  # 로그인상황이 False이면 아래것 보여주고 로그인상황이면 프로필 로그아웃 보여줌</span><br><span class="line">  &#123;% if not user.is_authenticated %&#125;</span><br><span class="line">             &lt;li&gt;&lt;a href=&quot;#&quot;&gt;회원가입&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">             &lt;li&gt;&lt;a href=&quot;#&quot;&gt; 로그인&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">             &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&#123;&#123; user &#125;&#125;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">  &#123;% else %&#125;</span><br><span class="line">             &lt;li&gt;&lt;a href=&quot;#&quot;&gt;프로필&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">             &lt;li&gt;&lt;a href=&quot;#&quot;&gt;로그아웃&lt;/a&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">                    </span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>만약 로그인 후 해당 페이지로 다시 돌아가는것을 해주고 싶다면 next인자를 활용하자</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">#프로젝트/templates/layout.html</span><br><span class="line"></span><br><span class="line">&#123;% if not user.is_authenticated %&#125;</span><br><span class="line">                        &lt;li&gt;&lt;a href=&quot;&#123;% url &quot;signup&quot; %&#125;&quot;&gt;회원가입&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                        &lt;li&gt;&lt;a href=&quot;&#123;% url &quot;login&quot; %&#125;?next=&#123;&#123; request.path &#125;&#125;&quot;&gt; 로그인&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&#123;&#123; user &#125;&#125;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">                    &#123;% else %&#125;</span><br><span class="line">                        &lt;li&gt;&lt;a href=&quot;&#123;% url &quot;profile&quot; %&#125;&quot;&gt;프로필&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                        &lt;li&gt;&lt;a href=&quot;&#123;% url &quot;logout&quot; %&#125;?next=&#123;&#123; request.path &#125;&#125;&quot;&gt;로그아웃&lt;/a&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">                    &#123;% endif %&#125;</span><br><span class="line">                    </span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Profile-뷰-구현"><a href="#Profile-뷰-구현" class="headerlink" title="Profile 뷰 구현"></a>Profile 뷰 구현</h2><p>(로그인 유저의 프로필 정보 보여주기)</p>
+<ul>
+<li>settings.LOGIN_REDIRECT_URL 에 맞춰, /accounts/profile/ 주소를 처리토록 accounts.views.profile 뷰를 구 성해봅시다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># accounts/urls.py</span><br><span class="line"></span><br><span class="line">from . import views</span><br><span class="line">urlpatterns += [</span><br><span class="line"> url(r&apos;^profile/$&apos;, views.profile, name=&apos;profile&apos;),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># accounts/views.py</span><br><span class="line">@login_required #데코레이터!장식자! 아래함수가 로그인 환경일때만 가능</span><br><span class="line">def profile(request):</span><br><span class="line">	 return render(request, &apos;accounts/profile.html&apos;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#accounts/templates/accounts/profile.html</span><br><span class="line">&lt;h1&gt;&#123;&#123; user &#125;&#125;&apos;s Profile&lt;/h1&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">   &lt;li&gt;email : &#123;&#123; user.email &#125;&#125;&lt;/li&gt;</span><br><span class="line">   &lt;li&gt;name : &#123;&#123; user.first_name &#125;&#125;, &#123;&#123; user.last_name &#125;&#125;&lt;/li&gt;</span><br><span class="line">   &lt;li&gt;is_staff : &#123;&#123; user.is_staff &#125;&#125;&lt;/li&gt;</span><br><span class="line">   &lt;li&gt;is_superuser : &#123;&#123; user.is_superuser &#125;&#125;&lt;/li&gt;</span><br><span class="line">   &lt;li&gt;&#123;&#123; user.date_joined &#125;&#125;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>login 뷰에서는 next 인자 지원 : 로그인을 성공하면, 로그인을 요청했던 페이 지로 다시 돌아오기</li>
+</ul>
+<h2 id="장식자를-통한-뷰-접근-제한"><a href="#장식자를-통한-뷰-접근-제한" class="headerlink" title="장식자를 통한 뷰 접근 제한"></a>장식자를 통한 뷰 접근 제한</h2><ul>
+<li>로그아웃 상태일 때, 해당 뷰에 접근하면 settings.LOGIN_URL 로 이동</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.auth.decorators import login_required</span><br><span class="line"></span><br><span class="line">@login_required</span><br><span class="line">def profile(request):</span><br><span class="line"> 	return render(request, &apos;accounts/profile.html&apos;)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>체킹 루틴을 함수로 지정 가능</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#아래 설정으로 포인트가 50000이상이며 로그인되어있는 경우만 아래 함수 실행</span><br><span class="line"></span><br><span class="line">from django.contrib.auth.decorators import user_passes_test</span><br><span class="line"></span><br><span class="line">@user_passes_test(lambda user: user.is_authenticated() and user.point &gt; 50000)</span><br><span class="line">def gold_membership(request):</span><br><span class="line">	 return render(request, &apos;app/gold_membership.html&apos;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 
     </article>
     <!-- license  -->
@@ -636,7 +718,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#User-Authentication"><span class="toc-number">1.</span> <span class="toc-text">User Authentication</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#관련-디폴트-settings"><span class="toc-number">1.1.</span> <span class="toc-text">관련 디폴트 settings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#주요-모델의-주요-필드-살펴보기"><span class="toc-number">1.2.</span> <span class="toc-text">주요 모델의 주요 필드 살펴보기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AbstractUser-클래스-주요-속성-멤버함수"><span class="toc-number">1.3.</span> <span class="toc-text">AbstractUser 클래스, 주요 속성/멤버함수</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#로그인-불가-암호로-세팅한다는-것을-의미"><span class="toc-number">1.3.1.</span> <span class="toc-text">로그인 불가 암호로 세팅한다는 것을 의미</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#password-해싱-절차"><span class="toc-number">1.4.</span> <span class="toc-text">password 해싱 절차</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#User-모델-클래스-획득하는-방법"><span class="toc-number">1.5.</span> <span class="toc-text">User 모델 클래스 획득하는 방법</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#User관련-추가-속성을-정의하고-싶다면"><span class="toc-number">1.6.</span> <span class="toc-text">User관련 추가 속성을 정의하고 싶다면</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#뷰에서-현재-로그인-유저-획득"><span class="toc-number">1.7.</span> <span class="toc-text">뷰에서 현재 로그인 유저 획득</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#모든-템플릿에서-편하게-값쓰기"><span class="toc-number">1.8.</span> <span class="toc-text">모든 템플릿에서 편하게 값쓰기!</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#User-Authentication"><span class="toc-number">1.</span> <span class="toc-text">User Authentication</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#관련-디폴트-settings"><span class="toc-number">1.1.</span> <span class="toc-text">관련 디폴트 settings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#주요-모델의-주요-필드-살펴보기"><span class="toc-number">1.2.</span> <span class="toc-text">주요 모델의 주요 필드 살펴보기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AbstractUser-클래스-주요-속성-멤버함수"><span class="toc-number">1.3.</span> <span class="toc-text">AbstractUser 클래스, 주요 속성/멤버함수</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#로그인-불가-암호로-세팅한다는-것을-의미"><span class="toc-number">1.3.1.</span> <span class="toc-text">로그인 불가 암호로 세팅한다는 것을 의미</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#password-해싱-절차"><span class="toc-number">1.4.</span> <span class="toc-text">password 해싱 절차</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#User-모델-클래스-획득하는-방법"><span class="toc-number">1.5.</span> <span class="toc-text">User 모델 클래스 획득하는 방법</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#User관련-추가-속성을-정의하고-싶다면"><span class="toc-number">1.6.</span> <span class="toc-text">User관련 추가 속성을 정의하고 싶다면</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#뷰에서-현재-로그인-유저-획득"><span class="toc-number">1.7.</span> <span class="toc-text">뷰에서 현재 로그인 유저 획득</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#모든-템플릿에서-편하게-값쓰기"><span class="toc-number">1.8.</span> <span class="toc-text">모든 템플릿에서 편하게 값쓰기!</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#User-Authentication-Implementation"><span class="toc-number">2.</span> <span class="toc-text">User Authentication Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#d-contrib-auth-forms-내-Form-Class"><span class="toc-number">2.1.</span> <span class="toc-text">d.contrib.auth.forms 내 Form Class</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#회원가입-구현-UserCreationForm-활용"><span class="toc-number">2.1.1.</span> <span class="toc-text">회원가입 구현 /UserCreationForm 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#로그인-로그아웃-구현"><span class="toc-number">2.1.2.</span> <span class="toc-text">로그인/로그아웃 구현</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Profile-뷰-구현"><span class="toc-number">2.2.</span> <span class="toc-text">Profile 뷰 구현</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장식자를-통한-뷰-접근-제한"><span class="toc-number">2.3.</span> <span class="toc-text">장식자를 통한 뷰 접근 제한</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -649,6 +731,10 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
     
     
     
@@ -862,6 +948,14 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
     
+        <span class="sidebar-tag-name" data-tags="마크다운"><span class="iconfont-archer">&#xe606;</span>마크다운</span>
+    
+        <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
+    
+        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
+    
+        <span class="sidebar-tag-name" data-tags="terminal"><span class="iconfont-archer">&#xe606;</span>terminal</span>
+    
         <span class="sidebar-tag-name" data-tags="GDG"><span class="iconfont-archer">&#xe606;</span>GDG</span>
     
         <span class="sidebar-tag-name" data-tags="Google"><span class="iconfont-archer">&#xe606;</span>Google</span>
@@ -869,14 +963,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Devfest"><span class="iconfont-archer">&#xe606;</span>Devfest</span>
     
         <span class="sidebar-tag-name" data-tags="Festival"><span class="iconfont-archer">&#xe606;</span>Festival</span>
-    
-        <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
-    
-        <span class="sidebar-tag-name" data-tags="terminal"><span class="iconfont-archer">&#xe606;</span>terminal</span>
-    
-        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
-    
-        <span class="sidebar-tag-name" data-tags="마크다운"><span class="iconfont-archer">&#xe606;</span>마크다운</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -913,15 +999,15 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="django"><span class="iconfont-archer">&#xe60a;</span>django</span>
     
-        <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
+        <span class="sidebar-category-name" data-categories="마크다운"><span class="iconfont-archer">&#xe60a;</span>마크다운</span>
     
         <span class="sidebar-category-name" data-categories="git"><span class="iconfont-archer">&#xe60a;</span>git</span>
     
-        <span class="sidebar-category-name" data-categories="terminal"><span class="iconfont-archer">&#xe60a;</span>terminal</span>
-    
         <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
     
-        <span class="sidebar-category-name" data-categories="마크다운"><span class="iconfont-archer">&#xe60a;</span>마크다운</span>
+        <span class="sidebar-category-name" data-categories="terminal"><span class="iconfont-archer">&#xe60a;</span>terminal</span>
+    
+        <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
