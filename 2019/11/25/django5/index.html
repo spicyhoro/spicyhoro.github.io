@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>django5 · spicyhoro</title>
+    <title>Django 기본 다섯번째이야기 · spicyhoro</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Hello Spicy Horo</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">django5</a>
+                <a href="#" class="post-name">Django 기본 다섯번째이야기</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            django5
+            Django 기본 다섯번째이야기
             <!-- 404 -->
             
         </h1>
@@ -266,15 +266,15 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "basic">basic</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags = "django">django</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "basic">basic</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">791</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                        <span>Word count: <span class="post-count word-count">782</span>Reading time: <span class="post-count reading-time">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -446,14 +446,49 @@ height:50vh;
 <ul>
 <li>인증 User모델을 다른 모델로 변경할 수 있기 때문</li>
 </ul>
-<figure class="highlight plain"><figcaption><span>django.contrib.auth.models import User User.objects.all()```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">방법2) helper 함수를 통해 모델 클래스 참조 (GOOD)</span><br></pre></td></tr></table></figure>
-<p>from django.contrib.auth import get_user_model<br>User = get_user_model()<br>User.objects.all()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## User관련 추가 속성을 정의하고 싶다면</span><br><span class="line"></span><br><span class="line">- 방법1) Profile 모델을 만들고, User모델과 1:1 관계 매핑 (추천) </span><br><span class="line">- 방법2) Custom User Model 만들기</span><br><span class="line">  - django.contrib.auth.models.AbstractUser 상속</span><br><span class="line">  - Custom User Model의 &apos;앱이름.모델명&apos;을 settings.AUTH_USER_MODEL으로 지정 (디폴트: &apos;auth.User&apos;)</span><br><span class="line"></span><br><span class="line">Tip:</span><br><span class="line"></span><br><span class="line">- 인증 User 모델 클래스는 변경될 수 있으며</span><br><span class="line"></span><br><span class="line">   관계 지정시 User 모델클래스 참조는 settings.AUTH_USER_MODEL</span><br></pre></td></tr></table></figure>
-<p>from django.conf import settings<br>from django.contrib.auth.models import User # BAD<br>from django.db import models</p>
-<p>class Post(models.Model):<br> author = models.ForeignKey(User) # BAD #모델 커스텀으로 바뀔수있음<br> author = models.ForeignKey(‘auth.User’) # BAD #모델 커스텀으로 바뀔수있음<br> author = models.ForeignKey(settings.AUTH_USER_MODEL) # GOOD #이렇게하면 settings에 저거 경로만 바꿔주면됨.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- User 모델클래스 획득은 django.contrib.auth.get_user_model</span><br></pre></td></tr></table></figure>
-<p>from django.contrib.auth import get_user_model<br>User = get_user_model()<br>print(User.objects.all())</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 뷰에서 현재 로그인 유저 획득</span><br><span class="line"></span><br><span class="line">- 뷰 FBV에서 request.user, 뷰 CBV에서 self.request.user </span><br><span class="line">  - 로그인 상태 : settings.AUTH_USER_MODEL 클래스 인스턴스 </span><br><span class="line">  - 로그아웃 상태 : django.contrib.auth.models.AnonymousUser (just 파이썬 함수임)</span><br><span class="line">    - __모델 인스턴스가 아니므로, 다른 모델과 관계 불가__</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 모든 템플릿에서 편하게 값쓰기!</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- context_processors를 통해 user 제공(템플릿에서 그냥 user를 써도 바로호출가능한이유)</span><br><span class="line"></span><br><span class="line">  (Setting.py에서 context_processors가 역할수행)</span><br><span class="line"></span><br><span class="line">  ``` </span><br><span class="line">  #템플릿 렌더전에 함수들이 리턴한 디렉토리형식으로 모든 값을 템플릿에 전달</span><br><span class="line">  따라서 blog.context_processors.blog 추가후에 내가 더 추가하여 모든 템플릿에서 blog함수의 리턴값(디렉토리)(무조건) 를 쓸수있다</span><br><span class="line">  TEMPLATES = [</span><br><span class="line">      &#123;</span><br><span class="line">          &apos;BACKEND&apos;: &apos;django.template.backends.django.DjangoTemplates&apos;,</span><br><span class="line">          &apos;DIRS&apos;: [</span><br><span class="line">              os.path.join(BASE_DIR, &apos;askdjango&apos;, &apos;templates&apos;)</span><br><span class="line">          ],</span><br><span class="line">          &apos;APP_DIRS&apos;: True,</span><br><span class="line">          &apos;OPTIONS&apos;: &#123;</span><br><span class="line">              &apos;context_processors&apos;: [</span><br><span class="line">                  &apos;django.template.context_processors.debug&apos;,</span><br><span class="line">                  &apos;django.template.context_processors.request&apos;,</span><br><span class="line">                  &apos;django.contrib.auth.context_processors.auth&apos;,</span><br><span class="line">                 &apos;django.contrib.messages.context_processors.messages&apos;,</span><br><span class="line">              ],</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.auth.models import User User.objects.all()</span><br></pre></td></tr></table></figure>
+
+
+<p>방법2) helper 함수를 통해 모델 클래스 참조 (GOOD)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.auth import get_user_model</span><br><span class="line">User = get_user_model()</span><br><span class="line">User.objects.all()</span><br></pre></td></tr></table></figure>
+
+<h2 id="User관련-추가-속성을-정의하고-싶다면"><a href="#User관련-추가-속성을-정의하고-싶다면" class="headerlink" title="User관련 추가 속성을 정의하고 싶다면"></a>User관련 추가 속성을 정의하고 싶다면</h2><ul>
+<li>방법1) Profile 모델을 만들고, User모델과 1:1 관계 매핑 (추천) </li>
+<li>방법2) Custom User Model 만들기<ul>
+<li>django.contrib.auth.models.AbstractUser 상속</li>
+<li>Custom User Model의 ‘앱이름.모델명’을 settings.AUTH_USER_MODEL으로 지정 (디폴트: ‘auth.User’)</li>
+</ul>
+</li>
+</ul>
+<p>Tip:</p>
+<ul>
+<li><p>인증 User 모델 클래스는 변경될 수 있으며</p>
+<p> 관계 지정시 User 모델클래스 참조는 settings.AUTH_USER_MODEL</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from django.conf import settings</span><br><span class="line">from django.contrib.auth.models import User # BAD</span><br><span class="line">from django.db import models</span><br><span class="line"></span><br><span class="line">class Post(models.Model):</span><br><span class="line"> author = models.ForeignKey(User) # BAD #모델 커스텀으로 바뀔수있음</span><br><span class="line"> author = models.ForeignKey(&apos;auth.User&apos;) # BAD #모델 커스텀으로 바뀔수있음</span><br><span class="line"> author = models.ForeignKey(settings.AUTH_USER_MODEL) # GOOD #이렇게하면 settings에 저거 경로만 바꿔주면됨.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>User 모델클래스 획득은 django.contrib.auth.get_user_model</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.auth import get_user_model</span><br><span class="line">User = get_user_model()</span><br><span class="line">print(User.objects.all())</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="뷰에서-현재-로그인-유저-획득"><a href="#뷰에서-현재-로그인-유저-획득" class="headerlink" title="뷰에서 현재 로그인 유저 획득"></a>뷰에서 현재 로그인 유저 획득</h2><ul>
+<li>뷰 FBV에서 request.user, 뷰 CBV에서 self.request.user <ul>
+<li>로그인 상태 : settings.AUTH_USER_MODEL 클래스 인스턴스 </li>
+<li>로그아웃 상태 : django.contrib.auth.models.AnonymousUser (just 파이썬 함수임)<ul>
+<li><strong>모델 인스턴스가 아니므로, 다른 모델과 관계 불가</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="모든-템플릿에서-편하게-값쓰기"><a href="#모든-템플릿에서-편하게-값쓰기" class="headerlink" title="모든 템플릿에서 편하게 값쓰기!"></a>모든 템플릿에서 편하게 값쓰기!</h2><ul>
+<li><p>context_processors를 통해 user 제공(템플릿에서 그냥 user를 써도 바로호출가능한이유)</p>
+<p>(Setting.py에서 context_processors가 역할수행)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#템플릿 렌더전에 함수들이 리턴한 디렉토리형식으로 모든 값을 템플릿에 전달</span><br><span class="line">따라서 blog.context_processors.blog 추가후에</span><br><span class="line">내가 더 추가하여 모든 템플릿에서 blog함수의 리턴값(디렉토리)(무조건) 를 쓸수있다</span><br><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        &apos;BACKEND&apos;: &apos;django.template.backends.django.DjangoTemplates&apos;,</span><br><span class="line">        &apos;DIRS&apos;: [</span><br><span class="line">            os.path.join(BASE_DIR, &apos;askdjango&apos;, &apos;templates&apos;)</span><br><span class="line">        ],</span><br><span class="line">        &apos;APP_DIRS&apos;: True,</span><br><span class="line">        &apos;OPTIONS&apos;: &#123;</span><br><span class="line">            &apos;context_processors&apos;: [</span><br><span class="line">                &apos;django.template.context_processors.debug&apos;,</span><br><span class="line">                &apos;django.template.context_processors.request&apos;,</span><br><span class="line">                &apos;django.contrib.auth.context_processors.auth&apos;,</span><br><span class="line">               &apos;django.contrib.messages.context_processors.messages&apos;,</span><br><span class="line">            ],</span><br></pre></td></tr></table></figure>
 
 
 
@@ -467,6 +502,8 @@ height:50vh;
 
 
 
+</li>
+</ul>
 
     </article>
     <!-- license  -->
@@ -599,7 +636,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#User-Authentication"><span class="toc-number">1.</span> <span class="toc-text">User Authentication</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#관련-디폴트-settings"><span class="toc-number">1.1.</span> <span class="toc-text">관련 디폴트 settings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#주요-모델의-주요-필드-살펴보기"><span class="toc-number">1.2.</span> <span class="toc-text">주요 모델의 주요 필드 살펴보기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AbstractUser-클래스-주요-속성-멤버함수"><span class="toc-number">1.3.</span> <span class="toc-text">AbstractUser 클래스, 주요 속성/멤버함수</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#로그인-불가-암호로-세팅한다는-것을-의미"><span class="toc-number">1.3.1.</span> <span class="toc-text">로그인 불가 암호로 세팅한다는 것을 의미</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#password-해싱-절차"><span class="toc-number">1.4.</span> <span class="toc-text">password 해싱 절차</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#User-모델-클래스-획득하는-방법"><span class="toc-number">1.5.</span> <span class="toc-text">User 모델 클래스 획득하는 방법</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#User-Authentication"><span class="toc-number">1.</span> <span class="toc-text">User Authentication</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#관련-디폴트-settings"><span class="toc-number">1.1.</span> <span class="toc-text">관련 디폴트 settings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#주요-모델의-주요-필드-살펴보기"><span class="toc-number">1.2.</span> <span class="toc-text">주요 모델의 주요 필드 살펴보기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AbstractUser-클래스-주요-속성-멤버함수"><span class="toc-number">1.3.</span> <span class="toc-text">AbstractUser 클래스, 주요 속성/멤버함수</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#로그인-불가-암호로-세팅한다는-것을-의미"><span class="toc-number">1.3.1.</span> <span class="toc-text">로그인 불가 암호로 세팅한다는 것을 의미</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#password-해싱-절차"><span class="toc-number">1.4.</span> <span class="toc-text">password 해싱 절차</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#User-모델-클래스-획득하는-방법"><span class="toc-number">1.5.</span> <span class="toc-text">User 모델 클래스 획득하는 방법</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#User관련-추가-속성을-정의하고-싶다면"><span class="toc-number">1.6.</span> <span class="toc-text">User관련 추가 속성을 정의하고 싶다면</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#뷰에서-현재-로그인-유저-획득"><span class="toc-number">1.7.</span> <span class="toc-text">뷰에서 현재 로그인 유저 획득</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#모든-템플릿에서-편하게-값쓰기"><span class="toc-number">1.8.</span> <span class="toc-text">모든 템플릿에서 편하게 값쓰기!</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -612,6 +649,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
@@ -752,7 +791,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2019/11/25/django5/" >django5</a>
+            <span class="archive-post-date">11/25</span><a class="archive-post-title" href= "/2019/11/25/django5/" >Django 기본 다섯번째이야기</a>
         </li>
     
     
@@ -792,12 +831,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/henoy-tips/" >기타 꿀팁</a>
+            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/git-memo/" >git memo</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/git-memo/" >git memo</a>
+            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/henoy-tips/" >기타 꿀팁</a>
         </li>
     
     
@@ -815,13 +854,13 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
-    
         <span class="sidebar-tag-name" data-tags="django"><span class="iconfont-archer">&#xe606;</span>django</span>
     
         <span class="sidebar-tag-name" data-tags="장고"><span class="iconfont-archer">&#xe606;</span>장고</span>
     
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
     
         <span class="sidebar-tag-name" data-tags="GDG"><span class="iconfont-archer">&#xe606;</span>GDG</span>
     
@@ -831,9 +870,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Festival"><span class="iconfont-archer">&#xe606;</span>Festival</span>
     
-        <span class="sidebar-tag-name" data-tags="terminal"><span class="iconfont-archer">&#xe606;</span>terminal</span>
-    
         <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
+    
+        <span class="sidebar-tag-name" data-tags="terminal"><span class="iconfont-archer">&#xe606;</span>terminal</span>
     
         <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
     
@@ -876,9 +915,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
     
-        <span class="sidebar-category-name" data-categories="terminal"><span class="iconfont-archer">&#xe60a;</span>terminal</span>
-    
         <span class="sidebar-category-name" data-categories="git"><span class="iconfont-archer">&#xe60a;</span>git</span>
+    
+        <span class="sidebar-category-name" data-categories="terminal"><span class="iconfont-archer">&#xe60a;</span>terminal</span>
     
         <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
     
