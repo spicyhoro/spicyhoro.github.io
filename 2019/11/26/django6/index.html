@@ -406,7 +406,7 @@ height:50vh;
         <h1 id="User-Authentication-Custom"><a href="#User-Authentication-Custom" class="headerlink" title="User Authentication Custom"></a>User Authentication Custom</h1><h2 id="회원가입-UserCreationForm-커스텀"><a href="#회원가입-UserCreationForm-커스텀" class="headerlink" title="회원가입 UserCreationForm 커스텀"></a>회원가입 UserCreationForm 커스텀</h2><ul>
 <li>case 1) 기존 username/password만 입력. email 추가 입력받기</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># accounts/forms.py</span><br><span class="line">from django import forms</span><br><span class="line">from django.contrib.auth.forms import</span><br><span class="line"></span><br><span class="line">UserCreationForm</span><br><span class="line">class SignupForm(UserCreationForm):</span><br><span class="line"> 	class Meta(UserCreationForm.Meta):</span><br><span class="line"> 			fields = UserCreationForm.Meta.fields + (&apos;email&apos;,)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># accounts/forms.py</span><br><span class="line">from django import forms</span><br><span class="line">from django.contrib.auth.forms import UserCreationForm</span><br><span class="line">class SignupForm(UserCreationForm):</span><br><span class="line"> 	class Meta(UserCreationForm.Meta):</span><br><span class="line"> 			fields = UserCreationForm.Meta.fields + (&apos;email&apos;,)</span><br></pre></td></tr></table></figure>
 
 <p> accounts.views.signup 뷰 Form Class를 SignupForm으로 변경</p>
 <p>(그냥 class Meta로 할경우 기존 Meta정보를 다 삭제후 적는것이므로 model도 지정안되있음)</p>
@@ -934,6 +934,12 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 13
@@ -1034,15 +1040,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Festival"><span class="iconfont-archer">&#xe606;</span>Festival</span>
     
+        <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
+    
         <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
     
         <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
     
-        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
-    
         <span class="sidebar-tag-name" data-tags="terminal"><span class="iconfont-archer">&#xe606;</span>terminal</span>
     
-        <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
+        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1081,13 +1087,13 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
     
-        <span class="sidebar-category-name" data-categories="git"><span class="iconfont-archer">&#xe60a;</span>git</span>
+        <span class="sidebar-category-name" data-categories="Markdown"><span class="iconfont-archer">&#xe60a;</span>Markdown</span>
     
-        <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
+        <span class="sidebar-category-name" data-categories="git"><span class="iconfont-archer">&#xe60a;</span>git</span>
     
         <span class="sidebar-category-name" data-categories="terminal"><span class="iconfont-archer">&#xe60a;</span>terminal</span>
     
-        <span class="sidebar-category-name" data-categories="Markdown"><span class="iconfont-archer">&#xe60a;</span>Markdown</span>
+        <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
