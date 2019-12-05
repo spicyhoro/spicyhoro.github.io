@@ -346,6 +346,35 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2019/12/03/class-view1/" >
+            
+                <span>클래스뷰 정확히 쓰기</span>
+        </a>
+        <div class="abstract-content">
+            overviewView?
+뷰의 정체는 호출가능한 객체 (Callable Object) 
+첫번째 인자로 HttpRequest 인스턴스를 받고, 
+리턴값으로 HttpResponse 인스턴스를 리턴해야하는 의무
+
+
+12345678# myapp/views.pydef about(request):  #여기 request가 HttpRequest인스턴스     return HttpResponse(&apos;안녕하세요. AskDjango입니다.&apos;) #여기가 httpResponse인스턴스# myapp/urls.pyfrom . impor...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/12/03</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/11/26/django6/" >
             
                 <span>Django 기본 여섯번째이야기</span>
@@ -717,49 +746,6 @@ texttext2text3text4text5(5개이상부터는 4개와 같은 것을 볼 수 있�
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/10/19/git-memo/" >
-            
-                <span>git memo</span>
-        </a>
-        <div class="abstract-content">
-            
-git의 관리받는 저장소만들기
-1git init
-
-저장소 받아오기
-로결저장소 복제1git clone /로컬/저장소/경로
-원격 서버의 저장소를 복제1git clone 사용자명@호스트:/원격/저장소/경로
-
-git 의 구성
--작업디렉토리-인덱스(stage)-HEAD
-
-관련 설명
-작업디렉토리는 실제 파일들로 이루어져있으며안에 변경사항이 일어날경우 git이 인지내가 변경사항이 있는 것들을 add를 통해 추가또는 기존에서 추가하는파일들이있어도 역시 add로 추가한다그리고 stage에 있는 애들은 commit명령어로 HEAD로 최종확정본...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/19</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "git">git</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "basic">basic</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -990,9 +976,32 @@ git 의 구성
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 13
+        Total : 14
         </div>
         <!-- search  -->
         
@@ -1005,6 +1014,11 @@ git 의 구성
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href= "/2019/12/03/class-view1/" >클래스뷰 정확히 쓰기</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1058,12 +1072,12 @@ git 의 구성
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/git-memo/" >git memo</a>
+            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/henoy-tips/" >기타 꿀팁</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/henoy-tips/" >기타 꿀팁</a>
+            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/git-memo/" >git memo</a>
         </li>
     
     
@@ -1090,15 +1104,15 @@ git 의 구성
     
         <span class="sidebar-tag-name" data-tags="Festival"><span class="iconfont-archer">&#xe606;</span>Festival</span>
     
-        <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
-    
-        <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
+        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
     
         <span class="sidebar-tag-name" data-tags="terminal"><span class="iconfont-archer">&#xe606;</span>terminal</span>
     
-        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
+        <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
     
         <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1137,13 +1151,13 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
     
-        <span class="sidebar-category-name" data-categories="git"><span class="iconfont-archer">&#xe60a;</span>git</span>
+        <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
     
         <span class="sidebar-category-name" data-categories="terminal"><span class="iconfont-archer">&#xe60a;</span>terminal</span>
     
-        <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
-    
         <span class="sidebar-category-name" data-categories="Markdown"><span class="iconfont-archer">&#xe60a;</span>Markdown</span>
+    
+        <span class="sidebar-category-name" data-categories="git"><span class="iconfont-archer">&#xe60a;</span>git</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
