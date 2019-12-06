@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>클래스뷰 정확히 쓰기 · spicyhoro</title>
+    <title>클래스뷰 정확히 쓰기 1 · spicyhoro</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Hello Spicy Horo</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">클래스뷰 정확히 쓰기</a>
+                <a href="#" class="post-name">클래스뷰 정확히 쓰기 1</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            클래스뷰 정확히 쓰기
+            클래스뷰 정확히 쓰기 1
             <!-- 404 -->
             
         </h1>
@@ -264,9 +264,15 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Django">Django</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">2k</span>Reading time: <span class="post-count reading-time">12 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2.8k</span>Reading time: <span class="post-count reading-time">17 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -549,7 +555,140 @@ height:50vh;
 
 <h3 id="FBV-스타일로-구현"><a href="#FBV-스타일로-구현" class="headerlink" title="FBV 스타일로 구현"></a>FBV 스타일로 구현</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def post_list(request):</span><br><span class="line">     if request.method == &apos;HEAD&apos;:</span><br><span class="line">         try:</span><br><span class="line">         		post = Post.objects.all().latest(&apos;created_at&apos;)</span><br><span class="line">         except Post.DoesNotExist:</span><br><span class="line">         		raise Http404</span><br><span class="line">         		</span><br><span class="line">         response = HttpResponse()</span><br><span class="line">         # RFC 1123 date format</span><br><span class="line">         response[&apos;Last-Modified&apos;] = post.created_at.strftime(&apos;%a, %d %b %Y %H:%M:%S GMT&apos;)</span><br><span class="line">         return response</span><br><span class="line">         </span><br><span class="line">      elif request.method == &apos;DELETE&apos;:</span><br><span class="line">     		 raise NotImplementedError</span><br><span class="line">     		</span><br><span class="line">     return render(request, &apos;myapp/post_list.html&apos;, &#123;</span><br><span class="line">     		&apos;post_list&apos;: Post.objects.all(),</span><br><span class="line">     &#125;)</span><br></pre></td></tr></table></figure>
 
-<p>???: httpresponse는 dic 형태인가?</p>
+<h1 id="CBV에-장식자-입히기"><a href="#CBV에-장식자-입히기" class="headerlink" title="CBV에 장식자 입히기"></a>CBV에 장식자 입히기</h1><h2 id="장식자-Decorators"><a href="#장식자-Decorators" class="headerlink" title="장식자(Decorators)"></a>장식자(Decorators)</h2><ul>
+<li>어떤 함수를 감싸는 (Wrapping) 목적의 함수</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def base_10(fn):  #장식자 정의</span><br><span class="line">     def wrap(x, y):</span><br><span class="line">         return x + y + 10</span><br><span class="line">     return wrap</span><br><span class="line">     </span><br><span class="line">@base_10</span><br><span class="line">def mysum2(x, y):</span><br><span class="line"> return x + y</span><br><span class="line"> </span><br><span class="line"># 이는 아래 코드와 동일 #함수 감싸주는 형태!</span><br><span class="line"></span><br><span class="line">def mysum1(x, y):</span><br><span class="line"> return x + y</span><br><span class="line">mysum1 = base_10(mysum1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="FBV-뷰-함수에-장식자-적용"><a href="#FBV-뷰-함수에-장식자-적용" class="headerlink" title="FBV) 뷰 함수에 장식자 적용"></a>FBV) 뷰 함수에 장식자 적용</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.auth.decorators import login_required</span><br><span class="line">from django.shortcuts import render</span><br><span class="line"></span><br><span class="line">@login_required  #역할은 아래 함수실행전에 로그인되어있는지 안되어있을시 로그인페이지로보냄</span><br><span class="line">def protected_view(request):   #get, post요청 구별못해</span><br><span class="line"> 		return render(request, &apos;myapp/secret.html&apos;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="CBV-FBV-스타일로-장식자-적"><a href="#CBV-FBV-스타일로-장식자-적" class="headerlink" title="CBV) FBV 스타일로 장식자 적"></a>CBV) FBV 스타일로 장식자 적</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.auth.decorators import login_required</span><br><span class="line">from django.views.generic import TempalteView</span><br><span class="line"></span><br><span class="line">class SecretView(TemplateView):</span><br><span class="line">		 template_name = &apos;myapp/secret.html&apos;</span><br><span class="line"> </span><br><span class="line">view_fn = SecretView.as_view()</span><br><span class="line"></span><br><span class="line">secret = login_required(view_fn) # 생성된 함수에 장식자 입히기</span><br></pre></td></tr></table></figure>
+
+<h3 id="CBV-클래스에-직접-장식자-입히기-1"><a href="#CBV-클래스에-직접-장식자-입히기-1" class="headerlink" title="CBV) 클래스에 직접 장식자 입히기 #1"></a>CBV) 클래스에 직접 장식자 입히기 #1</h3><ul>
+<li>CBV에서 모든 요청은 dispatch 함수를 통해 처리되므로, dispatch 멤버함수를 꾸며야 합니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.auth.decorators import login_required</span><br><span class="line">from django.utils.decorators import method_decorator</span><br><span class="line">from django.views.generic import TempalteView</span><br><span class="line"></span><br><span class="line">#아래코드와 FBV뷰 함수에 장식자 적용은 같은 동작을함</span><br><span class="line"></span><br><span class="line">class ProtectedView(TemplateView):</span><br><span class="line">		 template_name = &apos;myapp/secret.html&apos;</span><br><span class="line"> </span><br><span class="line">		 @method_decorator(login_required) # 인스턴스 함수를 꾸밀 때 #이렇게 장식해줘야함</span><br><span class="line">     def dispatch(self, *args, **kwargs):</span><br><span class="line">    		 return super().dispatch(*args, **kwargs)</span><br><span class="line">protected = ProtectedView.as_view()</span><br></pre></td></tr></table></figure>
+
+<h3 id="CBV-클래스에-직접-장식자-입히기-2-추천"><a href="#CBV-클래스에-직접-장식자-입히기-2-추천" class="headerlink" title="CBV) 클래스에 직접 장식자 입히기 #2 (추천)"></a>CBV) 클래스에 직접 장식자 입히기 #2 (추천)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from django.contrib.auth.decorators import login_required</span><br><span class="line">from django.utils.decorators import method_decorator</span><br><span class="line">from django.views.generic import TempalteView</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 클래스도 장식자 지원함. 클래스를 꾸밀 때, 인스턴스 함수명을 지칭</span><br><span class="line">@method_decorator(login_required, name=&apos;dispatch&apos;) #클래스에서 원하는 함수 클래스이름만 적으면됨 </span><br><span class="line"></span><br><span class="line">class AnotherProtectedView(TemplateView):</span><br><span class="line"> 		template_name = &apos;myapp/secret.html&apos;</span><br><span class="line"> 		</span><br><span class="line">another_protected = AnotherProtectedView.as_view()</span><br></pre></td></tr></table></figure>
+
+<h1 id="Mixin과-django-braces"><a href="#Mixin과-django-braces" class="headerlink" title="Mixin과 django-braces"></a>Mixin과 django-braces</h1><h2 id="Mixins을-통해-여러-CBV를-한번에-조합"><a href="#Mixins을-통해-여러-CBV를-한번에-조합" class="headerlink" title="Mixins을 통해 여러 CBV를 한번에 조합"></a>Mixins을 통해 여러 CBV를 한번에 조합</h2><ul>
+<li>Mixins은 그냥 상속이라고 생각하자</li>
+<li>CBV는 재사용성에 초점을 둔 뷰 <ul>
+<li>기존 패턴을 사용할 경우에는 CBV가 단순하지만, </li>
+<li>새로운 루틴의 뷰를 구현하실 때에는 FBV를 사용하시는 것이 구현이 더 단순해지실 경우 가 많습니다.</li>
+</ul>
+</li>
+<li>파이썬은 다중상속을 지원합니다.</li>
+<li>동일 멤버함수가 여러 CBV에 걸쳐서 구현되었을 경우, MRO (Method Resolution Order) 1 순서대로 호출됩니다. (파이썬 차근차근 시작하기 “클래스 상속과 MRO”참조)</li>
+</ul>
+<h3 id="예시-FBV"><a href="#예시-FBV" class="headerlink" title="예시(FBV)"></a>예시(FBV)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def home_page(request): # 요청이 들어왔을 때</span><br><span class="line">     # 템플릿에서 사용할 인자를 준비하고</span><br><span class="line">     context = &#123;&#125;</span><br><span class="line">     # 템플릿 파일을 선택한 다음</span><br><span class="line">     template_name = &apos;home.html&apos;</span><br><span class="line">     # HttpResponse응답을 생성</span><br><span class="line">     return render(request, template_name, context)</span><br></pre></td></tr></table></figure>
+
+<h3 id="예시-CBV-클래스가-다들-상속되어있다"><a href="#예시-CBV-클래스가-다들-상속되어있다" class="headerlink" title="예시(CBV) (클래스가 다들 상속되어있다)"></a>예시(CBV) (클래스가 다들 상속되어있다)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class TemplateResponseMixin:</span><br><span class="line">     def render_to_response(self, context, **response_kwargs):</span><br><span class="line">     		&apos;HttpResponse 응답 생성&apos;</span><br><span class="line">     </span><br><span class="line">     def get_template_names(self):</span><br><span class="line">    		 &apos;사용할 템플릿 파일 이름 정하기&apos;</span><br><span class="line">     </span><br><span class="line">class ContextMixin:</span><br><span class="line">		 def get_context_data(self, **kwargs):</span><br><span class="line">				 &apos;템플릿에서 사용할 변수목록 만들기&apos;</span><br><span class="line">class View:</span><br><span class="line">    @classmethod</span><br><span class="line">    def as_view(cls, **initkwargs):</span><br><span class="line">			 &apos;뷰 함수를 생성&apos;</span><br><span class="line"> </span><br><span class="line">    def dispatch(self, request, *args, **kwargs):</span><br><span class="line"> 				&apos;Http 요청이 들어오면 호출되어, 요청을 처리&apos;</span><br><span class="line"> 				</span><br><span class="line">class TemplateView(TemplateResponseMixin, ContextMixin, View):</span><br><span class="line">		 def get(self, request, *args, **kwargs):</span><br><span class="line"> 						context = self.get_context_data(**kwargs) # 부모 CBV의 Context 데이터를 받아와서</span><br><span class="line">			 		  return self.render_to_response(context) # HttpResponse 응답 생성</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">#FBV예시와 동일, 여기서부터 위로 분석해보기</span><br><span class="line">class HomePageView(TemplateView):</span><br><span class="line"> 		template_name = &apos;home.html&apos; # get_template_names 함수에서 참조하는 값</span><br><span class="line"> 		</span><br><span class="line"> 		def get_context_data(self, **kwargs):</span><br><span class="line"> 		    context = super().get_context_data(**kwargs)</span><br><span class="line"> 		    context[&apos;name&apos;&#125; = &apos;AskDjango&apos; #이런식으로 템플릿에 전달하는 정보추가 가능</span><br><span class="line"> 		    return context</span><br><span class="line"> 		</span><br><span class="line"># as_view 호출을 통해 뷰 함수 생성</span><br><span class="line">home_page = HomePageView.as_view()</span><br></pre></td></tr></table></figure>
+
+<h2 id="django-views-generic-일반적인-활용에좋음"><a href="#django-views-generic-일반적인-활용에좋음" class="headerlink" title="django.views.generic (일반적인 활용에좋음)"></a>django.views.generic (일반적인 활용에좋음)</h2><p><strong>사용법들은 개발 문서보기</strong></p>
+<p>더 필요한 옵션을 추가하고싶다면 코드를 뜯고 부모, 부모의부모를 super()로 부르고 거기에 추가만 해주면됨</p>
+<h3 id="django-views-generic-base"><a href="#django-views-generic-base" class="headerlink" title="django.views.generic.base"></a>django.views.generic.base</h3><ul>
+<li>ContextMixin</li>
+<li>TemplateResponseMixin</li>
+<li><strong>TemplateView</strong>(TemplateResonseMixin, ContextMixin, View) </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from django.views.generic.base import TemplateView</span><br><span class="line"></span><br><span class="line">class HomePageView(TemplateView):</span><br><span class="line"></span><br><span class="line">     template_name = &apos;home.html&apos;</span><br><span class="line">     def get_context_data(self, **kwargs):</span><br><span class="line">         context = super().get_context_data(**kwargs)</span><br><span class="line">         context[&apos;latest_articles&apos;] = Article.objects.all()[:5]</span><br><span class="line">         return context</span><br></pre></td></tr></table></figure>
+
+<h3 id="django-views-generic-dates"><a href="#django-views-generic-dates" class="headerlink" title="django.views.generic.dates"></a>django.views.generic.dates</h3><ul>
+<li>YearMixin, MonthMixin, DayMixin, WeekMixin -</li>
+<li>BaseDateListView(MultipleObjectMixin, DateMixin, View) </li>
+<li><strong>ArchiveIndexView</strong>(MultipleObjectTemplateResponseMixin, BaseArchiveIndexView) </li>
+<li>BaseYearArchiveView(YearMixin, BaseDateListView) </li>
+<li><strong>YearArchiveView</strong>(MultipleObjectTemplateResponseMixin, BaseYearArchiveView)</li>
+<li>BaseMonthArchiveView(YearMixin, MonthMixin, BaseDateListView) </li>
+<li><strong>MonthArchiveView</strong>(MultipleObjectTemplateResponseMixin, BaseMonthArchiveView) </li>
+<li>BaseWeekArchiveView(YearMixin, WeekMixin, BaseDateListView) </li>
+<li><strong>WeekArchiveView</strong>(MultipleObjectTemplateResponseMixin, BaseWeekArchiveView) </li>
+<li>BaseDayArchiveView(YearMixin, MonthMixin, DayMixin, BaseDateListView) </li>
+<li><strong>DayArchiveView</strong>(MultipleObjectTemplateResponseMixin, BaseDayArchiveView)</li>
+<li><strong>TodayArchiveView</strong>(MultipleObjectTemplateResponseMixin, BaseTodayArchiveView) </li>
+<li>BaseDateDetailView(YearMixin, MonthMixin, DayMixin, DateMixin, BaseDetailView) </li>
+<li><strong>DateDetailView</strong>(SingleObjectTemplateResponseMixin, BaseDateDetailView)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from django.views.generic.dates import ArchiveIndexView, YearArchiveView, MonthArchiveView</span><br><span class="line"></span><br><span class="line">class PostArchiveIndexView(ArchiveIndexView): #모델과 저거 기준으로 정렬됨 </span><br><span class="line">     model = Article</span><br><span class="line">     date_field = &apos;pub_date&apos;</span><br><span class="line">     </span><br><span class="line">class ArticleYearArchiveView(YearArchiveView): #년단위</span><br><span class="line">     queryset = Article.objects.all()</span><br><span class="line">     date_field = &apos;pub_date&apos;</span><br><span class="line">     make_object_list = True</span><br><span class="line">     allow_future = True</span><br><span class="line">     </span><br><span class="line">class ArticleMonthArchiveView(MonthArchiveView): #월단위</span><br><span class="line">     queryset = Article.objects.all()</span><br><span class="line">     date_field = &quot;pub_date&quot;</span><br><span class="line">     allow_future = True</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="django-views-generic-detail"><a href="#django-views-generic-detail" class="headerlink" title="django.views.generic.detail"></a>django.views.generic.detail</h3><ul>
+<li>SingleObjectMixin(ContextMixin)</li>
+<li>BaseDetailView(SingleObjectMixin, View) </li>
+<li>SingleObjectTemplateResponseMixin(TemplateResponseMixin) </li>
+<li><strong>DetailView</strong>(SingleObjectTemplateResponseMixin, BaseDetailView)</li>
+</ul>
+<h3 id="django-views-generic-edit"><a href="#django-views-generic-edit" class="headerlink" title="django.views.generic.edit"></a>django.views.generic.edit</h3><ul>
+<li>FormMixin(ContextMixin) </li>
+<li>ModelFormMixin(FormMixin, SingleObjectMixin) </li>
+<li>BaseFormView(FormMixin, ProcessFormView) </li>
+<li><strong>FormView</strong>(TemplateResponseMixin, BaseFormView)</li>
+<li>BaseCreateView(ModelFormMixin, ProcessFormView)</li>
+<li><strong>CreateView</strong>(SingleObjectTemplateResponseMixin, BaseCreateView)</li>
+<li>BaseUpdateView(ModelFormMixin, ProcessFormView) </li>
+<li><strong>UpdateView</strong>(SingleObjectTemplateResponseMixin, BaseUpdateView) </li>
+<li>DeletionMixin</li>
+<li>BaseDeleteView(DeletionMixin, BaseDetailView) </li>
+<li><strong>DeleteView</strong>(SingleObjectTemplateResponseMixin, BaseDeleteView)</li>
+</ul>
+<h3 id="django-views-generic-list"><a href="#django-views-generic-list" class="headerlink" title="django.views.generic.list"></a>django.views.generic.list</h3><ul>
+<li>MultipleObjectMixin(ContextMixin)</li>
+<li>BaseListView(MultipleObjectMixin, View) </li>
+<li>MultipleObjectTemplateResponseMixin(TemplateResponseMixin)</li>
+<li><strong>ListView</strong>(MultipleObjectTemplateResponseMixin, BaseListView)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from django.views.generic.list import ListView</span><br><span class="line"></span><br><span class="line">class ArticleListView(ListView):</span><br><span class="line">		 model = Article</span><br></pre></td></tr></table></figure>
+
+<h2 id="django-braces-써드파티-Class-Based-View"><a href="#django-braces-써드파티-Class-Based-View" class="headerlink" title="django-braces (써드파티 Class Based View)"></a>django-braces (써드파티 Class Based View)</h2><ul>
+<li><p>LoginRequiredMixin : 로그아웃 시에 로그인URL로 이동 </p>
+<ul>
+<li>장고 1.9부터 django.contrib.auth.mixins.LoginRequiredMixin에 서 동일 기능을 제공 </li>
+</ul>
+</li>
+<li><p>PermissionRequiredMixin(AccessMixin)</p>
+</li>
+<li><p>MultiplePermissionsRequiredMixin(PermissionRequiredMixin)</p>
+</li>
+<li><p>GroupRequiredMixin(AccessMixin)</p>
+</li>
+<li><p>UserPassesTestMixin(AccessMixin) </p>
+</li>
+<li><p>SuperuserRequiredMixin(AccessMixin)</p>
+</li>
+<li><p>AnonymousRequiredMixin(object) </p>
+</li>
+<li><p>StaffuserRequiredMixin(AccessMixin) </p>
+<ul>
+<li>staff 제한 </li>
+</ul>
+</li>
+<li><p><strong>SSLRequiredMixin(object)</strong></p>
+<ul>
+<li>현재 페이지의 https URL로 이동 응답 (301). raise_exception=True 설정으로 404 응답도 가능</li>
+</ul>
+</li>
+<li><p><strong>RecentLoginRequiredMixin</strong>(LoginRequiredMixin</p>
+<ul>
+<li>지정 시간 (디폴트 30분) 내 로그인 여부 체크</li>
+<li>시간을 넘겼다면, 로그아웃/로그인 요청</li>
+</ul>
+</li>
+</ul>
+<h3 id="Form-Mixins"><a href="#Form-Mixins" class="headerlink" title="Form Mixins"></a>Form Mixins</h3><ul>
+<li>CsrfExemptMixin </li>
+<li>UserFormKwargsMixin </li>
+<li>UserKwargModelFormMixin </li>
+<li>SuccessURLRedirectListMixin</li>
+<li>FormValidMessageMixin</li>
+<li>FormInvalidMessageMixin</li>
+<li>FormMessagesMixin</li>
+</ul>
+<p>Other Mixins</p>
+<blockquote>
+<p>• SetHeadlineMixin • StaticContextMixin • SelectRelatedMixin • PrefetchRelatedMixin • JSONResponseMixin • JsonRequestResponseMixin • AjaxResponseMixin • OrderableListMixin • CanonicalSlugDetailMixin • MessageMixin • AllVerbsMixin • HeaderMixin</p>
+</blockquote>
 
     </article>
     <!-- license  -->
@@ -557,6 +696,11 @@ height:50vh;
     <!-- paginator  -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/12/06/class-view2/" title= "클래스뷰 정확히 쓰기 2">
+                    <div class="nextTitle">클래스뷰 정확히 쓰기 2</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -682,7 +826,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#overview"><span class="toc-number">1.</span> <span class="toc-text">overview</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#View"><span class="toc-number">1.1.</span> <span class="toc-text">View?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#함수기반뷰-or-클래스-기반뷰"><span class="toc-number">1.1.1.</span> <span class="toc-text">함수기반뷰 or 클래스 기반뷰</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#참고-클래스의-3가지-함수-형식"><span class="toc-number">1.1.2.</span> <span class="toc-text">참고) 클래스의 3가지 함수 형식</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ClassBasedView-CBV"><span class="toc-number">1.2.</span> <span class="toc-text">ClassBasedView(CBV)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-FBV코드"><span class="toc-number">1.2.1.</span> <span class="toc-text">1) FBV코드</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-동일한-동작을-하는-CBV를-직접-컨셉만-구현"><span class="toc-number">1.2.2.</span> <span class="toc-text">2) 동일한 동작을 하는 CBV를 직접 컨셉만 구현</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-장고-기본제공-CBV-쓰기"><span class="toc-number">1.2.3.</span> <span class="toc-text">3) 장고 기본제공 CBV 쓰기</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#샘플-urls-py"><span class="toc-number">1.3.</span> <span class="toc-text">샘플 urls.py</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CBV는-구현은-복잡해도-가져다-쓸-때는-SO-SIMPLE"><span class="toc-number">1.3.1.</span> <span class="toc-text">CBV는 구현은 복잡해도, 가져다 쓸 때는 SO SIMPLE !!!</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CBV는-코드-재사용성을-높이기-위한-목적"><span class="toc-number">1.4.</span> <span class="toc-text">CBV는 코드 재사용성을 높이기 위한 목적</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#상속을-통해-특정-루틴-재정의-Overriding"><span class="toc-number">2.</span> <span class="toc-text">상속을 통해 특정 루틴 재정의 (Overriding)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#파이썬에서의-Overriding"><span class="toc-number">2.1.</span> <span class="toc-text">파이썬에서의 Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CBV에-Overriding-활용"><span class="toc-number">2.2.</span> <span class="toc-text">CBV에 Overriding 활용</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#view-fn-CBV-as-view-init-kwargs-의-동작방식"><span class="toc-number">2.2.1.</span> <span class="toc-text">view_fn = CBV.as_view(**init_kwargs) 의 동작방식</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#함수로-재구현-스타일1"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">함수로 재구현(스타일1)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#함수로-재구현-스타일2"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">함수로 재구현 (스타일2)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#복잡한-뷰를-여러-함수에-나눠-구현하고-재사용할-때-필요한-루틴만-재정의하기"><span class="toc-number">2.3.</span> <span class="toc-text">복잡한 뷰를 여러 함수에 나눠 구현하고, 재사용할 때 필요한 루틴만 재정의하기</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#재사용이-가능토록-CBV패턴으로-재구현"><span class="toc-number">2.3.1.</span> <span class="toc-text">재사용이 가능토록, CBV패턴으로 재구현</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#활용-1-클래스-변수값만-재정의"><span class="toc-number">2.3.2.</span> <span class="toc-text">활용 1) 클래스 변수값만 재정의</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#각-인스턴스-함수들을-재정의"><span class="toc-number">2.3.3.</span> <span class="toc-text">각 인스턴스 함수들을 재정의</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#정리"><span class="toc-number">2.4.</span> <span class="toc-text">정리</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-메소드별-처리"><span class="toc-number">3.</span> <span class="toc-text">HTTP 메소드별 처리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#다양한-HTTP-메소드"><span class="toc-number">3.1.</span> <span class="toc-text">다양한 HTTP 메소드</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-메소드별-인스턴스함수-지원"><span class="toc-number">3.2.</span> <span class="toc-text">HTTP 메소드별 인스턴스함수 지원</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-ListView에서-head1-요청을-처리할-경우"><span class="toc-number">3.2.1.</span> <span class="toc-text">Example) ListView에서 head1 요청을 처리할 경우</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FBV-스타일로-구현"><span class="toc-number">3.2.2.</span> <span class="toc-text">FBV 스타일로 구현</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#overview"><span class="toc-number">1.</span> <span class="toc-text">overview</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#View"><span class="toc-number">1.1.</span> <span class="toc-text">View?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#함수기반뷰-or-클래스-기반뷰"><span class="toc-number">1.1.1.</span> <span class="toc-text">함수기반뷰 or 클래스 기반뷰</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#참고-클래스의-3가지-함수-형식"><span class="toc-number">1.1.2.</span> <span class="toc-text">참고) 클래스의 3가지 함수 형식</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ClassBasedView-CBV"><span class="toc-number">1.2.</span> <span class="toc-text">ClassBasedView(CBV)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-FBV코드"><span class="toc-number">1.2.1.</span> <span class="toc-text">1) FBV코드</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-동일한-동작을-하는-CBV를-직접-컨셉만-구현"><span class="toc-number">1.2.2.</span> <span class="toc-text">2) 동일한 동작을 하는 CBV를 직접 컨셉만 구현</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-장고-기본제공-CBV-쓰기"><span class="toc-number">1.2.3.</span> <span class="toc-text">3) 장고 기본제공 CBV 쓰기</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#샘플-urls-py"><span class="toc-number">1.3.</span> <span class="toc-text">샘플 urls.py</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CBV는-구현은-복잡해도-가져다-쓸-때는-SO-SIMPLE"><span class="toc-number">1.3.1.</span> <span class="toc-text">CBV는 구현은 복잡해도, 가져다 쓸 때는 SO SIMPLE !!!</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CBV는-코드-재사용성을-높이기-위한-목적"><span class="toc-number">1.4.</span> <span class="toc-text">CBV는 코드 재사용성을 높이기 위한 목적</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#상속을-통해-특정-루틴-재정의-Overriding"><span class="toc-number">2.</span> <span class="toc-text">상속을 통해 특정 루틴 재정의 (Overriding)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#파이썬에서의-Overriding"><span class="toc-number">2.1.</span> <span class="toc-text">파이썬에서의 Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CBV에-Overriding-활용"><span class="toc-number">2.2.</span> <span class="toc-text">CBV에 Overriding 활용</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#view-fn-CBV-as-view-init-kwargs-의-동작방식"><span class="toc-number">2.2.1.</span> <span class="toc-text">view_fn = CBV.as_view(**init_kwargs) 의 동작방식</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#함수로-재구현-스타일1"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">함수로 재구현(스타일1)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#함수로-재구현-스타일2"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">함수로 재구현 (스타일2)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#복잡한-뷰를-여러-함수에-나눠-구현하고-재사용할-때-필요한-루틴만-재정의하기"><span class="toc-number">2.3.</span> <span class="toc-text">복잡한 뷰를 여러 함수에 나눠 구현하고, 재사용할 때 필요한 루틴만 재정의하기</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#재사용이-가능토록-CBV패턴으로-재구현"><span class="toc-number">2.3.1.</span> <span class="toc-text">재사용이 가능토록, CBV패턴으로 재구현</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#활용-1-클래스-변수값만-재정의"><span class="toc-number">2.3.2.</span> <span class="toc-text">활용 1) 클래스 변수값만 재정의</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#각-인스턴스-함수들을-재정의"><span class="toc-number">2.3.3.</span> <span class="toc-text">각 인스턴스 함수들을 재정의</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#정리"><span class="toc-number">2.4.</span> <span class="toc-text">정리</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP-메소드별-처리"><span class="toc-number">3.</span> <span class="toc-text">HTTP 메소드별 처리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#다양한-HTTP-메소드"><span class="toc-number">3.1.</span> <span class="toc-text">다양한 HTTP 메소드</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-메소드별-인스턴스함수-지원"><span class="toc-number">3.2.</span> <span class="toc-text">HTTP 메소드별 인스턴스함수 지원</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-ListView에서-head1-요청을-처리할-경우"><span class="toc-number">3.2.1.</span> <span class="toc-text">Example) ListView에서 head1 요청을 처리할 경우</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FBV-스타일로-구현"><span class="toc-number">3.2.2.</span> <span class="toc-text">FBV 스타일로 구현</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CBV에-장식자-입히기"><span class="toc-number">4.</span> <span class="toc-text">CBV에 장식자 입히기</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#장식자-Decorators"><span class="toc-number">4.1.</span> <span class="toc-text">장식자(Decorators)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FBV-뷰-함수에-장식자-적용"><span class="toc-number">4.1.1.</span> <span class="toc-text">FBV) 뷰 함수에 장식자 적용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CBV-FBV-스타일로-장식자-적"><span class="toc-number">4.1.2.</span> <span class="toc-text">CBV) FBV 스타일로 장식자 적</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CBV-클래스에-직접-장식자-입히기-1"><span class="toc-number">4.1.3.</span> <span class="toc-text">CBV) 클래스에 직접 장식자 입히기 #1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CBV-클래스에-직접-장식자-입히기-2-추천"><span class="toc-number">4.1.4.</span> <span class="toc-text">CBV) 클래스에 직접 장식자 입히기 #2 (추천)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mixin과-django-braces"><span class="toc-number">5.</span> <span class="toc-text">Mixin과 django-braces</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mixins을-통해-여러-CBV를-한번에-조합"><span class="toc-number">5.1.</span> <span class="toc-text">Mixins을 통해 여러 CBV를 한번에 조합</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#예시-FBV"><span class="toc-number">5.1.1.</span> <span class="toc-text">예시(FBV)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#예시-CBV-클래스가-다들-상속되어있다"><span class="toc-number">5.1.2.</span> <span class="toc-text">예시(CBV) (클래스가 다들 상속되어있다)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#django-views-generic-일반적인-활용에좋음"><span class="toc-number">5.2.</span> <span class="toc-text">django.views.generic (일반적인 활용에좋음)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#django-views-generic-base"><span class="toc-number">5.2.1.</span> <span class="toc-text">django.views.generic.base</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#django-views-generic-dates"><span class="toc-number">5.2.2.</span> <span class="toc-text">django.views.generic.dates</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#django-views-generic-detail"><span class="toc-number">5.2.3.</span> <span class="toc-text">django.views.generic.detail</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#django-views-generic-edit"><span class="toc-number">5.2.4.</span> <span class="toc-text">django.views.generic.edit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#django-views-generic-list"><span class="toc-number">5.2.5.</span> <span class="toc-text">django.views.generic.list</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#django-braces-써드파티-Class-Based-View"><span class="toc-number">5.3.</span> <span class="toc-text">django-braces (써드파티 Class Based View)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Form-Mixins"><span class="toc-number">5.3.1.</span> <span class="toc-text">Form Mixins</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -847,9 +991,14 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 14
+        Total : 15
         </div>
         <!-- search  -->
         
@@ -865,7 +1014,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/03</span><a class="archive-post-title" href= "/2019/12/03/class-view1/" >클래스뷰 정확히 쓰기</a>
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2019/12/06/class-view2/" >클래스뷰 정확히 쓰기 2</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href= "/2019/12/03/class-view1/" >클래스뷰 정확히 쓰기 1</a>
         </li>
     
     
@@ -944,6 +1098,8 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Basic"><span class="iconfont-archer">&#xe606;</span>Basic</span>
     
+        <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
+    
         <span class="sidebar-tag-name" data-tags="GDG"><span class="iconfont-archer">&#xe606;</span>GDG</span>
     
         <span class="sidebar-tag-name" data-tags="Google"><span class="iconfont-archer">&#xe606;</span>Google</span>
@@ -952,15 +1108,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Festival"><span class="iconfont-archer">&#xe606;</span>Festival</span>
     
-        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
-    
         <span class="sidebar-tag-name" data-tags="terminal"><span class="iconfont-archer">&#xe606;</span>terminal</span>
     
         <span class="sidebar-tag-name" data-tags="basic"><span class="iconfont-archer">&#xe606;</span>basic</span>
     
-        <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
-    
         <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
+    
+        <span class="sidebar-tag-name" data-tags="프로젝트, 위치,"><span class="iconfont-archer">&#xe606;</span>프로젝트, 위치,</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -997,15 +1151,15 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Django"><span class="iconfont-archer">&#xe60a;</span>Django</span>
     
-        <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
+        <span class="sidebar-category-name" data-categories="Markdown"><span class="iconfont-archer">&#xe60a;</span>Markdown</span>
     
-        <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
+        <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
     
         <span class="sidebar-category-name" data-categories="terminal"><span class="iconfont-archer">&#xe60a;</span>terminal</span>
     
-        <span class="sidebar-category-name" data-categories="Markdown"><span class="iconfont-archer">&#xe60a;</span>Markdown</span>
-    
         <span class="sidebar-category-name" data-categories="git"><span class="iconfont-archer">&#xe60a;</span>git</span>
+    
+        <span class="sidebar-category-name" data-categories="위치서비스프로젝트-19-10"><span class="iconfont-archer">&#xe60a;</span>위치서비스프로젝트-19-10</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
