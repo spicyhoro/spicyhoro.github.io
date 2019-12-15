@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>spicyhoro</title>
+    <title>front-end-prac2 · spicyhoro</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Hello Spicy Horo</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">front-end-prac2</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Hello Spicy Horo</a>
 </header>
@@ -220,24 +231,78 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            front-end-prac2
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Django">Django</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Frontend">Frontend</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Ajax">Ajax</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">539</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/12/15</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,57 +403,133 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/12/15/Devfesjunior/" >
-            
-                <span>한빛소프트 devfest for junior</span>
-        </a>
-        <div class="abstract-content">
-            콘퍼런스
-Devground Junior 2019
-발표 자료와 영상 보는법
-데브그라운드 홈페이지
-발표영상은 공개까지 1~2주 시간 걸립니다
-개발자가 갖추어야 할 9가지 기술 -박종천 삼성전자유투브 보기
-각 프로젝트에 책들보기
-설득할떄 3가지 중요요소 &lt;메세지, 형태(어떤식으로 말을 전달), 말을 하는 사람 (화자)&gt;
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="장고에서의-STATIC-파일-관리"><a href="#장고에서의-STATIC-파일-관리" class="headerlink" title="장고에서의 STATIC 파일 관리"></a>장고에서의 STATIC 파일 관리</h1><h2 id="참고-VOD-요약"><a href="#참고-VOD-요약" class="headerlink" title="참고 VOD 요약"></a>참고 VOD 요약</h2><p>[장고 기본편] “Static Files - CSS/JavaScript 파일을 어떻게 관리해야 할까요?” VOD 링크</p>
+<ul>
+<li>장고는 One Project, Multi App 구조 </li>
+<li>한 App을 위한 static 파일을 app/static/app경로에 두세요.</li>
+<li>프로젝트 전반적으로 사용되는 static 파일을 settings.STATICFILES_DIRS에서 참조 하는 경로에 두세요.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># myproj/settings.py</span><br><span class="line">STATIC_URL = &apos;/static/&apos; # Static 파일 요청에 대한 URL Prefix</span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line"> 		os.path.join(BASE_DIR, &apos;myproj&apos;, &apos;static&apos;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-프로필
-아래한글에서 처음시작, 6년일을 함, 보스턴 스타트업, 블리자드&gt;넥슨&gt;삼성전자
+<h2 id="장고에서의-STATIC-파일-서빙"><a href="#장고에서의-STATIC-파일-서빙" class="headerlink" title="장고에서의 STATIC 파일 서빙"></a>장고에서의 STATIC 파일 서빙</h2><p>장고의 개발서버에서는 정적파일 서빙기능을 지원</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">myproj/static/main.css =&gt; http://localhost:8000/static/main.css 경로로 접근 가능</span><br><span class="line">myproj/static/jquery/jquery-2.2.4.min.js =&gt; http://localhost:8000/static/jquery/</span><br><span class="line">jquery-2.2.4.min.js</span><br><span class="line">myproj/static/bootstrap/3.3.7/css/bootstrap.min.css =&gt; http://localhost:8000/static/</span><br><span class="line">bootstrap/3.3.7/css/bootstrap.min.css</span><br><span class="line">blog/static/blog/style.css =&gt; http://localhost:8000/static/blog/style.css 경로로 접근 가능</span><br><span class="line">blog/static/blog/blog.js =&gt; http://localhost:8000/static/blog/blog.js 경로로 접근 가능</span><br><span class="line">shop/static/shop/shop.js =&gt; http://localhost:8000/static/shop/shop.js 경로로 접근 가능</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">URL을 통해 STATIC 파일이 저장된 파일시스템에 직접 접근하는 것이 아니라, 지정 이름의 STATIC 파일</span><br><span class="line">을 장고의 StaticFiles Finder에서 대신 찾아 그 내용을 읽어서 응답하는 것</span><br></pre></td></tr></table></figure>
 
-Basic Knowledge(C++, OS)
-Understanding for product
-Develop...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/12/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "hanbik">hanbik</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Junior">Junior</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Devfest">Devfest</a>
-    
-</div>
-            
-        </div>
+<h2 id="브라우저-캐시"><a href="#브라우저-캐시" class="headerlink" title="브라우저 캐시"></a>브라우저 캐시</h2><p>브라우저 캐시 기간을 설정해 주면 그 기간 동안은 웹브라우저가 해당 파일을 다시 다운받지 않고 캐싱된 내용을 사용하기 때문에 트래픽이 줄어들고, 속도도 빨라집니다.</p>
+<ul>
+<li><p>Expires 헤더 MDN #doc : 만료일시를 지정</p>
+<ul>
+<li><p>Expires: Wed, 21 Oct 2015 07:28:00 GMT</p>
+</li>
+<li><p>응답 내에 “max-age” 혹은 “s-max-age” directive를 지닌 CacheControl 헤더가 존재할 경우, Expires 헤더는 무시 </p>
+</li>
+</ul>
+</li>
+<li><p>Cache-Control </p>
+</li>
+</ul>
+<h3 id="이후에-해당-파일이-변경되었습니다-그런데-새로운-내용이-반영되지-않습니다"><a href="#이후에-해당-파일이-변경되었습니다-그런데-새로운-내용이-반영되지-않습니다" class="headerlink" title="이후에 해당 파일이 변경되었습니다. 그런데, 새로운 내용이 반영되지 않습니다. ???"></a>이후에 해당 파일이 변경되었습니다. 그런데, 새로운 내용이 반영되지 않습니다. ???</h3><ol>
+<li>유저는 /blog/ 페이지에 방문하면서 브라우저에 /static/blog/style.css 파일이 다운로드되었습니다. 이때 이 파 일이 24시간 동안 브라우저 캐싱이 되어있다고 생각해봅시다.</li>
+<li>그런데, 개발하면서 CSS파일이 변경되었습니다. 파일경로는 바뀌지 않았습니다. 변경된 CSS파일이 유저페이지에 적용되길 원하지만 적용되지 않습니다. 캐싱된 이전 파일에 계속 접근하게 됩니다.</li>
+<li>해결하기<ul>
+<li>방법1) 해당 파일의 캐싱이 만료될 때까지 기다립니다.</li>
+<li>방법2) 브라우저 설정에서 캐싱된 내용을 삭제합니다. 크롬 브라우저에서는 “강력 새로고침” 3을 통해 수행 가능.</li>
+<li>방법3) 해당 STATIC 리소스의 URL을 변경합니다.</li>
+</ul>
+</li>
+</ol>
+<p>Tip: 개발 시에 유용합니다. 윈도우 단축키 Ctrl+Shift+R, 맥 단축키 Command+Shift+R</p>
+<h3 id="클라이언트측-캐싱과-빠른-업데이트를-할려면"><a href="#클라이언트측-캐싱과-빠른-업데이트를-할려면" class="headerlink" title="클라이언트측 캐싱과 빠른 업데이트를 할려면"></a>클라이언트측 캐싱과 빠른 업데이트를 할려면</h3><p>리소스의 URL을 변경하고 콘텐츠가 변경될 때마다 사용자가 새 응답을 다운로드하도록 하면 됩니다.</p>
+<ol>
+<li><p>GET인자 붙이기 : 실제 파일명은 변경하지 않으면서, 브라우저가 인지하는 URL만 변경</p>
+<ul>
+<li><p>개발 시에 유용 • 버전을 숫자로 붙이거나</p>
+<p><a href="http://localhost:8000/static/main.css?v=1" target="_blank" rel="noopener">http://localhost:8000/static/main.css?v=1</a></p>
+</li>
+<li><p>버전을 날짜로 붙이거나</p>
+<p><a href="http://localhost:8000/static/main.css?v=20180618" target="_blank" rel="noopener">http://localhost:8000/static/main.css?v=20180618</a></p>
+</li>
+<li><p>더미로 현재시각의 timestamp을 붙입니다.</p>
+<p><a href="http://localhost:8000/static/main.css?_=1503808011" target="_blank" rel="noopener">http://localhost:8000/static/main.css?_=1503808011</a></p>
+</li>
+</ul>
+</li>
+<li><p>파일명 변경하기</p>
+<ul>
+<li>서비스 배포 시에 유용</li>
+</ul>
+</li>
+</ol>
+<h3 id="커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><a href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기" class="headerlink" title="커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기"></a>커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</h3><p>샘플 경로) myapp/templatetags/static_tags.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">from django import template</span><br><span class="line">from django.conf import settings</span><br><span class="line">from django.templatetags.static import StaticNode</span><br><span class="line"></span><br><span class="line">register = template.Library()</span><br><span class="line"></span><br><span class="line">class VersioningStaticNode(StaticNode):</span><br><span class="line">     def url(self, context):</span><br><span class="line">         url = super().url(context)</span><br><span class="line">         if settings.DEBUG:</span><br><span class="line">             t = str(int(time.time()))</span><br><span class="line">             if &apos;?&apos; not in url:</span><br><span class="line">             		url += &apos;?_=&apos; + t</span><br><span class="line">             else:</span><br><span class="line">             		url += &apos;&amp;_=&apos; + t</span><br><span class="line">         return url</span><br><span class="line"></span><br><span class="line">@register.tag(&apos;static_t&apos;)</span><br><span class="line">def static_t(parser, token):</span><br><span class="line">		 return VersioningStaticNode.handle_token(parser, token)</span><br></pre></td></tr></table></figure>
+
+<h3 id="static-t-태그-활용"><a href="#static-t-태그-활용" class="headerlink" title="static_t 태그 활용"></a>static_t 태그 활용</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static_tags %&#125;</span><br><span class="line">&#123;% static_t &quot;blog/style.css&quot; %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </article>
+    <!-- license  -->
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/12/15/html/" title= "html">
+                    <div class="prevTitle">html</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -473,6 +614,24 @@ Develop...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고에서의-STATIC-파일-관리"><span class="toc-number">1.</span> <span class="toc-text">장고에서의 STATIC 파일 관리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#참고-VOD-요약"><span class="toc-number">1.1.</span> <span class="toc-text">참고 VOD 요약</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고에서의-STATIC-파일-서빙"><span class="toc-number">1.2.</span> <span class="toc-text">장고에서의 STATIC 파일 서빙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#브라우저-캐시"><span class="toc-number">1.3.</span> <span class="toc-text">브라우저 캐시</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#이후에-해당-파일이-변경되었습니다-그런데-새로운-내용이-반영되지-않습니다"><span class="toc-number">1.3.1.</span> <span class="toc-text">이후에 해당 파일이 변경되었습니다. 그런데, 새로운 내용이 반영되지 않습니다. ???</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#클라이언트측-캐싱과-빠른-업데이트를-할려면"><span class="toc-number">1.3.2.</span> <span class="toc-text">클라이언트측 캐싱과 빠른 업데이트를 할려면</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><span class="toc-number">1.3.3.</span> <span class="toc-text">커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static-t-태그-활용"><span class="toc-number">1.3.4.</span> <span class="toc-text">static_t 태그 활용</span></a></li></ol></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -920,6 +1079,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
