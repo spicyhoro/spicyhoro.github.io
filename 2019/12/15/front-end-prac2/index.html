@@ -276,7 +276,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.1k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.2k</span>Reading time: <span class="post-count reading-time">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -444,7 +444,8 @@ height:50vh;
 <h3 id="클라이언트측-캐싱과-빠른-업데이트를-할려면"><a href="#클라이언트측-캐싱과-빠른-업데이트를-할려면" class="headerlink" title="클라이언트측 캐싱과 빠른 업데이트를 할려면"></a>클라이언트측 캐싱과 빠른 업데이트를 할려면</h3><p>리소스의 URL을 변경하고 콘텐츠가 변경될 때마다 사용자가 새 응답을 다운로드하도록 하면 됩니다.</p>
 <ol>
 <li><p>GET인자 붙이기 : 실제 파일명은 변경하지 않으면서, 브라우저가 인지하는 URL만 변경</p>
-<p>개발 시에 유용 • 버전을 숫자로 붙이거나</p>
+<p>개발 시에 유용</p>
+<p>버전을 숫자로 붙이거나 (아래 예시는 get인자로 버전숫자붙임)(새로운 url로 인식되므로 모든 리소스 새롭게 다운받게됨)</p>
 <p><a href="http://localhost:8000/static/main.css?v=1" target="_blank" rel="noopener">http://localhost:8000/static/main.css?v=1</a></p>
 <p>버전을 날짜로 붙이거나</p>
 <p><a href="http://localhost:8000/static/main.css?v=20180618" target="_blank" rel="noopener">http://localhost:8000/static/main.css?v=20180618</a></p>
@@ -455,10 +456,14 @@ height:50vh;
 <p>서비스 배포 시에 유용</p>
 </li>
 </ol>
-<h3 id="커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><a href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기" class="headerlink" title="커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기"></a>커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</h3><p>샘플 경로) myapp/templatetags/static_tags.py</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">from django import template</span><br><span class="line">from django.conf import settings</span><br><span class="line">from django.templatetags.static import StaticNode</span><br><span class="line"></span><br><span class="line">register = template.Library()</span><br><span class="line"></span><br><span class="line">class VersioningStaticNode(StaticNode):</span><br><span class="line">     def url(self, context):</span><br><span class="line">         url = super().url(context)</span><br><span class="line">         if settings.DEBUG:</span><br><span class="line">             t = str(int(time.time()))</span><br><span class="line">             if &apos;?&apos; not in url:</span><br><span class="line">             		url += &apos;?_=&apos; + t</span><br><span class="line">             else:</span><br><span class="line">             		url += &apos;&amp;_=&apos; + t</span><br><span class="line">         return url</span><br><span class="line"></span><br><span class="line">@register.tag(&apos;static_t&apos;)</span><br><span class="line">def static_t(parser, token):</span><br><span class="line">		 return VersioningStaticNode.handle_token(parser, token)</span><br></pre></td></tr></table></figure>
+<h3 id="커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><a href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기" class="headerlink" title="커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기"></a>커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</h3><p>필요 위치 경로) myapp/templatetags/static_tags.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">from django import template</span><br><span class="line">from django.conf import settings</span><br><span class="line">from django.templatetags.static import StaticNode</span><br><span class="line"></span><br><span class="line">register = template.Library()</span><br><span class="line"></span><br><span class="line">class VersioningStaticNode(StaticNode):  #장고에서 기본 지원해주는 템플릿 태그</span><br><span class="line">     def url(self, context):</span><br><span class="line">         url = super().url(context)  #기존 스테틱노드에서 url얻고 </span><br><span class="line">         if settings.DEBUG:  #개발모드 일때만 </span><br><span class="line">             t = str(int(time.time())) #소수점까지 붙는 시간을 int로 정수형반환&gt;문자열로 반환</span><br><span class="line">             if &apos;?&apos; not in url:     #(url안에 ? 없다면)</span><br><span class="line">             		url += &apos;?_=&apos; + t</span><br><span class="line">             else:</span><br><span class="line">             		url += &apos;&amp;_=&apos; + t   #?가 이미있다면 get인자가 이미존재하는것이므로 &amp;_뒤에씀</span><br><span class="line">         return url</span><br><span class="line"></span><br><span class="line">@register.tag(&apos;static_t&apos;)</span><br><span class="line">def static_t(parser, token):</span><br><span class="line">		 return VersioningStaticNode.handle_token(parser, token)</span><br></pre></td></tr></table></figure>
 
-<h3 id="static-t-태그-활용"><a href="#static-t-태그-활용" class="headerlink" title="static_t 태그 활용"></a>static_t 태그 활용</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static_tags %&#125;</span><br><span class="line">&#123;% static_t &quot;blog/style.css&quot; %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">blog/templates/layout</span><br><span class="line"></span><br><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line">&#123;%  block extra_head %&#125;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&#123;%  static &quot;blog/style.css&quot; %&#125;   #경로 반환해줌</span><br><span class="line">&#123;%  endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="static-t-태그-활용"><a href="#static-t-태그-활용" class="headerlink" title="static_t 태그 활용"></a>static_t 태그 활용</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static_tags %&#125;</span><br><span class="line">&#123;% static_t &quot;blog/style.css&quot; %&#125;  #사용법</span><br></pre></td></tr></table></figure>
 
 
 
@@ -483,87 +488,95 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&quot; /&gt;</span><br><span class="line">&lt;script src=&apos;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt; &lt;!-- bootstrap은 jquery에 의존성이 있습니다. --&gt;</span><br><span class="line">&lt;script src=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>안정적인 실서비스 제공을 위해서는 다운로드&amp;서빙을 추천<ul>
+<li><strong>안정적인 실서비스 제공을 위해서는 다운로드&amp;서빙을 추천</strong><ul>
 <li>정적 파일 서빙을 “관리할 수 없는 외부 서비스”에 의존할 경우, 특정 유 저의 해외망 접속이 원활하지 않거나, 해당 서비스 장애일 경우, 의도치 않게 서비스 이용에 차질이 발생하게 됩니다.</li>
 </ul>
 </li>
 </ul>
 <h3 id="직접-다운로드-amp-서빙"><a href="#직접-다운로드-amp-서빙" class="headerlink" title="직접 다운로드&amp;서빙"></a>직접 다운로드&amp;서빙</h3><ul>
-<li>프로젝트 전반적으로 사용될 파일들이므로, filesystem static finder 에서 접근하는 경로에 넣어두고, 버전관리 대상에도 추가<ul>
-<li>“프로젝트/static/“ 경로</li>
-</ul>
-</li>
-</ul>
-<h3 id="자바스크립트-팩키지-관리자를-활용"><a href="#자바스크립트-팩키지-관리자를-활용" class="headerlink" title="자바스크립트 팩키지 관리자를 활용"></a>자바스크립트 팩키지 관리자를 활용</h3><ul>
-<li>bower (deprecated)<ul>
-<li>트위터에서 만든 프론트엔드 전용 팩키지 관리자</li>
-<li>bower_components 디렉토리에 다운로드/저장을(만) 해줍니다.</li>
-</ul>
-</li>
-<li>yarn <ul>
-<li>JavaScript/CSS 팩키지 관리자</li>
-<li>node_moduels 디렉토리에 저장</li>
-</ul>
-</li>
-<li>webpack<ul>
-<li>JavaScript/CSS Bundler</li>
-<li><a href="https://hyunseob.github.io/2017/03/21/webpack2-beginners-guide/" target="_blank" rel="noopener">https://hyunseob.github.io/2017/03/21/webpack2-beginners-guide/</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="Bower-deprecated"><a href="#Bower-deprecated" class="headerlink" title="Bower (deprecated)"></a>Bower (deprecated)</h2><h3 id="먼저-nodejs-설치"><a href="#먼저-nodejs-설치" class="headerlink" title="먼저 nodejs 설치"></a>먼저 nodejs 설치</h3><ul>
-<li><p><a href="https://nodejs.org/ko/download/" target="_blank" rel="noopener">https://nodejs.org/ko/download/</a></p>
-</li>
-<li><p>설치 확인 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">쉘&gt; node --version # nodejs 인터프리터 v8.3.0 </span><br><span class="line"></span><br><span class="line">쉘&gt; npm --version # nodejs 팩키지 매니저 5.3.0</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-</li>
-</ul>
-<h3 id="bower-설치"><a href="#bower-설치" class="headerlink" title="bower 설치"></a>bower 설치</h3><p>Deprecated된 라이브러리이지만, yarn보다는 심플한 컨셉입니다. 한 번 경험해봅시다</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm을 통한 설치 : 쉘&gt; npm install -g bowe</span><br><span class="line"></span><br><span class="line"> homebrew를 통한 설치 : 쉘&gt; brew install bower</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="CSS-JavaScript-라이브러리-설치"><a href="#CSS-JavaScript-라이브러리-설치" class="headerlink" title="CSS/JavaScript 라이브러리 설치"></a>CSS/JavaScript 라이브러리 설치</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower install jquery</span><br><span class="line">bower install &quot;jquery#3.2.1&quot;</span><br></pre></td></tr></table></figure>
-
-<p>bower_components 디렉토리에 다운로드됩니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower uninstall jquery # 혹은 해당 디렉토리를 직접 제거하셔도 됩니다.</span><br><span class="line">쉘&gt; bower list</span><br></pre></td></tr></table></figure>
-
-<h3 id="bower-json"><a href="#bower-json" class="headerlink" title="bower.json"></a>bower.json</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">쉘&gt; bower init 명령을 통해 bower.json 파일 생성 혹은 직접 생성</span><br><span class="line">본 JavaScript/CSS 팩키지를 배포하는 것은 아니기에, 다른 항목은 불필요</span><br><span class="line">&#123;</span><br><span class="line"> &quot;name&quot;: &quot;example&quot;,</span><br><span class="line"> &quot;dependencies&quot;: &#123;</span><br><span class="line"> &quot;jquery&quot;: &quot;~3.2.1&quot;,</span><br><span class="line"> &quot;bootstrap&quot;: &quot;~3.3.7&quot;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Tip: 버전지정 Rule : “~3.2.1”은 “3.2.1” 이상 “3.3.0” 미만을 뜻합니다</p>
-<h3 id="bower-install-명령을-통한-일괄-다운로드"><a href="#bower-install-명령을-통한-일괄-다운로드" class="headerlink" title="bower install 명령을 통한 일괄 다운로드"></a>bower install 명령을 통한 일괄 다운로드</h3><p>bower_components 디렉토리가 생성되며, 그 하위에 다운로드</p>
-<p>생성되는 경로 </p>
+<li><p>프로젝트 전반적으로 사용될 파일들이므로, filesystem static finder 에서 접근하는 경로에 넣어두고, 버전관리 대상에도 추가</p>
 <ul>
-<li>bower.json</li>
-<li>bower_components/ <ul>
-<li>bootstrap/ </li>
-<li>jquery/ </li>
+<li><pre><code># settings.py
+STATIC_URL = &apos;/static/&apos;
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, &apos;askdjango&apos;, &apos;static&apos;),
+]   # 여기에 추가해주면 알아서 관리해줌
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">  - &quot;프로젝트/static/&quot; 경로</span><br><span class="line"></span><br><span class="line">### 자바스크립트 팩키지 관리자를 활용(좋아)</span><br><span class="line"></span><br><span class="line">- bower (deprecated) </span><br><span class="line">  - 트위터에서 만든 프론트엔드 전용 팩키지 관리자</span><br><span class="line">  - bower_components 디렉토리에 다운로드/저장을(만) 해줍니다.</span><br><span class="line">- yarn(추천 기능많음) </span><br><span class="line">  - JavaScript/CSS 팩키지 관리자</span><br><span class="line">  - node_moduels 디렉토리에 저장</span><br><span class="line">- webpack(여러파일 합쳐줌,,. 따라서 yarn과  같이 잘씀)</span><br><span class="line">  - JavaScript/CSS Bundler</span><br><span class="line">  - https://hyunseob.github.io/2017/03/21/webpack2-beginners-guide/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Bower (deprecated)</span><br><span class="line"></span><br><span class="line">### 먼저 nodejs 설치</span><br><span class="line"></span><br><span class="line">- https://nodejs.org/ko/download/</span><br><span class="line"></span><br><span class="line">- 설치 확인</span><br></pre></td></tr></table></figure>
+쉘&gt; node --version # nodejs 인터프리터 v8.3.0 
+</code></pre></li>
 </ul>
+<p>쉘&gt; npm –version # nodejs 팩키지 매니저 5.3.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### bower 설치</span><br><span class="line"></span><br><span class="line">Deprecated된 라이브러리이지만, yarn보다는 심플한 컨셉입니다. 한 번 경험해봅시다</span><br></pre></td></tr></table></figure>
+<p>npm을 통한 설치 : 쉘&gt; npm install -g bowe</p>
+<p>homebrew를 통한 설치 : 쉘&gt; brew install bower</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### CSS/JavaScript 라이브러리 설치</span><br></pre></td></tr></table></figure>
+<p>bower install jquery<br>bower install “jquery#3.2.1” </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bower_components 디렉토리에 다운로드됩니다.</span><br></pre></td></tr></table></figure>
+<p>bower uninstall jquery # 혹은 해당 디렉토리를 직접 제거하셔도 됩니다.<br>쉘&gt; bower list</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### bower.json</span><br></pre></td></tr></table></figure>
+<p>쉘&gt; bower init 명령을 통해 bower.json 파일 생성 혹은 직접 생성<br>본 JavaScript/CSS 팩키지를 배포하는 것은 아니기에, 다른 항목은 불필요<br>{<br>“name”: “example”,<br>“dependencies”: {<br>“jquery”: “<del>3.2.1”,<br>“bootstrap”: “</del>3.3.7”<br>}<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Tip: 버전지정 Rule : &quot;~3.2.1&quot;은 &quot;3.2.1&quot; 이상 &quot;3.3.0&quot; 미만을 뜻합니다</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### bower install 명령을 통한 일괄 다운로드(현재창에서 명령시)</span><br><span class="line"></span><br><span class="line">bower_components 디렉토리가 생성되며, 그 하위에 다운로드</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">생성되는 경로 </span><br><span class="line"></span><br><span class="line">- bower.json</span><br><span class="line">- bower_components/ </span><br><span class="line">  - bootstrap/ </span><br><span class="line">  - jquery/ </span><br><span class="line"></span><br><span class="line">ex) 다운로드 예시 </span><br><span class="line"></span><br><span class="line">- bower_components/bootstrap/dist/js/bootstrap.min.js 경로</span><br><span class="line">- bower_components/bootstrap/dist/css/bootstrap.min.css 경로 </span><br><span class="line">- bower_components/jquery/dist/jquery.min.js 경로</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 장고와 연계</span><br><span class="line"></span><br><span class="line">- 따로 생성한 bower_components 경로를 settings.STATICFILES_DIRS 경로에 추가</span><br></pre></td></tr></table></figure>
+<h1 id="myproj-settings-py"><a href="#myproj-settings-py" class="headerlink" title="myproj/settings.py"></a>myproj/settings.py</h1><p>STATICFILES_DIRS = [<br>   os.path.join(BASE_DIR, ‘myproj’, ‘static’),<br>   os.path.join(BASE_DIR, ‘bower_components’), # 추가<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- bower_components 하위 경로를 참조하여, 템플릿에서 직접 참조</span><br><span class="line"></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+
+실전예시
+#프로젝트/templates/layout.html
+{% load static %}
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+이것을 변경
+<script src="{% static "jquery/dis/jquery.min.js" %}"></script>
+<script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
+
+결과값 (페이지 소스 보기)
+
+    <script src="/static/jquery/dis/jquery.min.js"></script>
+    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### .gitignore</span><br><span class="line"></span><br><span class="line">bower.json 파일만 버전관리대상에 넣어두고, bower_components는 배포 시에 매번 새롭게 다운받습니다.</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>vi ./.gitignore</p>
+</blockquote>
+</blockquote>
+</blockquote>
 </li>
 </ul>
-<p>ex) 다운로드 예시 </p>
-<ul>
-<li>bower_components/bootstrap/dist/js/bootstrap.min.js 경로</li>
-<li>bower_components/bootstrap/dist/css/bootstrap.min.css 경로 </li>
-<li>bower_components/jquery/dist/jquery.min.js 경로</li>
-</ul>
-<h3 id="장고와-연계"><a href="#장고와-연계" class="headerlink" title="장고와 연계"></a>장고와 연계</h3><ul>
-<li>따로 생성한 bower_components 경로를 settings.STATICFILES_DIRS 경로에 추가</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># myproj/settings.py</span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line"> os.path.join(BASE_DIR, &apos;myproj&apos;, &apos;static&apos;),</span><br><span class="line"> os.path.join(BASE_DIR, &apos;bower_components&apos;), # 추가</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>안에<br>bower_components 추가</p>
+<pre><code>
 
-<ul>
-<li>bower_components 하위 경로를 참조하여, 템플릿에서 직접 참조</li>
-</ul>
-<h3 id="gitignore"><a href="#gitignore" class="headerlink" title=".gitignore"></a>.gitignore</h3><p>bower.json 파일만 버전관리대상에 넣어두고, bower_components는 배포 시에 매번 새롭게 다운받습니다.</p>
-<h3 id="차후-에피소드에서-yarn과-webpack에-대해서-살펴보겠습니다"><a href="#차후-에피소드에서-yarn과-webpack에-대해서-살펴보겠습니다" class="headerlink" title="차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다."></a>차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다.</h3>
+
+### 차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</code></pre>
     </article>
     <!-- license  -->
     
@@ -695,7 +708,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고에서의-STATIC-파일-관리"><span class="toc-number">1.</span> <span class="toc-text">장고에서의 STATIC 파일 관리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#참고-VOD-요약"><span class="toc-number">1.1.</span> <span class="toc-text">참고 VOD 요약</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고에서의-STATIC-파일-서빙"><span class="toc-number">1.2.</span> <span class="toc-text">장고에서의 STATIC 파일 서빙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#브라우저-캐시"><span class="toc-number">1.3.</span> <span class="toc-text">브라우저 캐시</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#이후에-해당-파일이-변경되었습니다-그런데-새로운-내용이-반영되지-않습니다"><span class="toc-number">1.3.1.</span> <span class="toc-text">이후에 해당 파일이 변경되었습니다. 그런데, 새로운 내용이 반영되지 않습니다. ???</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#클라이언트측-캐싱과-빠른-업데이트를-할려면"><span class="toc-number">1.3.2.</span> <span class="toc-text">클라이언트측 캐싱과 빠른 업데이트를 할려면</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><span class="toc-number">1.3.3.</span> <span class="toc-text">커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static-t-태그-활용"><span class="toc-number">1.3.4.</span> <span class="toc-text">static_t 태그 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#다양한-STATIC-리소스"><span class="toc-number">1.3.5.</span> <span class="toc-text">다양한 STATIC 리소스</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDN-배포판-활용"><span class="toc-number">1.3.6.</span> <span class="toc-text">CDN 배포판 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#직접-다운로드-amp-서빙"><span class="toc-number">1.3.7.</span> <span class="toc-text">직접 다운로드&amp;서빙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#자바스크립트-팩키지-관리자를-활용"><span class="toc-number">1.3.8.</span> <span class="toc-text">자바스크립트 팩키지 관리자를 활용</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bower-deprecated"><span class="toc-number">1.4.</span> <span class="toc-text">Bower (deprecated)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#먼저-nodejs-설치"><span class="toc-number">1.4.1.</span> <span class="toc-text">먼저 nodejs 설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bower-설치"><span class="toc-number">1.4.2.</span> <span class="toc-text">bower 설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-JavaScript-라이브러리-설치"><span class="toc-number">1.4.3.</span> <span class="toc-text">CSS/JavaScript 라이브러리 설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bower-json"><span class="toc-number">1.4.4.</span> <span class="toc-text">bower.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bower-install-명령을-통한-일괄-다운로드"><span class="toc-number">1.4.5.</span> <span class="toc-text">bower install 명령을 통한 일괄 다운로드</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#장고와-연계"><span class="toc-number">1.4.6.</span> <span class="toc-text">장고와 연계</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gitignore"><span class="toc-number">1.4.7.</span> <span class="toc-text">.gitignore</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#차후-에피소드에서-yarn과-webpack에-대해서-살펴보겠습니다"><span class="toc-number">1.4.8.</span> <span class="toc-text">차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다.</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고에서의-STATIC-파일-관리"><span class="toc-number">1.</span> <span class="toc-text">장고에서의 STATIC 파일 관리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#참고-VOD-요약"><span class="toc-number">1.1.</span> <span class="toc-text">참고 VOD 요약</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고에서의-STATIC-파일-서빙"><span class="toc-number">1.2.</span> <span class="toc-text">장고에서의 STATIC 파일 서빙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#브라우저-캐시"><span class="toc-number">1.3.</span> <span class="toc-text">브라우저 캐시</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#이후에-해당-파일이-변경되었습니다-그런데-새로운-내용이-반영되지-않습니다"><span class="toc-number">1.3.1.</span> <span class="toc-text">이후에 해당 파일이 변경되었습니다. 그런데, 새로운 내용이 반영되지 않습니다. ???</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#클라이언트측-캐싱과-빠른-업데이트를-할려면"><span class="toc-number">1.3.2.</span> <span class="toc-text">클라이언트측 캐싱과 빠른 업데이트를 할려면</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><span class="toc-number">1.3.3.</span> <span class="toc-text">커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static-t-태그-활용"><span class="toc-number">1.3.4.</span> <span class="toc-text">static_t 태그 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#다양한-STATIC-리소스"><span class="toc-number">1.3.5.</span> <span class="toc-text">다양한 STATIC 리소스</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDN-배포판-활용"><span class="toc-number">1.3.6.</span> <span class="toc-text">CDN 배포판 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#직접-다운로드-amp-서빙"><span class="toc-number">1.3.7.</span> <span class="toc-text">직접 다운로드&amp;서빙</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#myproj-settings-py"><span class="toc-number">2.</span> <span class="toc-text">myproj/settings.py</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
