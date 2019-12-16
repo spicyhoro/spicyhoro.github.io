@@ -416,7 +416,7 @@ height:50vh;
 <h2 id="장고에서의-STATIC-파일-서빙"><a href="#장고에서의-STATIC-파일-서빙" class="headerlink" title="장고에서의 STATIC 파일 서빙"></a>장고에서의 STATIC 파일 서빙</h2><p>장고의 개발서버에서는 정적파일 서빙기능을 지원</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">myproj/static/main.css =&gt; http://localhost:8000/static/main.css 경로로 접근 가능</span><br><span class="line">myproj/static/jquery/jquery-2.2.4.min.js =&gt; http://localhost:8000/static/jquery/</span><br><span class="line">jquery-2.2.4.min.js</span><br><span class="line">myproj/static/bootstrap/3.3.7/css/bootstrap.min.css =&gt; http://localhost:8000/static/</span><br><span class="line">bootstrap/3.3.7/css/bootstrap.min.css</span><br><span class="line">blog/static/blog/style.css =&gt; http://localhost:8000/static/blog/style.css 경로로 접근 가능</span><br><span class="line">blog/static/blog/blog.js =&gt; http://localhost:8000/static/blog/blog.js 경로로 접근 가능</span><br><span class="line">shop/static/shop/shop.js =&gt; http://localhost:8000/static/shop/shop.js 경로로 접근 가능</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">URL을 통해 STATIC 파일이 저장된 파일시스템에 직접 접근하는 것이 아니라, 지정 이름의 STATIC 파일</span><br><span class="line">을 장고의 StaticFiles Finder에서 대신 찾아 그 내용을 읽어서 응답하는 것</span><br></pre></td></tr></table></figure>
 
-<h2 id="브라우저-캐시"><a href="#브라우저-캐시" class="headerlink" title="브라우저 캐시"></a>브라우저 캐시</h2><p>브라우저 캐시 기간을 설정해 주면 그 기간 동안은 웹브라우저가 해당 파일을 다시 다운받지 않고 캐싱된 내용을 사용하기 때문에 트래픽이 줄어들고, 속도도 빨라집니다.</p>
+<h2 id="브라우저-캐시"><a href="#브라우저-캐시" class="headerlink" title="브라우저 캐시"></a>브라우저 캐시</h2><p>브라우저 캐시 기간을 설정해 주면(header에서설정) 그 기간 동안은 웹브라우저가 해당 파일을 다시 다운받지 않고 캐싱된 내용을 사용하기 때문에 트래픽이 줄어들고, 속도도 빨라집니다.</p>
 <ul>
 <li><p>Expires 헤더 MDN #doc : 만료일시를 지정</p>
 <ul>
@@ -440,7 +440,7 @@ height:50vh;
 <p>​    방법3) 해당 STATIC 리소스의 URL을 변경합니다.</p>
 </li>
 </ol>
-<p>Tip: 개발 시에 유용합니다. 윈도우 단축키 Ctrl+Shift+R, 맥 단축키 Command+Shift+R</p>
+<p>Tip: 방법2)개발 시에 유용합니다. 윈도우 단축키 Ctrl+Shift+R, 맥 단축키 Command+Shift+R (개발자도구띄어놓은상황에서)</p>
 <h3 id="클라이언트측-캐싱과-빠른-업데이트를-할려면"><a href="#클라이언트측-캐싱과-빠른-업데이트를-할려면" class="headerlink" title="클라이언트측 캐싱과 빠른 업데이트를 할려면"></a>클라이언트측 캐싱과 빠른 업데이트를 할려면</h3><p>리소스의 URL을 변경하고 콘텐츠가 변경될 때마다 사용자가 새 응답을 다운로드하도록 하면 됩니다.</p>
 <ol>
 <li><p>GET인자 붙이기 : 실제 파일명은 변경하지 않으면서, 브라우저가 인지하는 URL만 변경</p>
@@ -919,6 +919,12 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 19
@@ -1012,17 +1018,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/henoy-tips/" >기타 꿀팁</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/django-basic/" >django-basic (장고 개념 기초)</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/git-memo/" >git memo</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/henoy-tips/" >기타 꿀팁</a>
         </li>
     
     
@@ -1039,13 +1045,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="ClassView"><span class="iconfont-archer">&#xe606;</span>ClassView</span>
     
-        <span class="sidebar-tag-name" data-tags="Basic"><span class="iconfont-archer">&#xe606;</span>Basic</span>
-    
         <span class="sidebar-tag-name" data-tags="hanbik"><span class="iconfont-archer">&#xe606;</span>hanbik</span>
     
         <span class="sidebar-tag-name" data-tags="Junior"><span class="iconfont-archer">&#xe606;</span>Junior</span>
     
         <span class="sidebar-tag-name" data-tags="Devfest"><span class="iconfont-archer">&#xe606;</span>Devfest</span>
+    
+        <span class="sidebar-tag-name" data-tags="Basic"><span class="iconfont-archer">&#xe606;</span>Basic</span>
     
         <span class="sidebar-tag-name" data-tags="GDG"><span class="iconfont-archer">&#xe606;</span>GDG</span>
     
@@ -1057,13 +1063,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Ajax"><span class="iconfont-archer">&#xe606;</span>Ajax</span>
     
-        <span class="sidebar-tag-name" data-tags="Git"><span class="iconfont-archer">&#xe606;</span>Git</span>
-    
         <span class="sidebar-tag-name" data-tags="Terminal"><span class="iconfont-archer">&#xe606;</span>Terminal</span>
     
-        <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
+        <span class="sidebar-tag-name" data-tags="Git"><span class="iconfont-archer">&#xe606;</span>Git</span>
     
         <span class="sidebar-tag-name" data-tags="프로젝트"><span class="iconfont-archer">&#xe606;</span>프로젝트</span>
+    
+        <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1104,13 +1110,13 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Frontend"><span class="iconfont-archer">&#xe60a;</span>Frontend</span>
     
-        <span class="sidebar-category-name" data-categories="Markdown"><span class="iconfont-archer">&#xe60a;</span>Markdown</span>
-    
         <span class="sidebar-category-name" data-categories="Terminal"><span class="iconfont-archer">&#xe60a;</span>Terminal</span>
+    
+        <span class="sidebar-category-name" data-categories="Git"><span class="iconfont-archer">&#xe60a;</span>Git</span>
     
         <span class="sidebar-category-name" data-categories="Project"><span class="iconfont-archer">&#xe60a;</span>Project</span>
     
-        <span class="sidebar-category-name" data-categories="Git"><span class="iconfont-archer">&#xe60a;</span>Git</span>
+        <span class="sidebar-category-name" data-categories="Markdown"><span class="iconfont-archer">&#xe60a;</span>Markdown</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
