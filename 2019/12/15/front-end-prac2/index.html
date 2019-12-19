@@ -276,7 +276,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.2k</span>Reading time: <span class="post-count reading-time">7 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2.8k</span>Reading time: <span class="post-count reading-time">17 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -413,7 +413,7 @@ height:50vh;
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># myproj/settings.py</span><br><span class="line">STATIC_URL = &apos;/static/&apos; # Static 파일 요청에 대한 URL Prefix</span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line"> 		os.path.join(BASE_DIR, &apos;myproj&apos;, &apos;static&apos;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
-<h2 id="장고에서의-STATIC-파일-서빙"><a href="#장고에서의-STATIC-파일-서빙" class="headerlink" title="장고에서의 STATIC 파일 서빙"></a>장고에서의 STATIC 파일 서빙</h2><p>장고의 개발서버에서는 정적파일 서빙기능을 지원</p>
+<h2 id="장고에서의-STATIC-파일-서빙"><a href="#장고에서의-STATIC-파일-서빙" class="headerlink" title="장고에서의 STATIC 파일 서빙"></a>장고에서의 STATIC 파일 서빙</h2><p>장고의 개발서버에서</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">myproj/static/main.css =&gt; http://localhost:8000/static/main.css 경로로 접근 가능</span><br><span class="line">myproj/static/jquery/jquery-2.2.4.min.js =&gt; http://localhost:8000/static/jquery/</span><br><span class="line">jquery-2.2.4.min.js</span><br><span class="line">myproj/static/bootstrap/3.3.7/css/bootstrap.min.css =&gt; http://localhost:8000/static/</span><br><span class="line">bootstrap/3.3.7/css/bootstrap.min.css</span><br><span class="line">blog/static/blog/style.css =&gt; http://localhost:8000/static/blog/style.css 경로로 접근 가능</span><br><span class="line">blog/static/blog/blog.js =&gt; http://localhost:8000/static/blog/blog.js 경로로 접근 가능</span><br><span class="line">shop/static/shop/shop.js =&gt; http://localhost:8000/static/shop/shop.js 경로로 접근 가능</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">URL을 통해 STATIC 파일이 저장된 파일시스템에 직접 접근하는 것이 아니라, 지정 이름의 STATIC 파일</span><br><span class="line">을 장고의 StaticFiles Finder에서 대신 찾아 그 내용을 읽어서 응답하는 것</span><br></pre></td></tr></table></figure>
 
 <h2 id="브라우저-캐시"><a href="#브라우저-캐시" class="headerlink" title="브라우저 캐시"></a>브라우저 캐시</h2><p>브라우저 캐시 기간을 설정해 주면(header에서설정) 그 기간 동안은 웹브라우저가 해당 파일을 다시 다운받지 않고 캐싱된 내용을 사용하기 때문에 트래픽이 줄어들고, 속도도 빨라집니다.</p>
@@ -459,11 +459,15 @@ height:50vh;
 <h3 id="커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><a href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기" class="headerlink" title="커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기"></a>커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</h3><p>필요 위치 경로) myapp/templatetags/static_tags.py</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import time</span><br><span class="line">from django import template</span><br><span class="line">from django.conf import settings</span><br><span class="line">from django.templatetags.static import StaticNode</span><br><span class="line"></span><br><span class="line">register = template.Library()</span><br><span class="line"></span><br><span class="line">class VersioningStaticNode(StaticNode):  #장고에서 기본 지원해주는 템플릿 태그</span><br><span class="line">     def url(self, context):</span><br><span class="line">         url = super().url(context)  #기존 스테틱노드에서 url얻고 </span><br><span class="line">         if settings.DEBUG:  #개발모드 일때만 </span><br><span class="line">             t = str(int(time.time())) #소수점까지 붙는 시간을 int로 정수형반환&gt;문자열로 반환</span><br><span class="line">             if &apos;?&apos; not in url:     #(url안에 ? 없다면)</span><br><span class="line">             		url += &apos;?_=&apos; + t</span><br><span class="line">             else:</span><br><span class="line">             		url += &apos;&amp;_=&apos; + t   #?가 이미있다면 get인자가 이미존재하는것이므로 &amp;_뒤에씀</span><br><span class="line">         return url</span><br><span class="line"></span><br><span class="line">@register.tag(&apos;static_t&apos;)</span><br><span class="line">def static_t(parser, token):</span><br><span class="line">		 return VersioningStaticNode.handle_token(parser, token)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">blog/templates/layout</span><br><span class="line"></span><br><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line">&#123;%  block extra_head %&#125;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&#123;%  static &quot;blog/style.css&quot; %&#125;   #경로 반환해줌</span><br><span class="line">&#123;%  endblock %&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="static-t-태그-활용"><a href="#static-t-태그-활용" class="headerlink" title="static_t 태그 활용"></a>static_t 태그 활용</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static_tags %&#125;</span><br><span class="line">&#123;% static_t &quot;blog/style.css&quot; %&#125;  #사용법</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">blog/templates/layout</span><br><span class="line"></span><br><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line">&#123;%  block extra_head %&#125;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&#123;%  static &quot;blog/style.css&quot; %&#125;   #경로 반환해줌</span><br><span class="line">&#123;%  endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="static-t-태그-활용"><a href="#static-t-태그-활용" class="headerlink" title="static_t 태그 활용"></a>static_t 태그 활용</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% load static_tags %&#125;</span><br><span class="line">&#123;% static_t &quot;blog/style.css&quot; %&#125;  #사용법</span><br><span class="line"></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -519,18 +523,19 @@ STATICFILES_DIR = [
 <h1 id="myproj-settings-py"><a href="#myproj-settings-py" class="headerlink" title="myproj/settings.py"></a>myproj/settings.py</h1><p>STATICFILES_DIRS = [<br>   os.path.join(BASE_DIR, ‘myproj’, ‘static’),<br>   os.path.join(BASE_DIR, ‘bower_components’), # 추가<br>]</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- bower_components 하위 경로를 참조하여, 템플릿에서 직접 참조</span><br><span class="line"></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
 
+
 실전예시
 #프로젝트/templates/layout.html
 {% load static %}
 
 <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 이것을 변경
-<script src="{% static "jquery/dis/jquery.min.js" %}"></script>
+<script src="{% static "jquery/dist/jquery.min.js" %}"></script>
 <script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
 
 결과값 (페이지 소스 보기)
 
-    <script src="/static/jquery/dis/jquery.min.js"></script>
+    <script src="/static/jquery/dist/jquery.min.js"></script>
     <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
 
 
@@ -548,35 +553,334 @@ STATICFILES_DIR = [
 </li>
 </ul>
 <p>안에<br>bower_components 추가</p>
-<pre><code>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다.</span><br><span class="line"></span><br><span class="line">## 배포는 지금까지 배운것이 거의 기본 전부</span><br><span class="line"></span><br><span class="line"># Ajax with Django 1</span><br><span class="line"></span><br><span class="line">## 코드 구현</span><br><span class="line"></span><br><span class="line">- List Pagination </span><br><span class="line"></span><br><span class="line">  - HTML만을 통한 페이징 처리</span><br><span class="line"></span><br><span class="line">  - Ajax를 통한 페이징 처리</span><br><span class="line">- 뷰에서의 응답 포맷: HTML or JSON</span><br><span class="line">- 무한 스크롤 (Infinite Scroll)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### List Pagination</span><br><span class="line"></span><br><span class="line">- List 뷰에서의 페이징 처리 : ListView CBV에서 paginate_by 인자를 지정하면, 페이징 처리를 해줍니다.</span><br><span class="line">  - 관련 context data : paginator, page_obj, is_paginated</span><br></pre></td></tr></table></figure>
 
 
-### 차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다.
+from django.views.generic import ListView
+
+class PostListView(ListView):
+     model = Post
+     paginate_by = 10 # 페이징 처리가 필요할 때, 지정
+
+페이지 이전 다음 만들기
+{% if is_paginated %}
+     {% if page_obj.has_previous %}
+     			<a href="?page={{ page_obj.previous_page_number }}">이전</a>
+     {% endif %}
+     {{ page_obj.number }} 페이지
+     {% if page_obj.has_next %}
+     			<a href="?page={{ page_obj.next_page_number }}">다음</a>
+     {% endif %}
+{% endif %}
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+#blog/templates/index.html
+
+{% extends "blog/layout.html" %}
+
+{%  block extra_body %}
+<script>
+
+$(function () {
+    $('#page-2-btn').click(function () {
+        $.get('?page=2')
+            .done(function(html) {
+                console.log(html);
+                $('#post-list-wrapper').html(html); #id가 이것인 html을 다 바꿥
+            })
+            .fail(function() {
+                console.log('fail');
+            })
+            .always(function () {
+                console.log('always');
+            });
+        return false;
+
+    });
+});
+</script>
+
+#blog/views.py
+
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/index.html'
+    paginate_by = 2
+
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return ['blog/_post_list.html']
+        return ['blog/index.html']
+
+이렇게 투가를 해줘야지 ajax일때는 따로 빼놓은 _post_list.html이 html로 전달되어서
+layout은 안바뀌고 필요한 내용만 바뀌는 것을 알수있다.
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">참고 강의 :</span><br><span class="line"></span><br><span class="line">&gt; &quot;클래스 기반 뷰, 잘 알고 쓰기&quot; 코스의 &quot;Generic CBV View - Display/Date&quot; 에피소드 참고</span><br><span class="line">&gt;</span><br><span class="line">&gt; django-bootstrap3 라이브러리 내 bootstrap_pagination 템플릿 태그 #src 참고</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 브라우저 히스토리 조작하기</span><br><span class="line"></span><br><span class="line">페이지 전환없이 URL만 조작하기 (예를 들면,즉 url에 지금 ?page=2를 로딩없이 붙일수있다.)</span><br><span class="line"></span><br><span class="line">HTML5, history객체의 pushState를 활용</span><br><span class="line"></span><br><span class="line">따라서 ajax로 이동후 url도 수정해주고싶은경우 사용</span><br></pre></td></tr></table></figure>
+<p>var state_obj = {}; // pushState 후에 history.state로 접근 가능<br>var title = ‘’;<br>var url = “?page=2”; // 이동할 URL<br>history.pushState(state_obj, title, url);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 응답포맷</span><br><span class="line"></span><br><span class="line">브라우저에서는 HTML 포맷의 데이터가 필요합니다.</span><br><span class="line"></span><br><span class="line">1) HTML 포맷을 서버에서 만들어서 응답으로 주거나</span><br></pre></td></tr></table></figure>
+<p>def my_view_fn_1(request):</p>
+<pre><code>response = render(request, &apos;myapp/my_view_fn_1.html&apos;, {
+&apos;post_list&apos;: Post.objects.all(),
+})
+return response</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2) __서버에서 Raw 데이터 응답을 하면 (주로 JSON포맷), 웹프론트엔드 JavaScript 단에서 이를 HTML포맷으로 변환__</span><br></pre></td></tr></table></figure>
+<p>from django.http import JsonResponse</p>
+<p>def my_view_fn_2(request):<br>     qs = Post.objects.all()</p>
+<pre><code># list comprehension 문법을 통해, 수동 직렬화
+post_list = [
+    {&apos;id&apos;: post.id, &apos;title&apos;: post.title }
+    for post in qs]
+
+return JsonResponse(post_list, safe=False) # safe=True일 때에는 dict타입만 받고, 아닐 경우 TypeError 예외 발생
+
+#jsonresponse는 직렬화에서 qs를 문자열로 변환해야되는 룰을 알지못해</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### JSON응답을 하기 위해서는, JSON 직렬화가 필요</span><br><span class="line"></span><br><span class="line">ex) QuerySet/Model 객체를 list/tuple/dict으로 변환</span><br><span class="line"></span><br><span class="line">- 직접 직렬화 코딩을 하거나</span><br><span class="line">- django-rest-framework 활용</span><br><span class="line">- 아래 예시 사용하기전에 serializers설치후 settings.py에 추가</span><br><span class="line">- pip3 install djangorestframework</span><br></pre></td></tr></table></figure>
+<h1 id="myapp-serializers-py"><a href="#myapp-serializers-py" class="headerlink" title="myapp/serializers.py"></a>myapp/serializers.py</h1><p>from rest_framework.serializers import ModelSerializer</p>
+<p>class PostSerializer(ModelSerializer): # Django Form/ModelForm과 유사<br>     class Meta:<br>         model = Post<br>         fields = ‘<strong>all</strong>‘</p>
+<h1 id="myapp-views-py"><a href="#myapp-views-py" class="headerlink" title="myapp/views.py"></a>myapp/views.py</h1><p>from django.http import HttpResponse<br>from rest_framework.renderers import JSONRenderer<br>from .serializers import PostSerializer</p>
+<p>def post_list(request):<br>     qs = Post.objects.all()<br>     serializer = PostSerializer(qs, many=True)<br>     json_utf8_string = JSONRenderer().render(serializer.data)<br>     # return HttpResponse(json_utf8_string) # Content-Type헤더가 text/html; charset=utf-8 로 디폴트 지정<br>     return HttpResponse(json_utf8_string, content_type=’application/json; charset=utf8’) # 커스텀 지정</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Tip &gt;&gt;&gt;curl -i  http://localhost:8000/post.json/ </span><br><span class="line"></span><br><span class="line">해보면 헤드정보 볼수있음</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Ajax HTTP 요청 여부 판단</span><br><span class="line"></span><br><span class="line">- Ajax 요청에는 X-Requested-With헤더에 &quot;XMLHttpRequest&quot;값이 전달</span><br><span class="line">- django 뷰에서는 request.is_ajax()로 판단</span><br></pre></td></tr></table></figure>
+<p>class PostListView(ListView):<br>     def render_to_response(self, context):<br>         # Ajax요청이 아니면, 템플릿 응답을 하고<br>         if not self.request.is_ajax():<br>                     return super().render_to_response(context)</p>
+<pre><code># Ajax요청일 경우에는 JSON응답을 하겠습니다.
+qs = context[&apos;post_list&apos;]
+serializer = PostSerializer(qs, many=True)
+json_utf8_string = JSONRenderer().render(serializer.data)
+return HttpResponse(json_utf8_string, content_type=&apos;application/json; charset=utf8&apos;) # 커스텀 지정</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[tip](https://github.com/django/django/blob/1.11.5/django/http/request.py#L214)</span><br><span class="line"></span><br><span class="line">### django-rest-framework 간단 활용</span><br></pre></td></tr></table></figure>
+
+
+# myapp/api.py
+from rest_framework import generics
+from rest_framework.pagination import PageNumberPagination
+
+class PostPagination(PageNumberPagination):
+		 page_size = 10
+		 
+class PostListAPIView(generics.ListAPIView): # CBV
+     queryset = Post.objects.all()
+     serializer_class = PostSerializer
+     pagination_class = PostPagination
+     
+     
+urlpatterns = [
+		 url(r'^posts/$', PostListApiView.as_view(), name='post_list'),
+]
+
+# myapp/urls.py
+from . import api
+
+urlpatterns = [
+     # 추가
+     url(r'^api/', include('myapp.api', namespace='api')),
+]
+# include라고 했으면 당연히 그 파일안에 urlpatterns가 선언이 되어있어야함.
+# 위설정끝나면 http://localhost:8000/api/v1/posts.json/?format=json로 받아볼수있다.
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Infinite Scroll</span><br><span class="line"></span><br><span class="line">스크롤을 내리면, 다음 페이지를 로딩해서, 페이지 하단에 추가</span><br></pre></td></tr></table></figure>
+
+
+#blog/templates/index.html
+{% extends "blog/layout.html" %}
+
+{%  block extra_body %}
+<script>
+$(function() {
+     var $win = $(window);
+     var is_loading = false;
+
+     // 매 화면 스크롤마다 호출
+     $win.scroll(function() {
+         // 문서의 끝에 도달했는가?
+         var diff = $(document).height() - $win.height();  //현재 전체 문서의 세로길이 - 윈도우의 세로길지==
+         if ( (!is_loading) && diff == $win.scrollTop() ) {  //is_loading이 false이므로 이것은 True, 값이 같아질때는 아래일어나야함
+             var search_params = new URLSearchParams(window.location.search); // location.search는 "?page=2"를 가져오고 이것을 URLSearchRarams를 사용해 현재 페이지의 GET인자를 가공
+             var current_page = parseInt(search_params.get('page')) || 1; // GET인자 page를 획득하고 없으면 1을 반환
+             var next_page_url = '?page=' + (current_page + 1); // 다음 페이지를 요청하기 위한 URL생성 JS는 문자열과 숫자를 더하면 문자열로 반환함,
+             is_loading = true;
+
+             $.get(next_page_url).
+                 done(function(html) {
+                     $('#post-list tbody').append(html);  //현재는 id에 tbody밑에있으므로!
+                     history.pushState({}, '', next_page_url);
+                 }).
+                 fail(function(xhr, textStatus, error) {
+		                 console.log(textStatus);
+                 })
+                 .always(function() {
+                     console.log("always");
+                     is_loading = false;
+                 });
+         }
+     });
+ });
+</script>
+
+
+
+
+{%  endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class= "table table-bordered table-hover" id="post-list">
+                <tbody>
+                    {% include "blog/_post_list.html" %}
+
+                </tbody>
+
+            </table>
 
 
 
 
 
+                <hr/>
+                <a href="{% url "blog:post_new" %}" class="btn btn-primary">새글쓰기
+                </a>
 
 
+        </div>
+    </div>
+</div>
 
 
+{% endblock %}
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 다음 시간에는 ..</span><br><span class="line"></span><br><span class="line">- Post Detail을 Bootstrap Model UI로 보기</span><br><span class="line">- Ajax를 활용한 댓글 추가/수정/삭제</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Ajax with Django 2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 코드 구현</span><br><span class="line"></span><br><span class="line">- More 버튼 추가</span><br><span class="line">- Modal을 활용한 Detail </span><br><span class="line">  - bootstrap4 modal </span><br><span class="line">- 댓글 Ajax 삭제</span><br><span class="line"></span><br><span class="line">## More 버튼 구현</span><br><span class="line"></span><br><span class="line">- 스크롤 뿐만 아니라, More 버튼을 통한 &quot;Load More&quot; 구현</span><br><span class="line">- load_more 자바스크립트 함수를 별도로 구현</span><br></pre></td></tr></table></figure>
+<p>$(function(){<br>     var $win = $(window);<br>     var is_loading = false;<br>     var current_page = null;</p>
+<pre><code>var load_more = function(){
+    if ( ! is_loading ) {
+        var next_page = (current_page || 1) +1;
+        var next_page_url = &apos;?page=&apos; + next_page;
+        is_loading = true;
+
+        $.get(next_page_url).
+                done(function(html){
+                $(&apos;#post-list tbody&apos;).append(html);
+                current_page = next_page;
+                // history.pushState({}, &apos;&apos;, next_page_url);
+
+                }).</code></pre><p> // 중략<br> }<br> };<br> // 생략<br>});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Modal을 활용한 Detail</span><br><span class="line"></span><br><span class="line">### 포스팅 리스트에서 링크에 click 리스너 걸기</span><br></pre></td></tr></table></figure>
+<p>$(function() {<br>     $(‘#post-list tbody a’).click(function(e) {<br>         e.preventDefault();<br>         var detail_url = $(this).attr(‘href’);<br>         alert(detail_url);<br>     });<br>});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">그런데, 새로이 추가된 다음 페이지 포스팅에 대해서는 이벤트가 먹지 않습니다. click 리스너를 등록하고 나서, 추가된 항목에 대해서는 click 리스너가 등록이 되어 있지 않는 거죠</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 다음 코드를 통해 해결.</span><br></pre></td></tr></table></figure>
+<p>$(function() {<br>     $(document).on(‘click’, ‘#post-list tbody a’, function(e) {<br>         e.preventDefault();<br>         var detail_url = $(this).attr(‘href’);<br>         alert(detail_url);<br>     });<br>});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 포스팅 제목 클릭 시에, Modal창 띄우기</span><br></pre></td></tr></table></figure>
+<script>
+$(function() {
+     $(document).on('click', '#post-list tbody a', function(e) {
+         e.preventDefault();
+         var detail_url = $(this).attr('href');
+         // alert(detail_url);
+         $('#post-modal').modal(); // modal 창 띄우기
+     });
+});
+</script>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Modal HTML 코드</span><br></pre></td></tr></table></figure>
+<div class="modal fade" id="post-modal" tabindex="-1">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title">포스팅 제목</h5>
+                 <button type="button" class="close" data-dismiss="modal">
+                         <span>&times;</span>
+                 </button>
+             </div>
+             <div class="modal-body">
+                 ...<br/>
+                 ...<br/>
+                 ...<br/>
+                 ...<br/>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                 <a class="btn btn-primary btn-detail">자세히</a>
+             </div>
+         </div>
+     </div>
+</div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### post detail 뷰에서의 Ajax 요청 추가 처리</span><br></pre></td></tr></table></figure>
+
+<p>from django.http import JsonResponse<br>from django.template.defaultfilters import truncatewords</p>
+<p>class PostDetailView(DetailView):<br>     model = Post</p>
+<pre><code>def render_to_response(self, context):
+    if self.request.is_ajax():
+        return JsonResponse({
+            &apos;title&apos;: self.object.title,
+            &apos;summary&apos;: truncatewords(self.object.content, 100),
+    })
+
+# 템플릿 렌더링
+return super().render_to_response(context)</code></pre><p>post_detail = PostDetailView.as_view()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 포스팅 링크 클릭 시, Ajax 요청, 모달에 반영 및 띄우기</span><br></pre></td></tr></table></figure>
+<p>$(function() {<br>     $(document).on(‘click’, ‘#post-list tbody a’, function(e) {<br>         e.preventDefault();<br>         var detail_url = $(this).attr(‘href’);<br>         $.get(detail_url)<br>             .done(function(obj) {<br>             // console.log(obj.title);<br>             // console.log(obj.summary);</p>
+<pre><code>        var $modal = $(&apos;#post-modal&apos;);
+        $modal.find(&apos;.modal-title&apos;).html(obj.title);
+        $modal.find(&apos;.modal-body&apos;).html(obj.ellipsis);
+        $modal.find(&apos;.btn-detail&apos;).attr(&apos;href&apos;, detail_url);
+        $modal.modal();
+    })
+    .fail(function() {
+            alert(&apos;request failed&apos;);
+    });
+});</code></pre><p>});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 댓글 Ajax 삭제</span><br><span class="line"></span><br><span class="line">### STEP #1) Ajax요청 전송이 용이하도록, 템플릿 변경</span><br></pre></td></tr></table></figure>
 
 
+<!-- blog/templates/blog/post_detail.html -->
+<ul>
+     {% for comment in post.comment_set.all %}
+         <li id="comment-{{ comment.pk }}">
+             {{ comment.message }}
+             &dash;
+             <a href="{% url "blog:comment_edit" post.pk comment.pk %}">
+                <small>{{ comment.updated_at }}</small>
+             </a>
+
+             <a href="{% url "blog:comment_delete" post.pk comment.pk %}"
+                 class="ajax-post-confirm"
+                 data-target-id="comment-{{ comment.pk }}"
+                 data-message="삭제하시겠습니까?">
+                 <small>삭제</small>
+             </a>
+     </li>
+     {% endfor %}
+</ul>
 
 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">TIP: HTML5에서는 커스텀 data 속성을 지원합니다.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### STEP #2) 삭제 링크 클릭 시에 Ajax POST 요청</span><br></pre></td></tr></table></figure>
+<p>$(function() {<br>     $(document).on(‘click’, ‘.ajax-post-confirm’, function(e) {<br>         e.preventDefault();</p>
+<pre><code>    var url = $(this).attr(&apos;href&apos;);
+    var message = $(this).data(&apos;message&apos;);
+    var target_id = $(this).data(&apos;target-id&apos;);
 
+    if ( confirm(message) ) {
+        $.post(url)
+            .done(function() {
+                    $(&apos;#&apos; + target_id).remove(); // 삭제된 엘리먼트를 UI에서 제거
+            })
+            .fail(function(xhr, textStatus, error) {
+                    alert(&apos;failed : &apos; + error);
+            });
+    }
+});</code></pre><p>});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 그런데, Forbidden가 발생해요.</span><br><span class="line"></span><br><span class="line">__runserver 로그에는 :( &quot;POST /11/comments/15/delete/ HTTP/1.1&quot; 403 2502__</span><br><span class="line"></span><br><span class="line">장고에서는 모든 POST요청에 대해 CSRF Token 체크를 하도록 되어있기 때문입니다. jQuery POST 요청에서는 CSRF Token 처리를 하지 않았어요</span><br><span class="line"></span><br><span class="line">### jQuery Ajax에서의 CSRF Token 대처</span><br><span class="line"></span><br><span class="line">- 매 Ajax요청마다 직접 CSRF Token값을 지정해줄 수도 있겠지만, </span><br><span class="line">  - 이건 우리 스타일이 아니예요. :D</span><br><span class="line">  - 구글에서 django csrf jquery 로 검색해보세요. </span><br><span class="line">- 장고 공식문서 CSRF Protection에 관련 코드가 상세히 기술되어있어요.</span><br></pre></td></tr></table></figure>
+<p>$.ajaxSetup({<br>     // 모든 Ajax 요청 전에 호출되는 함수를 지정<br>     beforeSend: function(xhr, settings) {<br>         // CSRF Token 설정이 필요한 요청이면<br>         if (! csrfSafeMethod(settings.type) &amp;&amp; !this.crossDomain ) {<br>             // Token 값을 가져와서, 요청 헤더에 심어줍니다.<br>             xhr.setRequestHeader(“X-CSRFToken”, csrftoken);<br>         }<br>     }<br>});</p>
+<p>function getCookie(name) {<br>     var cookieValue = null;<br>     if (document.cookie &amp;&amp; document.cookie !== ‘’) {<br>         var cookies = document.cookie.split(‘;’);<br>         for (var i = 0; i &lt; cookies.length; i++) {<br>             var cookie = jQuery.trim(cookies[i]);<br>             // Does this cookie string begin with the name we want?<br>             if (cookie.substring(0, name.length + 1) === (name + ‘=’)) {<br>                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));<br>                 break;<br>             }<br>         }<br>     }<br>     return cookieValue;<br>}<br>var csrftoken = getCookie(‘csrftoken’);</p>
+<p>function csrfSafeMethod(method) {<br>     // these HTTP methods do not require CSRF protection<br>     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));<br>}</p>
+<p>```</p>
+<p>이 파일을 jquery.csrf.js 파일로 static경로에 저장하고, 템플릿에 추가해주세요. 그럼 삭제가 됩니다</p>
+<h2 id="다음-이시간에는"><a href="#다음-이시간에는" class="headerlink" title="다음 이시간에는"></a>다음 이시간에는</h2><ul>
+<li>댓글 Ajax 쓰기/수정</li>
+<li>댓글 파일업로드 Ajax 처리</li>
+<li>댓글 Ajax 처리할 때, 유효성 검사에 실패한다면?</li>
+<li>ETC.</li>
+</ul>
 
-
-
-
-
-
-
-
-
-
-</code></pre>
     </article>
     <!-- license  -->
     
@@ -708,7 +1012,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고에서의-STATIC-파일-관리"><span class="toc-number">1.</span> <span class="toc-text">장고에서의 STATIC 파일 관리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#참고-VOD-요약"><span class="toc-number">1.1.</span> <span class="toc-text">참고 VOD 요약</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고에서의-STATIC-파일-서빙"><span class="toc-number">1.2.</span> <span class="toc-text">장고에서의 STATIC 파일 서빙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#브라우저-캐시"><span class="toc-number">1.3.</span> <span class="toc-text">브라우저 캐시</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#이후에-해당-파일이-변경되었습니다-그런데-새로운-내용이-반영되지-않습니다"><span class="toc-number">1.3.1.</span> <span class="toc-text">이후에 해당 파일이 변경되었습니다. 그런데, 새로운 내용이 반영되지 않습니다. ???</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#클라이언트측-캐싱과-빠른-업데이트를-할려면"><span class="toc-number">1.3.2.</span> <span class="toc-text">클라이언트측 캐싱과 빠른 업데이트를 할려면</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><span class="toc-number">1.3.3.</span> <span class="toc-text">커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static-t-태그-활용"><span class="toc-number">1.3.4.</span> <span class="toc-text">static_t 태그 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#다양한-STATIC-리소스"><span class="toc-number">1.3.5.</span> <span class="toc-text">다양한 STATIC 리소스</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDN-배포판-활용"><span class="toc-number">1.3.6.</span> <span class="toc-text">CDN 배포판 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#직접-다운로드-amp-서빙"><span class="toc-number">1.3.7.</span> <span class="toc-text">직접 다운로드&amp;서빙</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#myproj-settings-py"><span class="toc-number">2.</span> <span class="toc-text">myproj/settings.py</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고에서의-STATIC-파일-관리"><span class="toc-number">1.</span> <span class="toc-text">장고에서의 STATIC 파일 관리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#참고-VOD-요약"><span class="toc-number">1.1.</span> <span class="toc-text">참고 VOD 요약</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고에서의-STATIC-파일-서빙"><span class="toc-number">1.2.</span> <span class="toc-text">장고에서의 STATIC 파일 서빙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#브라우저-캐시"><span class="toc-number">1.3.</span> <span class="toc-text">브라우저 캐시</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#이후에-해당-파일이-변경되었습니다-그런데-새로운-내용이-반영되지-않습니다"><span class="toc-number">1.3.1.</span> <span class="toc-text">이후에 해당 파일이 변경되었습니다. 그런데, 새로운 내용이 반영되지 않습니다. ???</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#클라이언트측-캐싱과-빠른-업데이트를-할려면"><span class="toc-number">1.3.2.</span> <span class="toc-text">클라이언트측 캐싱과 빠른 업데이트를 할려면</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><span class="toc-number">1.3.3.</span> <span class="toc-text">커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static-t-태그-활용"><span class="toc-number">1.3.4.</span> <span class="toc-text">static_t 태그 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#다양한-STATIC-리소스"><span class="toc-number">1.3.5.</span> <span class="toc-text">다양한 STATIC 리소스</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDN-배포판-활용"><span class="toc-number">1.3.6.</span> <span class="toc-text">CDN 배포판 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#직접-다운로드-amp-서빙"><span class="toc-number">1.3.7.</span> <span class="toc-text">직접 다운로드&amp;서빙</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#myproj-settings-py"><span class="toc-number">2.</span> <span class="toc-text">myproj/settings.py</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#myapp-serializers-py"><span class="toc-number">3.</span> <span class="toc-text">myapp/serializers.py</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#myapp-views-py"><span class="toc-number">4.</span> <span class="toc-text">myapp/views.py</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#post-modal"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">포스팅 제목</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#다음-이시간에는"><span class="toc-number">4.1.</span> <span class="toc-text">다음 이시간에는</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -721,8 +1025,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
     
     
     
@@ -1031,17 +1333,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/henoy-tips/" >기타 꿀팁</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/django-basic/" >django-basic (장고 개념 기초)</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/git-memo/" >git memo</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/19</span><a class="archive-post-title" href= "/2019/10/19/henoy-tips/" >기타 꿀팁</a>
         </li>
     
     
@@ -1054,15 +1356,15 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Django"><span class="iconfont-archer">&#xe606;</span>Django</span>
-    
-        <span class="sidebar-tag-name" data-tags="ClassView"><span class="iconfont-archer">&#xe606;</span>ClassView</span>
-    
         <span class="sidebar-tag-name" data-tags="hanbik"><span class="iconfont-archer">&#xe606;</span>hanbik</span>
     
         <span class="sidebar-tag-name" data-tags="Junior"><span class="iconfont-archer">&#xe606;</span>Junior</span>
     
         <span class="sidebar-tag-name" data-tags="Devfest"><span class="iconfont-archer">&#xe606;</span>Devfest</span>
+    
+        <span class="sidebar-tag-name" data-tags="Django"><span class="iconfont-archer">&#xe606;</span>Django</span>
+    
+        <span class="sidebar-tag-name" data-tags="ClassView"><span class="iconfont-archer">&#xe606;</span>ClassView</span>
     
         <span class="sidebar-tag-name" data-tags="Basic"><span class="iconfont-archer">&#xe606;</span>Basic</span>
     
@@ -1072,17 +1374,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Festival"><span class="iconfont-archer">&#xe606;</span>Festival</span>
     
+        <span class="sidebar-tag-name" data-tags="Git"><span class="iconfont-archer">&#xe606;</span>Git</span>
+    
+        <span class="sidebar-tag-name" data-tags="Terminal"><span class="iconfont-archer">&#xe606;</span>Terminal</span>
+    
         <span class="sidebar-tag-name" data-tags="Frontend"><span class="iconfont-archer">&#xe606;</span>Frontend</span>
     
         <span class="sidebar-tag-name" data-tags="Ajax"><span class="iconfont-archer">&#xe606;</span>Ajax</span>
     
-        <span class="sidebar-tag-name" data-tags="Terminal"><span class="iconfont-archer">&#xe606;</span>Terminal</span>
-    
-        <span class="sidebar-tag-name" data-tags="Git"><span class="iconfont-archer">&#xe606;</span>Git</span>
+        <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
     
         <span class="sidebar-tag-name" data-tags="프로젝트"><span class="iconfont-archer">&#xe606;</span>프로젝트</span>
-    
-        <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1117,19 +1419,19 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Django"><span class="iconfont-archer">&#xe60a;</span>Django</span>
-    
         <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
     
-        <span class="sidebar-category-name" data-categories="Frontend"><span class="iconfont-archer">&#xe60a;</span>Frontend</span>
-    
-        <span class="sidebar-category-name" data-categories="Terminal"><span class="iconfont-archer">&#xe60a;</span>Terminal</span>
+        <span class="sidebar-category-name" data-categories="Django"><span class="iconfont-archer">&#xe60a;</span>Django</span>
     
         <span class="sidebar-category-name" data-categories="Git"><span class="iconfont-archer">&#xe60a;</span>Git</span>
     
-        <span class="sidebar-category-name" data-categories="Project"><span class="iconfont-archer">&#xe60a;</span>Project</span>
+        <span class="sidebar-category-name" data-categories="Terminal"><span class="iconfont-archer">&#xe60a;</span>Terminal</span>
+    
+        <span class="sidebar-category-name" data-categories="Frontend"><span class="iconfont-archer">&#xe60a;</span>Frontend</span>
     
         <span class="sidebar-category-name" data-categories="Markdown"><span class="iconfont-archer">&#xe60a;</span>Markdown</span>
+    
+        <span class="sidebar-category-name" data-categories="Project"><span class="iconfont-archer">&#xe60a;</span>Project</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
