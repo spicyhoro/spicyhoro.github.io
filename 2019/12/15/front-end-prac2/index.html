@@ -276,7 +276,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">2.8k</span>Reading time: <span class="post-count reading-time">17 min</span></span>
+                        <span>Word count: <span class="post-count word-count">3.5k</span>Reading time: <span class="post-count reading-time">21 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -498,381 +498,214 @@ height:50vh;
 </li>
 </ul>
 <h3 id="직접-다운로드-amp-서빙"><a href="#직접-다운로드-amp-서빙" class="headerlink" title="직접 다운로드&amp;서빙"></a>직접 다운로드&amp;서빙</h3><ul>
-<li><p>프로젝트 전반적으로 사용될 파일들이므로, filesystem static finder 에서 접근하는 경로에 넣어두고, 버전관리 대상에도 추가</p>
-<ul>
-<li><pre><code># settings.py
-STATIC_URL = &apos;/static/&apos;
-STATICFILES_DIR = [
-    os.path.join(BASE_DIR, &apos;askdjango&apos;, &apos;static&apos;),
-]   # 여기에 추가해주면 알아서 관리해줌
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">  - &quot;프로젝트/static/&quot; 경로</span><br><span class="line"></span><br><span class="line">### 자바스크립트 팩키지 관리자를 활용(좋아)</span><br><span class="line"></span><br><span class="line">- bower (deprecated) </span><br><span class="line">  - 트위터에서 만든 프론트엔드 전용 팩키지 관리자</span><br><span class="line">  - bower_components 디렉토리에 다운로드/저장을(만) 해줍니다.</span><br><span class="line">- yarn(추천 기능많음) </span><br><span class="line">  - JavaScript/CSS 팩키지 관리자</span><br><span class="line">  - node_moduels 디렉토리에 저장</span><br><span class="line">- webpack(여러파일 합쳐줌,,. 따라서 yarn과  같이 잘씀)</span><br><span class="line">  - JavaScript/CSS Bundler</span><br><span class="line">  - https://hyunseob.github.io/2017/03/21/webpack2-beginners-guide/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Bower (deprecated)</span><br><span class="line"></span><br><span class="line">### 먼저 nodejs 설치</span><br><span class="line"></span><br><span class="line">- https://nodejs.org/ko/download/</span><br><span class="line"></span><br><span class="line">- 설치 확인</span><br></pre></td></tr></table></figure>
-쉘&gt; node --version # nodejs 인터프리터 v8.3.0 
-</code></pre></li>
+<li>프로젝트 전반적으로 사용될 파일들이므로, filesystem static finder 에서 접근하는 경로에 넣어두고, 버전관리 대상에도 추가</li>
 </ul>
-<p>쉘&gt; npm –version # nodejs 팩키지 매니저 5.3.0</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### bower 설치</span><br><span class="line"></span><br><span class="line">Deprecated된 라이브러리이지만, yarn보다는 심플한 컨셉입니다. 한 번 경험해봅시다</span><br></pre></td></tr></table></figure>
-<p>npm을 통한 설치 : 쉘&gt; npm install -g bowe</p>
-<p>homebrew를 통한 설치 : 쉘&gt; brew install bower</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### CSS/JavaScript 라이브러리 설치</span><br></pre></td></tr></table></figure>
-<p>bower install jquery<br>bower install “jquery#3.2.1” </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bower_components 디렉토리에 다운로드됩니다.</span><br></pre></td></tr></table></figure>
-<p>bower uninstall jquery # 혹은 해당 디렉토리를 직접 제거하셔도 됩니다.<br>쉘&gt; bower list</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### bower.json</span><br></pre></td></tr></table></figure>
-<p>쉘&gt; bower init 명령을 통해 bower.json 파일 생성 혹은 직접 생성<br>본 JavaScript/CSS 팩키지를 배포하는 것은 아니기에, 다른 항목은 불필요<br>{<br>“name”: “example”,<br>“dependencies”: {<br>“jquery”: “<del>3.2.1”,<br>“bootstrap”: “</del>3.3.7”<br>}<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Tip: 버전지정 Rule : &quot;~3.2.1&quot;은 &quot;3.2.1&quot; 이상 &quot;3.3.0&quot; 미만을 뜻합니다</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### bower install 명령을 통한 일괄 다운로드(현재창에서 명령시)</span><br><span class="line"></span><br><span class="line">bower_components 디렉토리가 생성되며, 그 하위에 다운로드</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">생성되는 경로 </span><br><span class="line"></span><br><span class="line">- bower.json</span><br><span class="line">- bower_components/ </span><br><span class="line">  - bootstrap/ </span><br><span class="line">  - jquery/ </span><br><span class="line"></span><br><span class="line">ex) 다운로드 예시 </span><br><span class="line"></span><br><span class="line">- bower_components/bootstrap/dist/js/bootstrap.min.js 경로</span><br><span class="line">- bower_components/bootstrap/dist/css/bootstrap.min.css 경로 </span><br><span class="line">- bower_components/jquery/dist/jquery.min.js 경로</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 장고와 연계</span><br><span class="line"></span><br><span class="line">- 따로 생성한 bower_components 경로를 settings.STATICFILES_DIRS 경로에 추가</span><br></pre></td></tr></table></figure>
-<h1 id="myproj-settings-py"><a href="#myproj-settings-py" class="headerlink" title="myproj/settings.py"></a>myproj/settings.py</h1><p>STATICFILES_DIRS = [<br>   os.path.join(BASE_DIR, ‘myproj’, ‘static’),<br>   os.path.join(BASE_DIR, ‘bower_components’), # 추가<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- bower_components 하위 경로를 참조하여, 템플릿에서 직접 참조</span><br><span class="line"></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># settings.py</span><br><span class="line">STATIC_URL = &apos;/static/&apos;</span><br><span class="line">STATICFILES_DIR = [</span><br><span class="line">    os.path.join(BASE_DIR, &apos;askdjango&apos;, &apos;static&apos;),</span><br><span class="line">]   # 여기에 추가해주면 알아서 관리해줌</span><br></pre></td></tr></table></figure>
 
-
-실전예시
-#프로젝트/templates/layout.html
-{% load static %}
-
-<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
-이것을 변경
-<script src="{% static "jquery/dist/jquery.min.js" %}"></script>
-<script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
-
-결과값 (페이지 소스 보기)
-
-    <script src="/static/jquery/dist/jquery.min.js"></script>
-    <script src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
-
-
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### .gitignore</span><br><span class="line"></span><br><span class="line">bower.json 파일만 버전관리대상에 넣어두고, bower_components는 배포 시에 매번 새롭게 다운받습니다.</span><br></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>vi ./.gitignore</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<ul>
+<li>“프로젝트/static/“ 경로</li>
+</ul>
+<h3 id="자바스크립트-팩키지-관리자를-활용-좋아"><a href="#자바스크립트-팩키지-관리자를-활용-좋아" class="headerlink" title="자바스크립트 팩키지 관리자를 활용(좋아)"></a>자바스크립트 팩키지 관리자를 활용(좋아)</h3><ul>
+<li>bower (deprecated) <ul>
+<li>트위터에서 만든 프론트엔드 전용 팩키지 관리자</li>
+<li>bower_components 디렉토리에 다운로드/저장을(만) 해줍니다.</li>
+</ul>
+</li>
+<li>yarn(추천 기능많음) <ul>
+<li>JavaScript/CSS 팩키지 관리자</li>
+<li>node_moduels 디렉토리에 저장</li>
+</ul>
+</li>
+<li>webpack(여러파일 합쳐줌,,. 따라서 yarn과  같이 잘씀)<ul>
+<li>JavaScript/CSS Bundler</li>
+<li><a href="https://hyunseob.github.io/2017/03/21/webpack2-beginners-guide/" target="_blank" rel="noopener">https://hyunseob.github.io/2017/03/21/webpack2-beginners-guide/</a></li>
+</ul>
 </li>
 </ul>
-<p>안에<br>bower_components 추가</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다.</span><br><span class="line"></span><br><span class="line">## 배포는 지금까지 배운것이 거의 기본 전부</span><br><span class="line"></span><br><span class="line"># Ajax with Django 1</span><br><span class="line"></span><br><span class="line">## 코드 구현</span><br><span class="line"></span><br><span class="line">- List Pagination </span><br><span class="line"></span><br><span class="line">  - HTML만을 통한 페이징 처리</span><br><span class="line"></span><br><span class="line">  - Ajax를 통한 페이징 처리</span><br><span class="line">- 뷰에서의 응답 포맷: HTML or JSON</span><br><span class="line">- 무한 스크롤 (Infinite Scroll)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### List Pagination</span><br><span class="line"></span><br><span class="line">- List 뷰에서의 페이징 처리 : ListView CBV에서 paginate_by 인자를 지정하면, 페이징 처리를 해줍니다.</span><br><span class="line">  - 관련 context data : paginator, page_obj, is_paginated</span><br></pre></td></tr></table></figure>
-
-
-from django.views.generic import ListView
-
-class PostListView(ListView):
-     model = Post
-     paginate_by = 10 # 페이징 처리가 필요할 때, 지정
-
-페이지 이전 다음 만들기
-{% if is_paginated %}
-     {% if page_obj.has_previous %}
-     			<a href="?page={{ page_obj.previous_page_number }}">이전</a>
-     {% endif %}
-     {{ page_obj.number }} 페이지
-     {% if page_obj.has_next %}
-     			<a href="?page={{ page_obj.next_page_number }}">다음</a>
-     {% endif %}
-{% endif %}
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-#blog/templates/index.html
-
-{% extends "blog/layout.html" %}
-
-{%  block extra_body %}
-<script>
-
-$(function () {
-    $('#page-2-btn').click(function () {
-        $.get('?page=2')
-            .done(function(html) {
-                console.log(html);
-                $('#post-list-wrapper').html(html); #id가 이것인 html을 다 바꿥
-            })
-            .fail(function() {
-                console.log('fail');
-            })
-            .always(function () {
-                console.log('always');
-            });
-        return false;
-
-    });
-});
-</script>
-
-#blog/views.py
-
-class PostListView(ListView):
-    model = Post
-    template_name = 'blog/index.html'
-    paginate_by = 2
-
-    def get_template_names(self):
-        if self.request.is_ajax():
-            return ['blog/_post_list.html']
-        return ['blog/index.html']
-
-이렇게 투가를 해줘야지 ajax일때는 따로 빼놓은 _post_list.html이 html로 전달되어서
-layout은 안바뀌고 필요한 내용만 바뀌는 것을 알수있다.
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">참고 강의 :</span><br><span class="line"></span><br><span class="line">&gt; &quot;클래스 기반 뷰, 잘 알고 쓰기&quot; 코스의 &quot;Generic CBV View - Display/Date&quot; 에피소드 참고</span><br><span class="line">&gt;</span><br><span class="line">&gt; django-bootstrap3 라이브러리 내 bootstrap_pagination 템플릿 태그 #src 참고</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 브라우저 히스토리 조작하기</span><br><span class="line"></span><br><span class="line">페이지 전환없이 URL만 조작하기 (예를 들면,즉 url에 지금 ?page=2를 로딩없이 붙일수있다.)</span><br><span class="line"></span><br><span class="line">HTML5, history객체의 pushState를 활용</span><br><span class="line"></span><br><span class="line">따라서 ajax로 이동후 url도 수정해주고싶은경우 사용</span><br></pre></td></tr></table></figure>
-<p>var state_obj = {}; // pushState 후에 history.state로 접근 가능<br>var title = ‘’;<br>var url = “?page=2”; // 이동할 URL<br>history.pushState(state_obj, title, url);</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 응답포맷</span><br><span class="line"></span><br><span class="line">브라우저에서는 HTML 포맷의 데이터가 필요합니다.</span><br><span class="line"></span><br><span class="line">1) HTML 포맷을 서버에서 만들어서 응답으로 주거나</span><br></pre></td></tr></table></figure>
-<p>def my_view_fn_1(request):</p>
-<pre><code>response = render(request, &apos;myapp/my_view_fn_1.html&apos;, {
-&apos;post_list&apos;: Post.objects.all(),
-})
-return response</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2) __서버에서 Raw 데이터 응답을 하면 (주로 JSON포맷), 웹프론트엔드 JavaScript 단에서 이를 HTML포맷으로 변환__</span><br></pre></td></tr></table></figure>
-<p>from django.http import JsonResponse</p>
-<p>def my_view_fn_2(request):<br>     qs = Post.objects.all()</p>
-<pre><code># list comprehension 문법을 통해, 수동 직렬화
-post_list = [
-    {&apos;id&apos;: post.id, &apos;title&apos;: post.title }
-    for post in qs]
-
-return JsonResponse(post_list, safe=False) # safe=True일 때에는 dict타입만 받고, 아닐 경우 TypeError 예외 발생
-
-#jsonresponse는 직렬화에서 qs를 문자열로 변환해야되는 룰을 알지못해</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### JSON응답을 하기 위해서는, JSON 직렬화가 필요</span><br><span class="line"></span><br><span class="line">ex) QuerySet/Model 객체를 list/tuple/dict으로 변환</span><br><span class="line"></span><br><span class="line">- 직접 직렬화 코딩을 하거나</span><br><span class="line">- django-rest-framework 활용</span><br><span class="line">- 아래 예시 사용하기전에 serializers설치후 settings.py에 추가</span><br><span class="line">- pip3 install djangorestframework</span><br></pre></td></tr></table></figure>
-<h1 id="myapp-serializers-py"><a href="#myapp-serializers-py" class="headerlink" title="myapp/serializers.py"></a>myapp/serializers.py</h1><p>from rest_framework.serializers import ModelSerializer</p>
-<p>class PostSerializer(ModelSerializer): # Django Form/ModelForm과 유사<br>     class Meta:<br>         model = Post<br>         fields = ‘<strong>all</strong>‘</p>
-<h1 id="myapp-views-py"><a href="#myapp-views-py" class="headerlink" title="myapp/views.py"></a>myapp/views.py</h1><p>from django.http import HttpResponse<br>from rest_framework.renderers import JSONRenderer<br>from .serializers import PostSerializer</p>
-<p>def post_list(request):<br>     qs = Post.objects.all()<br>     serializer = PostSerializer(qs, many=True)<br>     json_utf8_string = JSONRenderer().render(serializer.data)<br>     # return HttpResponse(json_utf8_string) # Content-Type헤더가 text/html; charset=utf-8 로 디폴트 지정<br>     return HttpResponse(json_utf8_string, content_type=’application/json; charset=utf8’) # 커스텀 지정</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Tip &gt;&gt;&gt;curl -i  http://localhost:8000/post.json/ </span><br><span class="line"></span><br><span class="line">해보면 헤드정보 볼수있음</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Ajax HTTP 요청 여부 판단</span><br><span class="line"></span><br><span class="line">- Ajax 요청에는 X-Requested-With헤더에 &quot;XMLHttpRequest&quot;값이 전달</span><br><span class="line">- django 뷰에서는 request.is_ajax()로 판단</span><br></pre></td></tr></table></figure>
-<p>class PostListView(ListView):<br>     def render_to_response(self, context):<br>         # Ajax요청이 아니면, 템플릿 응답을 하고<br>         if not self.request.is_ajax():<br>                     return super().render_to_response(context)</p>
-<pre><code># Ajax요청일 경우에는 JSON응답을 하겠습니다.
-qs = context[&apos;post_list&apos;]
-serializer = PostSerializer(qs, many=True)
-json_utf8_string = JSONRenderer().render(serializer.data)
-return HttpResponse(json_utf8_string, content_type=&apos;application/json; charset=utf8&apos;) # 커스텀 지정</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[tip](https://github.com/django/django/blob/1.11.5/django/http/request.py#L214)</span><br><span class="line"></span><br><span class="line">### django-rest-framework 간단 활용</span><br></pre></td></tr></table></figure>
-
-
-# myapp/api.py
-from rest_framework import generics
-from rest_framework.pagination import PageNumberPagination
-
-class PostPagination(PageNumberPagination):
-		 page_size = 10
-		 
-class PostListAPIView(generics.ListAPIView): # CBV
-     queryset = Post.objects.all()
-     serializer_class = PostSerializer
-     pagination_class = PostPagination
-     
-     
-urlpatterns = [
-		 url(r'^posts/$', PostListApiView.as_view(), name='post_list'),
-]
-
-# myapp/urls.py
-from . import api
-
-urlpatterns = [
-     # 추가
-     url(r'^api/', include('myapp.api', namespace='api')),
-]
-# include라고 했으면 당연히 그 파일안에 urlpatterns가 선언이 되어있어야함.
-# 위설정끝나면 http://localhost:8000/api/v1/posts.json/?format=json로 받아볼수있다.
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Infinite Scroll</span><br><span class="line"></span><br><span class="line">스크롤을 내리면, 다음 페이지를 로딩해서, 페이지 하단에 추가</span><br></pre></td></tr></table></figure>
-
-
-#blog/templates/index.html
-{% extends "blog/layout.html" %}
-
-{%  block extra_body %}
-<script>
-$(function() {
-     var $win = $(window);
-     var is_loading = false;
-
-     // 매 화면 스크롤마다 호출
-     $win.scroll(function() {
-         // 문서의 끝에 도달했는가?
-         var diff = $(document).height() - $win.height();  //현재 전체 문서의 세로길이 - 윈도우의 세로길지==
-         if ( (!is_loading) && diff == $win.scrollTop() ) {  //is_loading이 false이므로 이것은 True, 값이 같아질때는 아래일어나야함
-             var search_params = new URLSearchParams(window.location.search); // location.search는 "?page=2"를 가져오고 이것을 URLSearchRarams를 사용해 현재 페이지의 GET인자를 가공
-             var current_page = parseInt(search_params.get('page')) || 1; // GET인자 page를 획득하고 없으면 1을 반환
-             var next_page_url = '?page=' + (current_page + 1); // 다음 페이지를 요청하기 위한 URL생성 JS는 문자열과 숫자를 더하면 문자열로 반환함,
-             is_loading = true;
-
-             $.get(next_page_url).
-                 done(function(html) {
-                     $('#post-list tbody').append(html);  //현재는 id에 tbody밑에있으므로!
-                     history.pushState({}, '', next_page_url);
-                 }).
-                 fail(function(xhr, textStatus, error) {
-		                 console.log(textStatus);
-                 })
-                 .always(function() {
-                     console.log("always");
-                     is_loading = false;
-                 });
-         }
-     });
- });
-</script>
-
-
-
-
-{%  endblock %}
-
-{% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <table class= "table table-bordered table-hover" id="post-list">
-                <tbody>
-                    {% include "blog/_post_list.html" %}
-
-                </tbody>
-
-            </table>
-
-
-
-
-
-                <hr/>
-                <a href="{% url "blog:post_new" %}" class="btn btn-primary">새글쓰기
-                </a>
-
-
-        </div>
-    </div>
-</div>
-
-
-{% endblock %}
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 다음 시간에는 ..</span><br><span class="line"></span><br><span class="line">- Post Detail을 Bootstrap Model UI로 보기</span><br><span class="line">- Ajax를 활용한 댓글 추가/수정/삭제</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Ajax with Django 2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 코드 구현</span><br><span class="line"></span><br><span class="line">- More 버튼 추가</span><br><span class="line">- Modal을 활용한 Detail </span><br><span class="line">  - bootstrap4 modal </span><br><span class="line">- 댓글 Ajax 삭제</span><br><span class="line"></span><br><span class="line">## More 버튼 구현</span><br><span class="line"></span><br><span class="line">- 스크롤 뿐만 아니라, More 버튼을 통한 &quot;Load More&quot; 구현</span><br><span class="line">- load_more 자바스크립트 함수를 별도로 구현</span><br></pre></td></tr></table></figure>
-<p>$(function(){<br>     var $win = $(window);<br>     var is_loading = false;<br>     var current_page = null;</p>
-<pre><code>var load_more = function(){
-    if ( ! is_loading ) {
-        var next_page = (current_page || 1) +1;
-        var next_page_url = &apos;?page=&apos; + next_page;
-        is_loading = true;
-
-        $.get(next_page_url).
-                done(function(html){
-                $(&apos;#post-list tbody&apos;).append(html);
-                current_page = next_page;
-                // history.pushState({}, &apos;&apos;, next_page_url);
-
-                }).</code></pre><p> // 중략<br> }<br> };<br> // 생략<br>});</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Modal을 활용한 Detail</span><br><span class="line"></span><br><span class="line">### 포스팅 리스트에서 링크에 click 리스너 걸기</span><br></pre></td></tr></table></figure>
-<p>$(function() {<br>     $(‘#post-list tbody a’).click(function(e) {<br>         e.preventDefault();<br>         var detail_url = $(this).attr(‘href’);<br>         alert(detail_url);<br>     });<br>});</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">그런데, 새로이 추가된 다음 페이지 포스팅에 대해서는 이벤트가 먹지 않습니다. click 리스너를 등록하고 나서, 추가된 항목에 대해서는 click 리스너가 등록이 되어 있지 않는 거죠</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 다음 코드를 통해 해결.</span><br></pre></td></tr></table></figure>
-<p>$(function() {<br>     $(document).on(‘click’, ‘#post-list tbody a’, function(e) {<br>         e.preventDefault();<br>         var detail_url = $(this).attr(‘href’);<br>         alert(detail_url);<br>     });<br>});</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 포스팅 제목 클릭 시에, Modal창 띄우기</span><br></pre></td></tr></table></figure>
-<script>
-$(function() {
-     $(document).on('click', '#post-list tbody a', function(e) {
-         e.preventDefault();
-         var detail_url = $(this).attr('href');
-         // alert(detail_url);
-         $('#post-modal').modal(); // modal 창 띄우기
-     });
-});
-</script>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Modal HTML 코드</span><br></pre></td></tr></table></figure>
-<div class="modal fade" id="post-modal" tabindex="-1">
-     <div class="modal-dialog">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <h5 class="modal-title">포스팅 제목</h5>
-                 <button type="button" class="close" data-dismiss="modal">
-                         <span>&times;</span>
-                 </button>
-             </div>
-             <div class="modal-body">
-                 ...<br/>
-                 ...<br/>
-                 ...<br/>
-                 ...<br/>
-             </div>
-             <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                 <a class="btn btn-primary btn-detail">자세히</a>
-             </div>
-         </div>
-     </div>
-</div>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### post detail 뷰에서의 Ajax 요청 추가 처리</span><br></pre></td></tr></table></figure>
-
-<p>from django.http import JsonResponse<br>from django.template.defaultfilters import truncatewords</p>
-<p>class PostDetailView(DetailView):<br>     model = Post</p>
-<pre><code>def render_to_response(self, context):
-    if self.request.is_ajax():
-        return JsonResponse({
-            &apos;title&apos;: self.object.title,
-            &apos;summary&apos;: truncatewords(self.object.content, 100),
-    })
-
-# 템플릿 렌더링
-return super().render_to_response(context)</code></pre><p>post_detail = PostDetailView.as_view()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 포스팅 링크 클릭 시, Ajax 요청, 모달에 반영 및 띄우기</span><br></pre></td></tr></table></figure>
-<p>$(function() {<br>     $(document).on(‘click’, ‘#post-list tbody a’, function(e) {<br>         e.preventDefault();<br>         var detail_url = $(this).attr(‘href’);<br>         $.get(detail_url)<br>             .done(function(obj) {<br>             // console.log(obj.title);<br>             // console.log(obj.summary);</p>
-<pre><code>        var $modal = $(&apos;#post-modal&apos;);
-        $modal.find(&apos;.modal-title&apos;).html(obj.title);
-        $modal.find(&apos;.modal-body&apos;).html(obj.ellipsis);
-        $modal.find(&apos;.btn-detail&apos;).attr(&apos;href&apos;, detail_url);
-        $modal.modal();
-    })
-    .fail(function() {
-            alert(&apos;request failed&apos;);
-    });
-});</code></pre><p>});</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 댓글 Ajax 삭제</span><br><span class="line"></span><br><span class="line">### STEP #1) Ajax요청 전송이 용이하도록, 템플릿 변경</span><br></pre></td></tr></table></figure>
-
-
-<!-- blog/templates/blog/post_detail.html -->
-<ul>
-     {% for comment in post.comment_set.all %}
-         <li id="comment-{{ comment.pk }}">
-             {{ comment.message }}
-             &dash;
-             <a href="{% url "blog:comment_edit" post.pk comment.pk %}">
-                <small>{{ comment.updated_at }}</small>
-             </a>
-
-             <a href="{% url "blog:comment_delete" post.pk comment.pk %}"
-                 class="ajax-post-confirm"
-                 data-target-id="comment-{{ comment.pk }}"
-                 data-message="삭제하시겠습니까?">
-                 <small>삭제</small>
-             </a>
-     </li>
-     {% endfor %}
+<h2 id="Bower-deprecated"><a href="#Bower-deprecated" class="headerlink" title="Bower (deprecated)"></a>Bower (deprecated)</h2><h3 id="먼저-nodejs-설치"><a href="#먼저-nodejs-설치" class="headerlink" title="먼저 nodejs 설치"></a>먼저 nodejs 설치</h3><ul>
+<li><p><a href="https://nodejs.org/ko/download/" target="_blank" rel="noopener">https://nodejs.org/ko/download/</a></p>
+</li>
+<li><p>설치 확인 </p>
+</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">쉘&gt; node --version # nodejs 인터프리터 v8.3.0 </span><br><span class="line"></span><br><span class="line">쉘&gt; npm --version # nodejs 팩키지 매니저 5.3.0</span><br></pre></td></tr></table></figure>
 
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">TIP: HTML5에서는 커스텀 data 속성을 지원합니다.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### STEP #2) 삭제 링크 클릭 시에 Ajax POST 요청</span><br></pre></td></tr></table></figure>
-<p>$(function() {<br>     $(document).on(‘click’, ‘.ajax-post-confirm’, function(e) {<br>         e.preventDefault();</p>
-<pre><code>    var url = $(this).attr(&apos;href&apos;);
-    var message = $(this).data(&apos;message&apos;);
-    var target_id = $(this).data(&apos;target-id&apos;);
 
-    if ( confirm(message) ) {
-        $.post(url)
-            .done(function() {
-                    $(&apos;#&apos; + target_id).remove(); // 삭제된 엘리먼트를 UI에서 제거
-            })
-            .fail(function(xhr, textStatus, error) {
-                    alert(&apos;failed : &apos; + error);
-            });
-    }
-});</code></pre><p>});</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 그런데, Forbidden가 발생해요.</span><br><span class="line"></span><br><span class="line">__runserver 로그에는 :( &quot;POST /11/comments/15/delete/ HTTP/1.1&quot; 403 2502__</span><br><span class="line"></span><br><span class="line">장고에서는 모든 POST요청에 대해 CSRF Token 체크를 하도록 되어있기 때문입니다. jQuery POST 요청에서는 CSRF Token 처리를 하지 않았어요</span><br><span class="line"></span><br><span class="line">### jQuery Ajax에서의 CSRF Token 대처</span><br><span class="line"></span><br><span class="line">- 매 Ajax요청마다 직접 CSRF Token값을 지정해줄 수도 있겠지만, </span><br><span class="line">  - 이건 우리 스타일이 아니예요. :D</span><br><span class="line">  - 구글에서 django csrf jquery 로 검색해보세요. </span><br><span class="line">- 장고 공식문서 CSRF Protection에 관련 코드가 상세히 기술되어있어요.</span><br></pre></td></tr></table></figure>
-<p>$.ajaxSetup({<br>     // 모든 Ajax 요청 전에 호출되는 함수를 지정<br>     beforeSend: function(xhr, settings) {<br>         // CSRF Token 설정이 필요한 요청이면<br>         if (! csrfSafeMethod(settings.type) &amp;&amp; !this.crossDomain ) {<br>             // Token 값을 가져와서, 요청 헤더에 심어줍니다.<br>             xhr.setRequestHeader(“X-CSRFToken”, csrftoken);<br>         }<br>     }<br>});</p>
-<p>function getCookie(name) {<br>     var cookieValue = null;<br>     if (document.cookie &amp;&amp; document.cookie !== ‘’) {<br>         var cookies = document.cookie.split(‘;’);<br>         for (var i = 0; i &lt; cookies.length; i++) {<br>             var cookie = jQuery.trim(cookies[i]);<br>             // Does this cookie string begin with the name we want?<br>             if (cookie.substring(0, name.length + 1) === (name + ‘=’)) {<br>                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));<br>                 break;<br>             }<br>         }<br>     }<br>     return cookieValue;<br>}<br>var csrftoken = getCookie(‘csrftoken’);</p>
-<p>function csrfSafeMethod(method) {<br>     // these HTTP methods do not require CSRF protection<br>     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));<br>}</p>
-<p>```</p>
+
+
+
+
+
+
+<h3 id="bower-설치"><a href="#bower-설치" class="headerlink" title="bower 설치"></a>bower 설치</h3><p>Deprecated된 라이브러리이지만, yarn보다는 심플한 컨셉입니다. 한 번 경험해봅시다</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm을 통한 설치 : 쉘&gt; npm install -g bowe</span><br><span class="line"></span><br><span class="line"> homebrew를 통한 설치 : 쉘&gt; brew install bower</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="CSS-JavaScript-라이브러리-설치"><a href="#CSS-JavaScript-라이브러리-설치" class="headerlink" title="CSS/JavaScript 라이브러리 설치"></a>CSS/JavaScript 라이브러리 설치</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower install jquery</span><br><span class="line">bower install &quot;jquery#3.2.1&quot;</span><br></pre></td></tr></table></figure>
+
+<p>bower_components 디렉토리에 다운로드됩니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bower uninstall jquery # 혹은 해당 디렉토리를 직접 제거하셔도 됩니다.</span><br><span class="line">쉘&gt; bower list</span><br></pre></td></tr></table></figure>
+
+<h3 id="bower-json"><a href="#bower-json" class="headerlink" title="bower.json"></a>bower.json</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">쉘&gt; bower init 명령을 통해 bower.json 파일 생성 혹은 직접 생성</span><br><span class="line">본 JavaScript/CSS 팩키지를 배포하는 것은 아니기에, 다른 항목은 불필요</span><br><span class="line">&#123;</span><br><span class="line"> &quot;name&quot;: &quot;example&quot;,</span><br><span class="line"> &quot;dependencies&quot;: &#123;</span><br><span class="line"> &quot;jquery&quot;: &quot;~3.2.1&quot;,</span><br><span class="line"> &quot;bootstrap&quot;: &quot;~3.3.7&quot;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Tip: 버전지정 Rule : “~3.2.1”은 “3.2.1” 이상 “3.3.0” 미만을 뜻합니다</p>
+<h3 id="bower-install-명령을-통한-일괄-다운로드-현재창에서-명령시"><a href="#bower-install-명령을-통한-일괄-다운로드-현재창에서-명령시" class="headerlink" title="bower install 명령을 통한 일괄 다운로드(현재창에서 명령시)"></a>bower install 명령을 통한 일괄 다운로드(현재창에서 명령시)</h3><p>bower_components 디렉토리가 생성되며, 그 하위에 다운로드</p>
+<p>생성되는 경로 </p>
+<ul>
+<li>bower.json</li>
+<li>bower_components/ <ul>
+<li>bootstrap/ </li>
+<li>jquery/ </li>
+</ul>
+</li>
+</ul>
+<p>ex) 다운로드 예시 </p>
+<ul>
+<li>bower_components/bootstrap/dist/js/bootstrap.min.js 경로</li>
+<li>bower_components/bootstrap/dist/css/bootstrap.min.css 경로 </li>
+<li>bower_components/jquery/dist/jquery.min.js 경로</li>
+</ul>
+<h3 id="장고와-연계"><a href="#장고와-연계" class="headerlink" title="장고와 연계"></a>장고와 연계</h3><ul>
+<li>따로 생성한 bower_components 경로를 settings.STATICFILES_DIRS 경로에 추가</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># myproj/settings.py</span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line">     os.path.join(BASE_DIR, &apos;myproj&apos;, &apos;static&apos;),</span><br><span class="line">     os.path.join(BASE_DIR, &apos;bower_components&apos;), # 추가</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>bower_components 하위 경로를 참조하여, 템플릿에서 직접 참조</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line"></span><br><span class="line">실전예시</span><br><span class="line">#프로젝트/templates/layout.html</span><br><span class="line">&#123;% load static %&#125;</span><br><span class="line"></span><br><span class="line">&lt;script src=&quot;//code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">이것을 변경</span><br><span class="line">&lt;script src=&quot;&#123;% static &quot;jquery/dist/jquery.min.js&quot; %&#125;&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;&#123;% static &quot;bootstrap/dist/js/bootstrap.min.js&quot; %&#125;&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">결과값 (페이지 소스 보기)</span><br><span class="line"></span><br><span class="line">    &lt;script src=&quot;/static/jquery/dist/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;/static/bootstrap/dist/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="gitignore"><a href="#gitignore" class="headerlink" title=".gitignore"></a>.gitignore</h3><p>bower.json 파일만 버전관리대상에 넣어두고, bower_components는 배포 시에 매번 새롭게 다운받습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; vi ./.gitignore</span><br><span class="line"></span><br><span class="line">안에 </span><br><span class="line">bower_components 추가</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="차후-에피소드에서-yarn과-webpack에-대해서-살펴보겠습니다"><a href="#차후-에피소드에서-yarn과-webpack에-대해서-살펴보겠습니다" class="headerlink" title="차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다."></a>차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다.</h3><h2 id="배포는-지금까지-배운것이-거의-기본-전부"><a href="#배포는-지금까지-배운것이-거의-기본-전부" class="headerlink" title="배포는 지금까지 배운것이 거의 기본 전부"></a>배포는 지금까지 배운것이 거의 기본 전부</h2><h1 id="Ajax-with-Django-1"><a href="#Ajax-with-Django-1" class="headerlink" title="Ajax with Django 1"></a>Ajax with Django 1</h1><h2 id="코드-구현"><a href="#코드-구현" class="headerlink" title="코드 구현"></a>코드 구현</h2><ul>
+<li><p>List Pagination </p>
+<ul>
+<li><p>HTML만을 통한 페이징 처리</p>
+</li>
+<li><p>Ajax를 통한 페이징 처리</p>
+</li>
+</ul>
+</li>
+<li><p>뷰에서의 응답 포맷: HTML or JSON</p>
+</li>
+<li><p>무한 스크롤 (Infinite Scroll)</p>
+</li>
+</ul>
+<h3 id="List-Pagination"><a href="#List-Pagination" class="headerlink" title="List Pagination"></a>List Pagination</h3><ul>
+<li>List 뷰에서의 페이징 처리 : ListView CBV에서 paginate_by 인자를 지정하면, 페이징 처리를 해줍니다.<ul>
+<li>관련 context data : paginator, page_obj, is_paginated</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line"></span><br><span class="line">from django.views.generic import ListView</span><br><span class="line"></span><br><span class="line">class PostListView(ListView):</span><br><span class="line">     model = Post</span><br><span class="line">     paginate_by = 10 # 페이징 처리가 필요할 때, 지정</span><br><span class="line"></span><br><span class="line">페이지 이전 다음 만들기</span><br><span class="line">&#123;% if is_paginated %&#125;</span><br><span class="line">     &#123;% if page_obj.has_previous %&#125;</span><br><span class="line">     			&lt;a href=&quot;?page=&#123;&#123; page_obj.previous_page_number &#125;&#125;&quot;&gt;이전&lt;/a&gt;</span><br><span class="line">     &#123;% endif %&#125;</span><br><span class="line">     &#123;&#123; page_obj.number &#125;&#125; 페이지</span><br><span class="line">     &#123;% if page_obj.has_next %&#125;</span><br><span class="line">     			&lt;a href=&quot;?page=&#123;&#123; page_obj.next_page_number &#125;&#125;&quot;&gt;다음&lt;/a&gt;</span><br><span class="line">     &#123;% endif %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line"></span><br><span class="line">#blog/templates/index.html</span><br><span class="line"></span><br><span class="line">&#123;% extends &quot;blog/layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;%  block extra_body %&#125;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">$(function () &#123;</span><br><span class="line">    $(&apos;#page-2-btn&apos;).click(function () &#123;</span><br><span class="line">        $.get(&apos;?page=2&apos;)</span><br><span class="line">            .done(function(html) &#123;</span><br><span class="line">                console.log(html);</span><br><span class="line">                $(&apos;#post-list-wrapper&apos;).html(html); #id가 이것인 html을 다 바꿥</span><br><span class="line">            &#125;)</span><br><span class="line">            .fail(function() &#123;</span><br><span class="line">                console.log(&apos;fail&apos;);</span><br><span class="line">            &#125;)</span><br><span class="line">            .always(function () &#123;</span><br><span class="line">                console.log(&apos;always&apos;);</span><br><span class="line">            &#125;);</span><br><span class="line">        return false;</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">#blog/views.py</span><br><span class="line"></span><br><span class="line">class PostListView(ListView):</span><br><span class="line">    model = Post</span><br><span class="line">    template_name = &apos;blog/index.html&apos;</span><br><span class="line">    paginate_by = 2</span><br><span class="line"></span><br><span class="line">    def get_template_names(self):</span><br><span class="line">        if self.request.is_ajax():</span><br><span class="line">            return [&apos;blog/_post_list.html&apos;]</span><br><span class="line">        return [&apos;blog/index.html&apos;]</span><br><span class="line"></span><br><span class="line">이렇게 투가를 해줘야지 ajax일때는 따로 빼놓은 _post_list.html이 html로 전달되어서</span><br><span class="line">layout은 안바뀌고 필요한 내용만 바뀌는 것을 알수있다.</span><br><span class="line"></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>참고 강의 :</p>
+<blockquote>
+<p>“클래스 기반 뷰, 잘 알고 쓰기” 코스의 “Generic CBV View - Display/Date” 에피소드 참고</p>
+<p>django-bootstrap3 라이브러리 내 bootstrap_pagination 템플릿 태그 #src 참고</p>
+</blockquote>
+<h3 id="브라우저-히스토리-조작하기"><a href="#브라우저-히스토리-조작하기" class="headerlink" title="브라우저 히스토리 조작하기"></a>브라우저 히스토리 조작하기</h3><p>페이지 전환없이 URL만 조작하기 (예를 들면,즉 url에 지금 ?page=2를 로딩없이 붙일수있다.)</p>
+<p>HTML5, history객체의 pushState를 활용</p>
+<p>따라서 ajax로 이동후 url도 수정해주고싶은경우 사용</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var state_obj = &#123;&#125;; // pushState 후에 history.state로 접근 가능</span><br><span class="line">var title = &apos;&apos;;</span><br><span class="line">var url = &quot;?page=2&quot;; // 이동할 URL</span><br><span class="line">history.pushState(state_obj, title, url);</span><br></pre></td></tr></table></figure>
+
+<h3 id="응답포맷"><a href="#응답포맷" class="headerlink" title="응답포맷"></a>응답포맷</h3><p>브라우저에서는 HTML 포맷의 데이터가 필요합니다.</p>
+<p>1) HTML 포맷을 서버에서 만들어서 응답으로 주거나</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def my_view_fn_1(request):</span><br><span class="line"></span><br><span class="line">     response = render(request, &apos;myapp/my_view_fn_1.html&apos;, &#123;</span><br><span class="line">     &apos;post_list&apos;: Post.objects.all(),</span><br><span class="line">     &#125;)</span><br><span class="line">     return response</span><br></pre></td></tr></table></figure>
+
+<p>2) <strong>서버에서 Raw 데이터 응답을 하면 (주로 JSON포맷), 웹프론트엔드 JavaScript 단에서 이를 HTML포맷으로 변환</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from django.http import JsonResponse</span><br><span class="line"></span><br><span class="line">def my_view_fn_2(request):</span><br><span class="line">     qs = Post.objects.all()</span><br><span class="line">     </span><br><span class="line">     # list comprehension 문법을 통해, 수동 직렬화</span><br><span class="line">     post_list = [</span><br><span class="line">         &#123;&apos;id&apos;: post.id, &apos;title&apos;: post.title &#125;</span><br><span class="line">         for post in qs]</span><br><span class="line">     </span><br><span class="line">     return JsonResponse(post_list, safe=False) # safe=True일 때에는 dict타입만 받고, 아닐 경우 TypeError 예외 발생</span><br><span class="line">     </span><br><span class="line">     #jsonresponse는 직렬화에서 qs를 문자열로 변환해야되는 룰을 알지못해</span><br></pre></td></tr></table></figure>
+
+<h3 id="JSON응답을-하기-위해서는-JSON-직렬화가-필요"><a href="#JSON응답을-하기-위해서는-JSON-직렬화가-필요" class="headerlink" title="JSON응답을 하기 위해서는, JSON 직렬화가 필요"></a>JSON응답을 하기 위해서는, JSON 직렬화가 필요</h3><p>ex) QuerySet/Model 객체를 list/tuple/dict으로 변환</p>
+<ul>
+<li>직접 직렬화 코딩을 하거나</li>
+<li>django-rest-framework 활용</li>
+<li>아래 예시 사용하기전에 serializers설치후 settings.py에 추가</li>
+<li>pip3 install djangorestframework</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># myapp/serializers.py</span><br><span class="line">from rest_framework.serializers import ModelSerializer</span><br><span class="line"></span><br><span class="line">class PostSerializer(ModelSerializer): # Django Form/ModelForm과 유사</span><br><span class="line">     class Meta:</span><br><span class="line">         model = Post</span><br><span class="line">         fields = &apos;__all__&apos;</span><br><span class="line">         </span><br><span class="line"># myapp/views.py</span><br><span class="line">from django.http import HttpResponse</span><br><span class="line">from rest_framework.renderers import JSONRenderer</span><br><span class="line">from .serializers import PostSerializer</span><br><span class="line"></span><br><span class="line">def post_list(request):</span><br><span class="line">     qs = Post.objects.all()</span><br><span class="line">     serializer = PostSerializer(qs, many=True)</span><br><span class="line">     json_utf8_string = JSONRenderer().render(serializer.data)</span><br><span class="line">     # return HttpResponse(json_utf8_string) # Content-Type헤더가 text/html; charset=utf-8 로 디폴트 지정</span><br><span class="line">     return HttpResponse(json_utf8_string, content_type=&apos;application/json; charset=utf8&apos;) # 커스텀 지정</span><br></pre></td></tr></table></figure>
+
+<p>Tip &gt;&gt;&gt;curl -i  <a href="http://localhost:8000/post.json/" target="_blank" rel="noopener">http://localhost:8000/post.json/</a> </p>
+<p>해보면 헤드정보 볼수있음</p>
+<h3 id="Ajax-HTTP-요청-여부-판단"><a href="#Ajax-HTTP-요청-여부-판단" class="headerlink" title="Ajax HTTP 요청 여부 판단"></a>Ajax HTTP 요청 여부 판단</h3><ul>
+<li>Ajax 요청에는 X-Requested-With헤더에 “XMLHttpRequest”값이 전달</li>
+<li>django 뷰에서는 request.is_ajax()로 판단</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class PostListView(ListView):</span><br><span class="line">     def render_to_response(self, context):</span><br><span class="line">         # Ajax요청이 아니면, 템플릿 응답을 하고</span><br><span class="line">         if not self.request.is_ajax():</span><br><span class="line">         			return super().render_to_response(context)</span><br><span class="line">         </span><br><span class="line">         # Ajax요청일 경우에는 JSON응답을 하겠습니다.</span><br><span class="line">         qs = context[&apos;post_list&apos;]</span><br><span class="line">         serializer = PostSerializer(qs, many=True)</span><br><span class="line">         json_utf8_string = JSONRenderer().render(serializer.data)</span><br><span class="line">         return HttpResponse(json_utf8_string, content_type=&apos;application/json; charset=utf8&apos;) # 커스텀 지정</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/django/django/blob/1.11.5/django/http/request.py#L214" target="_blank" rel="noopener">tip</a></p>
+<h3 id="django-rest-framework-간단-활용"><a href="#django-rest-framework-간단-활용" class="headerlink" title="django-rest-framework 간단 활용"></a>django-rest-framework 간단 활용</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw%&#125;</span><br><span class="line"></span><br><span class="line"># myapp/api.py</span><br><span class="line">from rest_framework import generics</span><br><span class="line">from rest_framework.pagination import PageNumberPagination</span><br><span class="line"></span><br><span class="line">class PostPagination(PageNumberPagination):</span><br><span class="line">		 page_size = 10</span><br><span class="line">		 </span><br><span class="line">class PostListAPIView(generics.ListAPIView): # CBV</span><br><span class="line">     queryset = Post.objects.all()</span><br><span class="line">     serializer_class = PostSerializer</span><br><span class="line">     pagination_class = PostPagination</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">urlpatterns = [</span><br><span class="line">		 url(r&apos;^posts/$&apos;, PostListApiView.as_view(), name=&apos;post_list&apos;),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># myapp/urls.py</span><br><span class="line">from . import api</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">     # 추가</span><br><span class="line">     url(r&apos;^api/&apos;, include(&apos;myapp.api&apos;, namespace=&apos;api&apos;)),</span><br><span class="line">]</span><br><span class="line"># include라고 했으면 당연히 그 파일안에 urlpatterns가 선언이 되어있어야함.</span><br><span class="line"># 위설정끝나면 http://localhost:8000/api/v1/posts.json/?format=json로 받아볼수있다.</span><br><span class="line"></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Infinite-Scroll"><a href="#Infinite-Scroll" class="headerlink" title="Infinite Scroll"></a>Infinite Scroll</h3><p>스크롤을 내리면, 다음 페이지를 로딩해서, 페이지 하단에 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line"></span><br><span class="line">#blog/templates/index.html</span><br><span class="line">&#123;% extends &quot;blog/layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;%  block extra_body %&#125;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(function() &#123;</span><br><span class="line">     var $win = $(window);</span><br><span class="line">     var is_loading = false;</span><br><span class="line"></span><br><span class="line">     // 매 화면 스크롤마다 호출</span><br><span class="line">     $win.scroll(function() &#123;</span><br><span class="line">         // 문서의 끝에 도달했는가?</span><br><span class="line">         var diff = $(document).height() - $win.height();  //현재 전체 문서의 세로길이 - 윈도우의 세로길지==</span><br><span class="line">         if ( (!is_loading) &amp;&amp; diff == $win.scrollTop() ) &#123;  //is_loading이 false이므로 이것은 True, 값이 같아질때는 아래일어나야함</span><br><span class="line">             var search_params = new URLSearchParams(window.location.search); // location.search는 &quot;?page=2&quot;를 가져오고 이것을 URLSearchRarams를 사용해 현재 페이지의 GET인자를 가공</span><br><span class="line">             var current_page = parseInt(search_params.get(&apos;page&apos;)) || 1; // GET인자 page를 획득하고 없으면 1을 반환</span><br><span class="line">             var next_page_url = &apos;?page=&apos; + (current_page + 1); // 다음 페이지를 요청하기 위한 URL생성 JS는 문자열과 숫자를 더하면 문자열로 반환함,</span><br><span class="line">             is_loading = true;</span><br><span class="line"></span><br><span class="line">             $.get(next_page_url).</span><br><span class="line">                 done(function(html) &#123;</span><br><span class="line">                     $(&apos;#post-list tbody&apos;).append(html);  //현재는 id에 tbody밑에있으므로!</span><br><span class="line">                     history.pushState(&#123;&#125;, &apos;&apos;, next_page_url);</span><br><span class="line">                 &#125;).</span><br><span class="line">                 fail(function(xhr, textStatus, error) &#123;</span><br><span class="line">		                 console.log(textStatus);</span><br><span class="line">                 &#125;)</span><br><span class="line">                 .always(function() &#123;</span><br><span class="line">                     console.log(&quot;always&quot;);</span><br><span class="line">                     is_loading = false;</span><br><span class="line">                 &#125;);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;);</span><br><span class="line"> &#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;%  endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;col-sm-12&quot;&gt;</span><br><span class="line">            &lt;table class= &quot;table table-bordered table-hover&quot; id=&quot;post-list&quot;&gt;</span><br><span class="line">                &lt;tbody&gt;</span><br><span class="line">                    &#123;% include &quot;blog/_post_list.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">                &lt;/tbody&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/table&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                &lt;hr/&gt;</span><br><span class="line">                &lt;a href=&quot;&#123;% url &quot;blog:post_new&quot; %&#125;&quot; class=&quot;btn btn-primary&quot;&gt;새글쓰기</span><br><span class="line">                &lt;/a&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="다음-시간에는"><a href="#다음-시간에는" class="headerlink" title="다음 시간에는 .."></a>다음 시간에는 ..</h2><ul>
+<li>Post Detail을 Bootstrap Model UI로 보기</li>
+<li>Ajax를 활용한 댓글 추가/수정/삭제</li>
+</ul>
+<h1 id="Ajax-with-Django-2"><a href="#Ajax-with-Django-2" class="headerlink" title="Ajax with Django 2"></a>Ajax with Django 2</h1><h2 id="코드-구현-1"><a href="#코드-구현-1" class="headerlink" title="코드 구현"></a>코드 구현</h2><ul>
+<li>More 버튼 추가</li>
+<li>Modal을 활용한 Detail <ul>
+<li>bootstrap4 modal </li>
+</ul>
+</li>
+<li>댓글 Ajax 삭제</li>
+</ul>
+<h2 id="More-버튼-구현"><a href="#More-버튼-구현" class="headerlink" title="More 버튼 구현"></a>More 버튼 구현</h2><ul>
+<li>스크롤 뿐만 아니라, More 버튼을 통한 “Load More” 구현</li>
+<li>load_more 자바스크립트 함수를 별도로 구현</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line">     var $win = $(window);</span><br><span class="line">     var is_loading = false;</span><br><span class="line">     var current_page = null;</span><br><span class="line">     </span><br><span class="line">     var load_more = function()&#123;</span><br><span class="line">         if ( ! is_loading ) &#123;</span><br><span class="line">             var next_page = (current_page || 1) +1;</span><br><span class="line">             var next_page_url = &apos;?page=&apos; + next_page;</span><br><span class="line">             is_loading = true;</span><br><span class="line">             </span><br><span class="line">             $.get(next_page_url).</span><br><span class="line">             		done(function(html)&#123;</span><br><span class="line">                 	$(&apos;#post-list tbody&apos;).append(html);</span><br><span class="line">                 	current_page = next_page;</span><br><span class="line">                 	// history.pushState(&#123;&#125;, &apos;&apos;, next_page_url);</span><br><span class="line">                 	</span><br><span class="line">                 	&#125;).</span><br><span class="line"> // 중략</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;;</span><br><span class="line"> // 생략</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Modal을-활용한-Detail"><a href="#Modal을-활용한-Detail" class="headerlink" title="Modal을 활용한 Detail"></a>Modal을 활용한 Detail</h2><h3 id="포스팅-리스트에서-링크에-click-리스너-걸기"><a href="#포스팅-리스트에서-링크에-click-리스너-걸기" class="headerlink" title="포스팅 리스트에서 링크에 click 리스너 걸기"></a>포스팅 리스트에서 링크에 click 리스너 걸기</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(function() &#123;</span><br><span class="line">     $(&apos;#post-list tbody a&apos;).click(function(e) &#123;</span><br><span class="line">         e.preventDefault();</span><br><span class="line">         var detail_url = $(this).attr(&apos;href&apos;);</span><br><span class="line">         alert(detail_url);</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>그런데, 새로이 추가된 다음 페이지 포스팅에 대해서는 이벤트가 먹지 않습니다. click 리스너를 등록하고 나서, 추가된 항목에 대해서는 click 리스너가 등록이 되어 있지 않는 거죠</p>
+<h3 id="다음-코드를-통해-해결"><a href="#다음-코드를-통해-해결" class="headerlink" title="다음 코드를 통해 해결."></a>다음 코드를 통해 해결.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(function() &#123;</span><br><span class="line">     $(document).on(&apos;click&apos;, &apos;#post-list tbody a&apos;, function(e) &#123;</span><br><span class="line">         e.preventDefault();</span><br><span class="line">         var detail_url = $(this).attr(&apos;href&apos;);</span><br><span class="line">         alert(detail_url);</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="포스팅-제목-클릭-시에-Modal창-띄우기"><a href="#포스팅-제목-클릭-시에-Modal창-띄우기" class="headerlink" title="포스팅 제목 클릭 시에, Modal창 띄우기"></a>포스팅 제목 클릭 시에, Modal창 띄우기</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(function() &#123;</span><br><span class="line">     $(document).on(&apos;click&apos;, &apos;#post-list tbody a&apos;, function(e) &#123;</span><br><span class="line">         e.preventDefault();</span><br><span class="line">         var detail_url = $(this).attr(&apos;href&apos;);</span><br><span class="line">         // alert(detail_url);</span><br><span class="line">         $(&apos;#post-modal&apos;).modal(); // modal 창 띄우기</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Modal-HTML-코드"><a href="#Modal-HTML-코드" class="headerlink" title="Modal HTML 코드"></a>Modal HTML 코드</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;modal fade&quot; id=&quot;post-modal&quot; tabindex=&quot;-1&quot;&gt;</span><br><span class="line">     &lt;div class=&quot;modal-dialog&quot;&gt;</span><br><span class="line">         &lt;div class=&quot;modal-content&quot;&gt;</span><br><span class="line">             &lt;div class=&quot;modal-header&quot;&gt;</span><br><span class="line">                 &lt;h5 class=&quot;modal-title&quot;&gt;포스팅 제목&lt;/h5&gt;</span><br><span class="line">                 &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot;&gt;</span><br><span class="line">                		 &lt;span&gt;&amp;times;&lt;/span&gt;</span><br><span class="line">                 &lt;/button&gt;</span><br><span class="line">             &lt;/div&gt;</span><br><span class="line">             &lt;div class=&quot;modal-body&quot;&gt;</span><br><span class="line">                 ...&lt;br/&gt;</span><br><span class="line">                 ...&lt;br/&gt;</span><br><span class="line">                 ...&lt;br/&gt;</span><br><span class="line">                 ...&lt;br/&gt;</span><br><span class="line">             &lt;/div&gt;</span><br><span class="line">             &lt;div class=&quot;modal-footer&quot;&gt;</span><br><span class="line">                 &lt;button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; data-dismiss=&quot;modal&quot;&gt;닫기&lt;/button&gt;</span><br><span class="line">                 &lt;a class=&quot;btn btn-primary btn-detail&quot;&gt;자세히&lt;/a&gt;</span><br><span class="line">             &lt;/div&gt;</span><br><span class="line">         &lt;/div&gt;</span><br><span class="line">     &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="post-detail-뷰에서의-Ajax-요청-추가-처리"><a href="#post-detail-뷰에서의-Ajax-요청-추가-처리" class="headerlink" title="post detail 뷰에서의 Ajax 요청 추가 처리"></a>post detail 뷰에서의 Ajax 요청 추가 처리</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">from django.http import JsonResponse</span><br><span class="line">from django.template.defaultfilters import truncatewords</span><br><span class="line"></span><br><span class="line">class PostDetailView(DetailView):</span><br><span class="line">     model = Post</span><br><span class="line">     </span><br><span class="line">     def render_to_response(self, context):</span><br><span class="line">         if self.request.is_ajax():</span><br><span class="line">             return JsonResponse(&#123;</span><br><span class="line">                 &apos;title&apos;: self.object.title,</span><br><span class="line">                 &apos;summary&apos;: truncatewords(self.object.content, 100),</span><br><span class="line">         &#125;)</span><br><span class="line">     </span><br><span class="line">     # 템플릿 렌더링</span><br><span class="line">     return super().render_to_response(context)</span><br><span class="line">     </span><br><span class="line">post_detail = PostDetailView.as_view()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="포스팅-링크-클릭-시-Ajax-요청-모달에-반영-및-띄우기"><a href="#포스팅-링크-클릭-시-Ajax-요청-모달에-반영-및-띄우기" class="headerlink" title="포스팅 링크 클릭 시, Ajax 요청, 모달에 반영 및 띄우기"></a>포스팅 링크 클릭 시, Ajax 요청, 모달에 반영 및 띄우기</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$(function() &#123;</span><br><span class="line">     $(document).on(&apos;click&apos;, &apos;#post-list tbody a&apos;, function(e) &#123;</span><br><span class="line">         e.preventDefault();</span><br><span class="line">         var detail_url = $(this).attr(&apos;href&apos;);</span><br><span class="line">         $.get(detail_url)</span><br><span class="line">             .done(function(obj) &#123;</span><br><span class="line">             // console.log(obj.title);</span><br><span class="line">             // console.log(obj.summary);</span><br><span class="line">             </span><br><span class="line">             var $modal = $(&apos;#post-modal&apos;);</span><br><span class="line">             $modal.find(&apos;.modal-title&apos;).html(obj.title);</span><br><span class="line">             $modal.find(&apos;.modal-body&apos;).html(obj.ellipsis);</span><br><span class="line">             $modal.find(&apos;.btn-detail&apos;).attr(&apos;href&apos;, detail_url);</span><br><span class="line">             $modal.modal();</span><br><span class="line">         &#125;)</span><br><span class="line">         .fail(function() &#123;</span><br><span class="line">         		alert(&apos;request failed&apos;);</span><br><span class="line">         &#125;);</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="댓글-Ajax-삭제"><a href="#댓글-Ajax-삭제" class="headerlink" title="댓글 Ajax 삭제"></a>댓글 Ajax 삭제</h2><h3 id="STEP-1-Ajax요청-전송이-용이하도록-템플릿-변경"><a href="#STEP-1-Ajax요청-전송이-용이하도록-템플릿-변경" class="headerlink" title="STEP #1) Ajax요청 전송이 용이하도록, 템플릿 변경"></a>STEP #1) Ajax요청 전송이 용이하도록, 템플릿 변경</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- blog/templates/blog/post_detail.html --&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">     &#123;% for comment in post.comment_set.all %&#125;</span><br><span class="line">         &lt;li id=&quot;comment-&#123;&#123; comment.pk &#125;&#125;&quot;&gt;</span><br><span class="line">             &#123;&#123; comment.message &#125;&#125;</span><br><span class="line">             &amp;dash;</span><br><span class="line">             &lt;a href=&quot;&#123;% url &quot;blog:comment_edit&quot; post.pk comment.pk %&#125;&quot;&gt;</span><br><span class="line">                &lt;small&gt;&#123;&#123; comment.updated_at &#125;&#125;&lt;/small&gt;</span><br><span class="line">             &lt;/a&gt;</span><br><span class="line"></span><br><span class="line">             &lt;a href=&quot;&#123;% url &quot;blog:comment_delete&quot; post.pk comment.pk %&#125;&quot;</span><br><span class="line">                 class=&quot;ajax-post-confirm&quot;</span><br><span class="line">                 data-target-id=&quot;comment-&#123;&#123; comment.pk &#125;&#125;&quot;</span><br><span class="line">                 data-message=&quot;삭제하시겠습니까?&quot;&gt;</span><br><span class="line">                 &lt;small&gt;삭제&lt;/small&gt;</span><br><span class="line">             &lt;/a&gt;</span><br><span class="line">     &lt;/li&gt;</span><br><span class="line">     &#123;% endfor %&#125;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TIP: HTML5에서는 커스텀 data 속성을 지원합니다.</p>
+<h3 id="STEP-2-삭제-링크-클릭-시에-Ajax-POST-요청"><a href="#STEP-2-삭제-링크-클릭-시에-Ajax-POST-요청" class="headerlink" title="STEP #2) 삭제 링크 클릭 시에 Ajax POST 요청"></a>STEP #2) 삭제 링크 클릭 시에 Ajax POST 요청</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$(function() &#123;</span><br><span class="line">     $(document).on(&apos;click&apos;, &apos;.ajax-post-confirm&apos;, function(e) &#123;</span><br><span class="line">         e.preventDefault();</span><br><span class="line">         </span><br><span class="line">         var url = $(this).attr(&apos;href&apos;);</span><br><span class="line">         var message = $(this).data(&apos;message&apos;);</span><br><span class="line">         var target_id = $(this).data(&apos;target-id&apos;);</span><br><span class="line">         </span><br><span class="line">         if ( confirm(message) ) &#123;</span><br><span class="line">             $.post(url)</span><br><span class="line">                 .done(function() &#123;</span><br><span class="line">                		 $(&apos;#&apos; + target_id).remove(); // 삭제된 엘리먼트를 UI에서 제거</span><br><span class="line">                 &#125;)</span><br><span class="line">                 .fail(function(xhr, textStatus, error) &#123;</span><br><span class="line">                 		alert(&apos;failed : &apos; + error);</span><br><span class="line">                 &#125;);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="그런데-Forbidden가-발생해요"><a href="#그런데-Forbidden가-발생해요" class="headerlink" title="그런데, Forbidden가 발생해요."></a>그런데, Forbidden가 발생해요.</h3><p><strong>runserver 로그에는 :( “POST /11/comments/15/delete/ HTTP/1.1” 403 2502</strong></p>
+<p>장고에서는 모든 POST요청에 대해 CSRF Token 체크를 하도록 되어있기 때문입니다. jQuery POST 요청에서는 CSRF Token 처리를 하지 않았어요</p>
+<h3 id="jQuery-Ajax에서의-CSRF-Token-대처"><a href="#jQuery-Ajax에서의-CSRF-Token-대처" class="headerlink" title="jQuery Ajax에서의 CSRF Token 대처"></a>jQuery Ajax에서의 CSRF Token 대처</h3><ul>
+<li>매 Ajax요청마다 직접 CSRF Token값을 지정해줄 수도 있겠지만, <ul>
+<li>이건 우리 스타일이 아니예요. :D</li>
+<li>구글에서 django csrf jquery 로 검색해보세요. </li>
+</ul>
+</li>
+<li>장고 공식문서 CSRF Protection에 관련 코드가 상세히 기술되어있어요.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$.ajaxSetup(&#123;</span><br><span class="line">     // 모든 Ajax 요청 전에 호출되는 함수를 지정</span><br><span class="line">     beforeSend: function(xhr, settings) &#123;</span><br><span class="line">         // CSRF Token 설정이 필요한 요청이면</span><br><span class="line">         if (! csrfSafeMethod(settings.type) &amp;&amp; !this.crossDomain ) &#123;</span><br><span class="line">             // Token 값을 가져와서, 요청 헤더에 심어줍니다.</span><br><span class="line">             xhr.setRequestHeader(&quot;X-CSRFToken&quot;, csrftoken);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getCookie(name) &#123;</span><br><span class="line">     var cookieValue = null;</span><br><span class="line">     if (document.cookie &amp;&amp; document.cookie !== &apos;&apos;) &#123;</span><br><span class="line">         var cookies = document.cookie.split(&apos;;&apos;);</span><br><span class="line">         for (var i = 0; i &lt; cookies.length; i++) &#123;</span><br><span class="line">             var cookie = jQuery.trim(cookies[i]);</span><br><span class="line">             // Does this cookie string begin with the name we want?</span><br><span class="line">             if (cookie.substring(0, name.length + 1) === (name + &apos;=&apos;)) &#123;</span><br><span class="line">                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));</span><br><span class="line">                 break;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     return cookieValue;</span><br><span class="line">&#125;</span><br><span class="line">var csrftoken = getCookie(&apos;csrftoken&apos;);</span><br><span class="line"></span><br><span class="line">function csrfSafeMethod(method) &#123;</span><br><span class="line">     // these HTTP methods do not require CSRF protection</span><br><span class="line">     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>이 파일을 jquery.csrf.js 파일로 static경로에 저장하고, 템플릿에 추가해주세요. 그럼 삭제가 됩니다</p>
 <h2 id="다음-이시간에는"><a href="#다음-이시간에는" class="headerlink" title="다음 이시간에는"></a>다음 이시간에는</h2><ul>
 <li>댓글 Ajax 쓰기/수정</li>
@@ -1012,7 +845,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고에서의-STATIC-파일-관리"><span class="toc-number">1.</span> <span class="toc-text">장고에서의 STATIC 파일 관리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#참고-VOD-요약"><span class="toc-number">1.1.</span> <span class="toc-text">참고 VOD 요약</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고에서의-STATIC-파일-서빙"><span class="toc-number">1.2.</span> <span class="toc-text">장고에서의 STATIC 파일 서빙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#브라우저-캐시"><span class="toc-number">1.3.</span> <span class="toc-text">브라우저 캐시</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#이후에-해당-파일이-변경되었습니다-그런데-새로운-내용이-반영되지-않습니다"><span class="toc-number">1.3.1.</span> <span class="toc-text">이후에 해당 파일이 변경되었습니다. 그런데, 새로운 내용이 반영되지 않습니다. ???</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#클라이언트측-캐싱과-빠른-업데이트를-할려면"><span class="toc-number">1.3.2.</span> <span class="toc-text">클라이언트측 캐싱과 빠른 업데이트를 할려면</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><span class="toc-number">1.3.3.</span> <span class="toc-text">커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static-t-태그-활용"><span class="toc-number">1.3.4.</span> <span class="toc-text">static_t 태그 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#다양한-STATIC-리소스"><span class="toc-number">1.3.5.</span> <span class="toc-text">다양한 STATIC 리소스</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDN-배포판-활용"><span class="toc-number">1.3.6.</span> <span class="toc-text">CDN 배포판 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#직접-다운로드-amp-서빙"><span class="toc-number">1.3.7.</span> <span class="toc-text">직접 다운로드&amp;서빙</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#myproj-settings-py"><span class="toc-number">2.</span> <span class="toc-text">myproj/settings.py</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#myapp-serializers-py"><span class="toc-number">3.</span> <span class="toc-text">myapp/serializers.py</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#myapp-views-py"><span class="toc-number">4.</span> <span class="toc-text">myapp/views.py</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#post-modal"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">포스팅 제목</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#다음-이시간에는"><span class="toc-number">4.1.</span> <span class="toc-text">다음 이시간에는</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#장고에서의-STATIC-파일-관리"><span class="toc-number">1.</span> <span class="toc-text">장고에서의 STATIC 파일 관리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#참고-VOD-요약"><span class="toc-number">1.1.</span> <span class="toc-text">참고 VOD 요약</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#장고에서의-STATIC-파일-서빙"><span class="toc-number">1.2.</span> <span class="toc-text">장고에서의 STATIC 파일 서빙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#브라우저-캐시"><span class="toc-number">1.3.</span> <span class="toc-text">브라우저 캐시</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#이후에-해당-파일이-변경되었습니다-그런데-새로운-내용이-반영되지-않습니다"><span class="toc-number">1.3.1.</span> <span class="toc-text">이후에 해당 파일이 변경되었습니다. 그런데, 새로운 내용이 반영되지 않습니다. ???</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#클라이언트측-캐싱과-빠른-업데이트를-할려면"><span class="toc-number">1.3.2.</span> <span class="toc-text">클라이언트측 캐싱과 빠른 업데이트를 할려면</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#커스텀-템플릿태그를-통해-STATIC-URL에-더미-GET인자-붙이기"><span class="toc-number">1.3.3.</span> <span class="toc-text">커스텀 템플릿태그를 통해 STATIC URL에 더미 GET인자 붙이기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static-t-태그-활용"><span class="toc-number">1.3.4.</span> <span class="toc-text">static_t 태그 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#다양한-STATIC-리소스"><span class="toc-number">1.3.5.</span> <span class="toc-text">다양한 STATIC 리소스</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CDN-배포판-활용"><span class="toc-number">1.3.6.</span> <span class="toc-text">CDN 배포판 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#직접-다운로드-amp-서빙"><span class="toc-number">1.3.7.</span> <span class="toc-text">직접 다운로드&amp;서빙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#자바스크립트-팩키지-관리자를-활용-좋아"><span class="toc-number">1.3.8.</span> <span class="toc-text">자바스크립트 팩키지 관리자를 활용(좋아)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bower-deprecated"><span class="toc-number">1.4.</span> <span class="toc-text">Bower (deprecated)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#먼저-nodejs-설치"><span class="toc-number">1.4.1.</span> <span class="toc-text">먼저 nodejs 설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bower-설치"><span class="toc-number">1.4.2.</span> <span class="toc-text">bower 설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-JavaScript-라이브러리-설치"><span class="toc-number">1.4.3.</span> <span class="toc-text">CSS/JavaScript 라이브러리 설치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bower-json"><span class="toc-number">1.4.4.</span> <span class="toc-text">bower.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bower-install-명령을-통한-일괄-다운로드-현재창에서-명령시"><span class="toc-number">1.4.5.</span> <span class="toc-text">bower install 명령을 통한 일괄 다운로드(현재창에서 명령시)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#장고와-연계"><span class="toc-number">1.4.6.</span> <span class="toc-text">장고와 연계</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gitignore"><span class="toc-number">1.4.7.</span> <span class="toc-text">.gitignore</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#차후-에피소드에서-yarn과-webpack에-대해서-살펴보겠습니다"><span class="toc-number">1.4.8.</span> <span class="toc-text">차후 에피소드에서 yarn과 webpack에 대해서 살펴보겠습니다.</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#배포는-지금까지-배운것이-거의-기본-전부"><span class="toc-number">1.5.</span> <span class="toc-text">배포는 지금까지 배운것이 거의 기본 전부</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ajax-with-Django-1"><span class="toc-number">2.</span> <span class="toc-text">Ajax with Django 1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#코드-구현"><span class="toc-number">2.1.</span> <span class="toc-text">코드 구현</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#List-Pagination"><span class="toc-number">2.1.1.</span> <span class="toc-text">List Pagination</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#브라우저-히스토리-조작하기"><span class="toc-number">2.1.2.</span> <span class="toc-text">브라우저 히스토리 조작하기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#응답포맷"><span class="toc-number">2.1.3.</span> <span class="toc-text">응답포맷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON응답을-하기-위해서는-JSON-직렬화가-필요"><span class="toc-number">2.1.4.</span> <span class="toc-text">JSON응답을 하기 위해서는, JSON 직렬화가 필요</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ajax-HTTP-요청-여부-판단"><span class="toc-number">2.1.5.</span> <span class="toc-text">Ajax HTTP 요청 여부 판단</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#django-rest-framework-간단-활용"><span class="toc-number">2.1.6.</span> <span class="toc-text">django-rest-framework 간단 활용</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Infinite-Scroll"><span class="toc-number">2.1.7.</span> <span class="toc-text">Infinite Scroll</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#다음-시간에는"><span class="toc-number">2.2.</span> <span class="toc-text">다음 시간에는 ..</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ajax-with-Django-2"><span class="toc-number">3.</span> <span class="toc-text">Ajax with Django 2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#코드-구현-1"><span class="toc-number">3.1.</span> <span class="toc-text">코드 구현</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#More-버튼-구현"><span class="toc-number">3.2.</span> <span class="toc-text">More 버튼 구현</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Modal을-활용한-Detail"><span class="toc-number">3.3.</span> <span class="toc-text">Modal을 활용한 Detail</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#포스팅-리스트에서-링크에-click-리스너-걸기"><span class="toc-number">3.3.1.</span> <span class="toc-text">포스팅 리스트에서 링크에 click 리스너 걸기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#다음-코드를-통해-해결"><span class="toc-number">3.3.2.</span> <span class="toc-text">다음 코드를 통해 해결.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#포스팅-제목-클릭-시에-Modal창-띄우기"><span class="toc-number">3.3.3.</span> <span class="toc-text">포스팅 제목 클릭 시에, Modal창 띄우기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modal-HTML-코드"><span class="toc-number">3.3.4.</span> <span class="toc-text">Modal HTML 코드</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#post-detail-뷰에서의-Ajax-요청-추가-처리"><span class="toc-number">3.3.5.</span> <span class="toc-text">post detail 뷰에서의 Ajax 요청 추가 처리</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#포스팅-링크-클릭-시-Ajax-요청-모달에-반영-및-띄우기"><span class="toc-number">3.3.6.</span> <span class="toc-text">포스팅 링크 클릭 시, Ajax 요청, 모달에 반영 및 띄우기</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#댓글-Ajax-삭제"><span class="toc-number">3.4.</span> <span class="toc-text">댓글 Ajax 삭제</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#STEP-1-Ajax요청-전송이-용이하도록-템플릿-변경"><span class="toc-number">3.4.1.</span> <span class="toc-text">STEP #1) Ajax요청 전송이 용이하도록, 템플릿 변경</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STEP-2-삭제-링크-클릭-시에-Ajax-POST-요청"><span class="toc-number">3.4.2.</span> <span class="toc-text">STEP #2) 삭제 링크 클릭 시에 Ajax POST 요청</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#그런데-Forbidden가-발생해요"><span class="toc-number">3.4.3.</span> <span class="toc-text">그런데, Forbidden가 발생해요.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jQuery-Ajax에서의-CSRF-Token-대처"><span class="toc-number">3.4.4.</span> <span class="toc-text">jQuery Ajax에서의 CSRF Token 대처</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#다음-이시간에는"><span class="toc-number">3.5.</span> <span class="toc-text">다음 이시간에는</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
