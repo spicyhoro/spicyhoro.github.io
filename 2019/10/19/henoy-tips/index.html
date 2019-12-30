@@ -274,7 +274,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">139</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">483</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -407,11 +407,35 @@ height:50vh;
 <h1 id="터미널에서"><a href="#터미널에서" class="headerlink" title="터미널에서"></a>터미널에서</h1><hr>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pip freeze #현재 설치된 버전들 모두 볼수있다</span><br><span class="line">pip freeze&gt;requirements.txt #현재 설치된 버전들을 txt파일로 저장함</span><br><span class="line">pip install -r requirements.txt #패키지 이름하고 해당 버전 읽어서 다 다운로드함</span><br><span class="line"></span><br><span class="line">Cat requirements.txt #파일 내용 출력</span><br><span class="line"></span><br><span class="line">cv requirements.txt ../cbv #복붙 기능 상위폴더에 cbv폴더안에</span><br><span class="line"></span><br><span class="line">mv requirements.txt ../cbv #이동 기능 상위폴더에 cbv폴더안에</span><br></pre></td></tr></table></figure>
 
+<h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><p>./gitignore 에 넣으면 안올라가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <h1 id="파이참에서"><a href="#파이참에서" class="headerlink" title="파이참에서"></a>파이참에서</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shift+shift는 프로젝트내에서 파일찾기임</span><br></pre></td></tr></table></figure>
 
 <h1 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py sqlmigrate blog 0001_initial sql언어로 뭐가 실행될지 알려준다</span><br></pre></td></tr></table></figure>
 
-<h2 id="Form"><a href="#Form" class="headerlink" title="Form"></a>Form</h2><h1 id="html"><a href="#html" class="headerlink" title="html"></a>html</h1><h2 id="get"><a href="#get" class="headerlink" title="get"></a>get</h2><p>Method=”GET”은 헤더만 존재하며 urlencoded방식으로만 전달되며</p>
+<h2 id="Form"><a href="#Form" class="headerlink" title="Form"></a>Form</h2><p>Db와 model이 이어진것처럼</p>
+<p>frontend와 form이 이어짐</p>
+<h3 id="form의-특징-딱-3가지만-기억하자"><a href="#form의-특징-딱-3가지만-기억하자" class="headerlink" title="form의 특징 (딱 3가지만 기억하자)"></a>form의 특징 (딱 3가지만 기억하자)</h3><ul>
+<li><p>입력폼을 생성: .as_table(), .as_p(), .as_ul() 기본제공</p>
+</li>
+<li><p>입력폼 값 검증(validation) 및 값 변환 (프론트엔드) </p>
+</li>
+<li><p>검증을 통과한 값들을 사전타입(cleaned_data이름으로 제공)</p>
+</li>
+<li><p>과정: 즉, get요청으로 처음으로 form = FormClass()&gt;&gt;입력폼 호출됨&gt;&gt;유저가 입력&gt;&gt;post요청&gt;&gt;form = FormClass(request.POST, request.FILES)를 받고&gt;&gt;form.is_valid() 유효성검사&gt;&gt;</p>
+<ul>
+<li>valid판정시 form.cleaned_data통해 필드별 값 제공받음&gt;&gt; form.save()로 저장후 다른 URL로 이동</li>
+<li>invalid판정시 form.errors통해 필드별 오류메세지 제공받음&gt;&gt;오류 메세지와 함께 입력 html폼을 노출</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#뷰 함수에서 구현</span><br><span class="line">def post_new(request):</span><br><span class="line">    if request.method == &apos;POST&apos;:</span><br><span class="line">        form = PostForm(request.POST, request.FILES)</span><br><span class="line">        if form.is_valid():</span><br><span class="line">            post = Post(**self.cleaned_data)</span><br><span class="line">            post.save()</span><br><span class="line">            return redirect(post)</span><br><span class="line">            </span><br><span class="line">    else:</span><br><span class="line">        form = PostForm()</span><br><span class="line">    return render(request, &apos;blog/post_form.html&apos;, &#123;</span><br><span class="line">        &apos;form&apos;: form,</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>Tip: 꼭 return render(~~)가 있어서 템플릿 또한 필요하고 form을 넘겨서 form.as_table()으로 입력폼을 생성할수있도록 해주자</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#form의 html예시</span><br><span class="line">&lt;table&gt;</span><br><span class="line">     &lt;form action=&quot;&quot; method=&quot;post&quot;&gt;</span><br><span class="line">             &#123;% csrf_token %&#125;</span><br><span class="line">             &lt;table&gt;&#123;&#123; form.as_table &#125;&#125;&lt;/table&gt; #이게 오류를 불러와줌, Form에 각 필드가 테이블 행으로  렌더링됨!!!</span><br><span class="line">             &lt;input type=&quot;submit&quot; /&gt;</span><br><span class="line">     &lt;/form&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="모델에-값저장방법4가지"><a href="#모델에-값저장방법4가지" class="headerlink" title="모델에 값저장방법4가지"></a><a href="https://spicyhoro.github.io/2019/11/15/django03/#Django-Style" target="_blank" rel="noopener">모델에 값저장방법4가지</a></h3><h3 id="나머지-요약정리"><a href="#나머지-요약정리" class="headerlink" title="나머지 요약정리"></a><a href="https://spicyhoro.github.io/2019/11/15/django03/#Form-Fields" target="_blank" rel="noopener">나머지 요약정리</a></h3><h1 id="html"><a href="#html" class="headerlink" title="html"></a>html</h1><h2 id="get"><a href="#get" class="headerlink" title="get"></a>get</h2><p>Method=”GET”은 헤더만 존재하며 urlencoded방식으로만 전달되며</p>
 <p>url뒤쪽에 ?<del>~</del>로 붙는다</p>
 <h2 id="post"><a href="#post" class="headerlink" title="post"></a>post</h2><p>Method=”POST”는 기본적으로 바디 둘다 존재하며</p>
 <ul>
@@ -424,6 +448,32 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------14973275531370807725960869059 #여기부터바디</span><br><span class="line">Content-Disposition: form-data; name=&quot;title&quot;</span><br><span class="line">title</span><br><span class="line">-----------------------------14973275531370807725960869059</span><br><span class="line">Content-Disposition: form-data; name=&quot;content&quot;</span><br><span class="line">(생략 ...)</span><br></pre></td></tr></table></figure>
 
 <p>식으로 아예 다른방식으로 바디에 붙는다. </p>
+<h1 id="Django-Bootstrap3"><a href="#Django-Bootstrap3" class="headerlink" title="Django-Bootstrap3"></a>Django-Bootstrap3</h1><p>bootstrap3 스타일로 HTML을 생성해주는 template tags 제공 설치 쉘&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> pip3 install django-bootstrap3</span><br><span class="line">settings.INSTALLED_APPS 에 &quot;bootstrap3&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#원하는 템플릿에서 </span><br><span class="line"></span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"></span><br><span class="line">&#123;# bootstrap3 라이브러리 로드 #&#125;</span><br><span class="line">&#123;% load bootstrap3 %&#125;</span><br><span class="line">&#123;# bootstrap3 라이브러리를 통해 css/javascript 태그 출력 #&#125;</span><br><span class="line">&#123;% bootstrap_css %&#125;</span><br><span class="line">&#123;% bootstrap_javascript %&#125;</span><br><span class="line">&lt;form action=&quot;&quot; method=&quot;post&quot; class=&quot;form&quot;&gt;</span><br><span class="line">     &#123;% csrf_token %&#125;</span><br><span class="line">     &#123;% bootstrap_form form %&#125; &lt;!-- bootstrap3 라이브러리를 통해 Form Render --&gt;</span><br><span class="line">     &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary btn-lg&quot; /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><a href="https://spicyhoro.github.io/2019/11/15/django03/#django-bootstrap3-%ED%8C%A9%ED%82%A4%EC%A7%80" target="_blank" rel="noopener">자세히</a></p>
 
     </article>
     <!-- license  -->
@@ -561,7 +611,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#터미널에서"><span class="toc-number">1.</span> <span class="toc-text">터미널에서</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#파이참에서"><span class="toc-number">2.</span> <span class="toc-text">파이참에서</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django"><span class="toc-number">3.</span> <span class="toc-text">Django</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Form"><span class="toc-number">3.1.</span> <span class="toc-text">Form</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#html"><span class="toc-number">4.</span> <span class="toc-text">html</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#get"><span class="toc-number">4.1.</span> <span class="toc-text">get</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#post"><span class="toc-number">4.2.</span> <span class="toc-text">post</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#터미널에서"><span class="toc-number">1.</span> <span class="toc-text">터미널에서</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#git"><span class="toc-number">2.</span> <span class="toc-text">git</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#파이참에서"><span class="toc-number">3.</span> <span class="toc-text">파이참에서</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django"><span class="toc-number">4.</span> <span class="toc-text">Django</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Form"><span class="toc-number">4.1.</span> <span class="toc-text">Form</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#form의-특징-딱-3가지만-기억하자"><span class="toc-number">4.1.1.</span> <span class="toc-text">form의 특징 (딱 3가지만 기억하자)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#모델에-값저장방법4가지"><span class="toc-number">4.1.2.</span> <span class="toc-text">모델에 값저장방법4가지</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#나머지-요약정리"><span class="toc-number">4.1.3.</span> <span class="toc-text">나머지 요약정리</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#html"><span class="toc-number">5.</span> <span class="toc-text">html</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#get"><span class="toc-number">5.1.</span> <span class="toc-text">get</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#post"><span class="toc-number">5.2.</span> <span class="toc-text">post</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django-Bootstrap3"><span class="toc-number">6.</span> <span class="toc-text">Django-Bootstrap3</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -574,6 +624,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
@@ -923,21 +975,17 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="hanbik"><span class="iconfont-archer">&#xe606;</span>hanbik</span>
-    
-        <span class="sidebar-tag-name" data-tags="Junior"><span class="iconfont-archer">&#xe606;</span>Junior</span>
-    
-        <span class="sidebar-tag-name" data-tags="Devfest"><span class="iconfont-archer">&#xe606;</span>Devfest</span>
-    
         <span class="sidebar-tag-name" data-tags="Django"><span class="iconfont-archer">&#xe606;</span>Django</span>
     
         <span class="sidebar-tag-name" data-tags="ClassView"><span class="iconfont-archer">&#xe606;</span>ClassView</span>
     
         <span class="sidebar-tag-name" data-tags="Basic"><span class="iconfont-archer">&#xe606;</span>Basic</span>
     
-        <span class="sidebar-tag-name" data-tags="Frontend"><span class="iconfont-archer">&#xe606;</span>Frontend</span>
+        <span class="sidebar-tag-name" data-tags="hanbik"><span class="iconfont-archer">&#xe606;</span>hanbik</span>
     
-        <span class="sidebar-tag-name" data-tags="Ajax"><span class="iconfont-archer">&#xe606;</span>Ajax</span>
+        <span class="sidebar-tag-name" data-tags="Junior"><span class="iconfont-archer">&#xe606;</span>Junior</span>
+    
+        <span class="sidebar-tag-name" data-tags="Devfest"><span class="iconfont-archer">&#xe606;</span>Devfest</span>
     
         <span class="sidebar-tag-name" data-tags="GDG"><span class="iconfont-archer">&#xe606;</span>GDG</span>
     
@@ -950,6 +998,10 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="Terminal"><span class="iconfont-archer">&#xe606;</span>Terminal</span>
     
         <span class="sidebar-tag-name" data-tags="Markdown"><span class="iconfont-archer">&#xe606;</span>Markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="Frontend"><span class="iconfont-archer">&#xe606;</span>Frontend</span>
+    
+        <span class="sidebar-tag-name" data-tags="Ajax"><span class="iconfont-archer">&#xe606;</span>Ajax</span>
     
         <span class="sidebar-tag-name" data-tags="프로젝트"><span class="iconfont-archer">&#xe606;</span>프로젝트</span>
     
@@ -986,17 +1038,17 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
-    
         <span class="sidebar-category-name" data-categories="Django"><span class="iconfont-archer">&#xe60a;</span>Django</span>
     
-        <span class="sidebar-category-name" data-categories="Frontend"><span class="iconfont-archer">&#xe60a;</span>Frontend</span>
+        <span class="sidebar-category-name" data-categories="Conference"><span class="iconfont-archer">&#xe60a;</span>Conference</span>
     
         <span class="sidebar-category-name" data-categories="Git"><span class="iconfont-archer">&#xe60a;</span>Git</span>
     
         <span class="sidebar-category-name" data-categories="Terminal"><span class="iconfont-archer">&#xe60a;</span>Terminal</span>
     
         <span class="sidebar-category-name" data-categories="Markdown"><span class="iconfont-archer">&#xe60a;</span>Markdown</span>
+    
+        <span class="sidebar-category-name" data-categories="Frontend"><span class="iconfont-archer">&#xe60a;</span>Frontend</span>
     
         <span class="sidebar-category-name" data-categories="Project"><span class="iconfont-archer">&#xe60a;</span>Project</span>
     
